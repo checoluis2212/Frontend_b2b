@@ -11,19 +11,20 @@ export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
 
+  // Genera y guarda el visitorId
   useEffect(() => {
     (async () => {
       const fp = await FingerprintJS.load();
-      const result = await fp.get();
-      setVisitorId(result.visitorId);
-      localStorage.setItem('visitorId', result.visitorId);
+      const { visitorId } = await fp.get();
+      setVisitorId(visitorId);
+      localStorage.setItem('visitorId', visitorId);
     })();
   }, []);
 
   const options = [
-    { title: 'Cotizar Más de 10 vacantes',    btn: 'Cotizar ahora',    opt: 'cotizar',       path: '/cotizar' },
-    { title: 'Publicar Mi Primera Vacante',   btn: 'Publicar ya',      opt: 'publicar',      path: '/publicar' },
-    { title: 'Estoy Buscando Empleo',         btn: 'Ver oportunidades',opt: 'oportunidades',  path: '/buscando' },
+    { title: 'Cotizar Más de 10 vacantes',  btn: 'Cotizar ahora',    opt: 'cotizar',      path: '/cotizar' },
+    { title: 'Publicar Mi Primera Vacante', btn: 'Publicar ya',      opt: 'publicar',     path: '/publicar' },
+    { title: 'Estoy Buscando Empleo',       btn: 'Ver oportunidades',opt: 'oportunidades',path: '/buscando' },
   ];
 
   const handleClick = async (buttonKey, path) => {
@@ -32,29 +33,31 @@ export default function Home() {
     navigate(path);
   };
 
+  // Variants para Framer Motion
   const containerVariants = {
     hidden:  { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
   };
   const itemVariants = {
     hidden:   { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } },
-    hover:    { scale: 1.05 }
+    visible:  { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } },
+    hover:    { scale: 1.05 },
   };
 
   return (
     <motion.div
+      className="text-white"
       style={{
         backgroundImage: `url(${bg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh'
       }}
-      className="text-white"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
+      {/* Header */}
       <motion.header
         className="py-4 mb-5 text-white"
         initial={{ opacity: 0, y: -20 }}
@@ -86,9 +89,9 @@ export default function Home() {
       </motion.header>
 
       <motion.main className="container d-flex flex-column py-5">
-        {/* Móvil: ¿Por qué elegir OCC? */}
+        {/* Móvil: sección “¿Por qué elegir OCC?” */}
         <motion.section
-          className="row mb-5 order-1 d-block d-md-none"
+          className="row mb-5 d-block d-md-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -104,9 +107,9 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* Título principal */}
+        {/* Título */}
         <motion.h2
-          className="text-start mb-4 order-2 order-md-1"
+          className="text-start mb-4"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -115,7 +118,7 @@ export default function Home() {
         </motion.h2>
 
         {/* Tarjetas de opciones */}
-        <section className="row g-4 mb-5 justify-content-center order-3 order-md-2">
+        <section className="row g-4 mb-5 justify-content-center">
           {options.map(({ title, btn, opt, path }) => (
             <motion.div
               key={opt}
@@ -131,7 +134,7 @@ export default function Home() {
                   <h5 className="card-title">{title}</h5>
                   <button
                     type="button"
-                    className="btn btn-primary mt-auto text-white"
+                    className="btn btn-primary mt-auto"
                     onClick={() => handleClick(opt, path)}
                   >
                     {btn}
@@ -142,9 +145,9 @@ export default function Home() {
           ))}
         </section>
 
-        {/* Desktop: ¿Por qué elegir OCC? */}
+        {/* Desktop: sección “¿Por qué elegir OCC?” */}
         <motion.section
-          className="row mb-5 order-md-4 d-none d-md-flex"
+          className="row mb-5 d-none d-md-flex"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -160,12 +163,12 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* Línea divisoria antes del footer (como en tu diseño original) */}
+        {/* Línea divisoria */}
         <hr className="my-4" />
 
         {/* Footer */}
         <motion.footer
-          className="text-center py-4 border-top order-5"
+          className="text-center py-4 border-top"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}

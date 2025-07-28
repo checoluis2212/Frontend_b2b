@@ -67,3 +67,21 @@ button:focus-visible {
   }
 }
 
+/* === Home Background Position === */
+.home-background {
+  /* posición por defecto (desktop) */
+  background-position: center center;
+}
+
+@media (max-width: 767px) {
+  /* posición para móvil */
+  .home-background {
+    /* ajusta estos valores a tu gusto */
+    background-position: top 20% left 50%;
+    /* por ejemplo, podrías usar:
+       background-position: top center;
+       background-position: 50% 10%;
+    */
+  }
+}
+

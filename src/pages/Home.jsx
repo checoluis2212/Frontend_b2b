@@ -56,6 +56,13 @@ export default function Home() {
     <motion.div
       className="text-white"
       style={{ backgroundImage:`url(${bg})`, backgroundSize:'cover', backgroundPosition:'center', minHeight:'100vh' }}
+      <motion.div
++      className="home-background text-white"
++      style={{
++        backgroundImage: `url(${bg})`,
++        backgroundSize: 'cover',
++        minHeight: '100vh'
++      }}
       variants={container}
       initial="hidden"
       animate="visible"

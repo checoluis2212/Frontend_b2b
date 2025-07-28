@@ -18,7 +18,7 @@ export default function Home() {
         const fp = await FingerprintJS.load();
         const result = await fp.get();
         setVisitorId(result.visitorId);
-        // Guarda el visitorId para que persista y puedas verlo en Application → Local Storage
+        // ← Aquí guardamos el visitorId en Local Storage:
         localStorage.setItem('visitorId', result.visitorId);
         console.log('⭐ visitorId generado y guardado:', result.visitorId);
       } catch (err) {
@@ -27,31 +27,29 @@ export default function Home() {
     })();
   }, []);
 
-  // 2) Definimos las tres opciones con su clave 'opt'
+  // 2) Opciones de botones
   const options = [
     { title: 'Cotizar Más de 10 vacantes',    btn: 'Cotizar ahora',    opt: 'cotizar',       path: '/cotizar' },
     { title: 'Publicar Mi Primera Vacante',   btn: 'Publicar ya',      opt: 'publicar',      path: '/publicar' },
     { title: 'Estoy Buscando Empleo',         btn: 'Ver oportunidades',opt: 'oportunidades',  path: '/buscando' },
   ];
 
-  // 3) Al hacer click enviamos visitorId + button, luego navegamos
+  // 3) Envío de datos y navegación
   const handleClick = async (buttonKey, path) => {
     if (!visitorId) {
       console.warn('Esperando visitorId…');
       return;
     }
-
     try {
       await sendResponse({ visitorId, button: buttonKey });
       console.log('Contador enviado:', buttonKey);
     } catch (err) {
       console.error('Error enviando datos:', err);
     }
-
     navigate(path);
   };
 
-  // Animaciones
+  // Animaciones (Framer Motion)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.2 } }

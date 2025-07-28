@@ -11,27 +11,30 @@ export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
 
-  // 1) Carga FingerprintJS y guarda visitorId
+  // 1) Carga FingerprintJS, guarda visitorId en estado y en localStorage
   useEffect(() => {
     (async () => {
       try {
         const fp = await FingerprintJS.load();
         const result = await fp.get();
         setVisitorId(result.visitorId);
+        // Guarda el visitorId para que persista y puedas verlo en Application → Local Storage
+        localStorage.setItem('visitorId', result.visitorId);
+        console.log('⭐ visitorId generado y guardado:', result.visitorId);
       } catch (err) {
         console.error('Error FingerprintJS:', err);
       }
     })();
   }, []);
 
-  // 2) Definimos las tres opciones con su clave 'opt' idéntica al nombre del contador
+  // 2) Definimos las tres opciones con su clave 'opt'
   const options = [
     { title: 'Cotizar Más de 10 vacantes',    btn: 'Cotizar ahora',    opt: 'cotizar',       path: '/cotizar' },
     { title: 'Publicar Mi Primera Vacante',   btn: 'Publicar ya',      opt: 'publicar',      path: '/publicar' },
     { title: 'Estoy Buscando Empleo',         btn: 'Ver oportunidades',opt: 'oportunidades',  path: '/buscando' },
   ];
 
-  // 3) Al hacer click sólo enviamos visitorId + button
+  // 3) Al hacer click enviamos visitorId + button, luego navegamos
   const handleClick = async (buttonKey, path) => {
     if (!visitorId) {
       console.warn('Esperando visitorId…');
@@ -39,8 +42,8 @@ export default function Home() {
     }
 
     try {
-      const { data } = await sendResponse({ visitorId, button: buttonKey });
-      console.log('Contadores actualizados:', data.buttonCounts);
+      await sendResponse({ visitorId, button: buttonKey });
+      console.log('Contador enviado:', buttonKey);
     } catch (err) {
       console.error('Error enviando datos:', err);
     }
@@ -88,7 +91,6 @@ export default function Home() {
             animate={{ scale: 1 }}
             transition={{ type: 'spring', stiffness: 120 }}
           />
-          {/* Ocultar esta frase en móvil */}
           <div className="ms-auto w-50 d-none d-md-block">
             <motion.p
               className="fs-6 text-end mb-0"
@@ -104,7 +106,6 @@ export default function Home() {
       </motion.header>
 
       <motion.main className="container d-flex flex-column py-5">
-        {/* “¿Por qué elegir OCC?” en móvil (order-1) */}
         <motion.section
           className="row mb-5 order-1 d-block d-md-none"
           initial={{ opacity: 0 }}
@@ -122,7 +123,6 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* Título “¿Qué deseas hacer?” (order-2) */}
         <motion.h2
           className="text-start mb-4 order-2 order-md-1"
           initial={{ opacity: 0, y: -10 }}
@@ -132,7 +132,6 @@ export default function Home() {
           ¿Qué deseas hacer?
         </motion.h2>
 
-        {/* Tarjetas de acción (order-3) */}
         <section className="row g-4 mb-5 justify-content-center order-3 order-md-2">
           {options.map(({ title, btn, opt, path }) => (
             <motion.div
@@ -159,7 +158,6 @@ export default function Home() {
           ))}
         </section>
 
-        {/* “¿Por qué elegir OCC?” en desktop (order-md-4) */}
         <motion.section
           className="row mb-5 order-md-4 d-none d-md-flex"
           initial={{ opacity: 0 }}
@@ -177,7 +175,6 @@ export default function Home() {
           </div>
         </motion.section>
 
-        {/* Footer (order-5) */}
         <motion.footer
           className="text-center py-4 border-top order-5"
           initial={{ opacity: 0 }}

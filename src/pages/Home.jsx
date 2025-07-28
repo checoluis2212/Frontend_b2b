@@ -16,11 +16,10 @@ export default function Home() {
     (async () => {
       try {
         const fp = await FingerprintJS.load();
-        const result = await fp.get();
-        setVisitorId(result.visitorId);
-        // ← Aquí guardamos el visitorId en Local Storage:
-        localStorage.setItem('visitorId', result.visitorId);
-        console.log('⭐ visitorId generado y guardado:', result.visitorId);
+        const { visitorId } = await fp.get();
+        console.log('⭐ visitorId generado:', visitorId);
+        setVisitorId(visitorId);
+        localStorage.setItem('visitorId', visitorId);
       } catch (err) {
         console.error('Error FingerprintJS:', err);
       }
@@ -29,23 +28,26 @@ export default function Home() {
 
   // 2) Opciones de botones
   const options = [
-    { title: 'Cotizar Más de 10 vacantes',    btn: 'Cotizar ahora',    opt: 'cotizar',       path: '/cotizar' },
-    { title: 'Publicar Mi Primera Vacante',   btn: 'Publicar ya',      opt: 'publicar',      path: '/publicar' },
-    { title: 'Estoy Buscando Empleo',         btn: 'Ver oportunidades',opt: 'oportunidades',  path: '/buscando' },
+    { title: 'Cotizar Más de 10 vacantes',  btn: 'Cotizar ahora',    opt: 'cotizar',      path: '/cotizar' },
+    { title: 'Publicar Mi Primera Vacante', btn: 'Publicar ya',      opt: 'publicar',     path: '/publicar' },
+    { title: 'Estoy Buscando Empleo',       btn: 'Ver oportunidades',opt: 'oportunidades', path: '/buscando' },
   ];
 
   // 3) Envío de datos y navegación
   const handleClick = async (buttonKey, path) => {
+    console.log(`🔘 Botón pulsado: ${buttonKey}; visitorId actual:`, visitorId);
     if (!visitorId) {
-      console.warn('Esperando visitorId…');
+      console.warn('⏳ Aún no hay visitorId. Esperando…');
       return;
     }
     try {
+      console.log('📤 Llamando a sendResponse…', { visitorId, button: buttonKey });
       await sendResponse({ visitorId, button: buttonKey });
-      console.log('Contador enviado:', buttonKey);
+      console.log('✅ sendResponse completado para:', buttonKey);
     } catch (err) {
-      console.error('Error enviando datos:', err);
+      console.error('❌ Error en sendResponse:', err);
     }
+    console.log('➡ Navegando a:', path);
     navigate(path);
   };
 
@@ -73,6 +75,7 @@ export default function Home() {
       initial="hidden"
       animate="visible"
     >
+      {/* Header */}
       <motion.header
         className="py-4 mb-5 text-white"
         initial={{ opacity: 0, y: -20 }}
@@ -103,9 +106,11 @@ export default function Home() {
         </div>
       </motion.header>
 
+      {/* Main */}
       <motion.main className="container d-flex flex-column py-5">
+        {/* Mobile Why OCC */}
         <motion.section
-          className="row mb-5 order-1 d-block d-md-none"
+          className="row mb-5 d-block d-md-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -121,8 +126,9 @@ export default function Home() {
           </div>
         </motion.section>
 
+        {/* Title */}
         <motion.h2
-          className="text-start mb-4 order-2 order-md-1"
+          className="text-start mb-4"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -130,21 +136,15 @@ export default function Home() {
           ¿Qué deseas hacer?
         </motion.h2>
 
-        <section className="row g-4 mb-5 justify-content-center order-3 order-md-2">
+        {/* Buttons */}
+        <section className="row g-4 mb-5 justify-content-center">
           {options.map(({ title, btn, opt, path }) => (
-            <motion.div
-              className="col-12 col-md-4"
-              key={opt}
-              variants={itemVariants}
-              whileHover="hover"
-            >
-              <motion.div
-                className="card h-100 shadow-sm bg-dark bg-opacity-50 text-white"
-                variants={itemVariants}
-              >
+            <motion.div key={opt} className="col-12 col-md-4" variants={itemVariants} whileHover="hover">
+              <motion.div className="card h-100 shadow-sm bg-dark bg-opacity-50 text-white" variants={itemVariants}>
                 <div className="card-body d-flex flex-column">
                   <h5 className="card-title">{title}</h5>
                   <button
+                    type="button"
                     className="btn btn-primary mt-auto text-white"
                     onClick={() => handleClick(opt, path)}
                   >
@@ -156,8 +156,9 @@ export default function Home() {
           ))}
         </section>
 
+        {/* Desktop Why OCC */}
         <motion.section
-          className="row mb-5 order-md-4 d-none d-md-flex"
+          className="row mb-5 d-none d-md-flex"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
@@ -173,8 +174,9 @@ export default function Home() {
           </div>
         </motion.section>
 
+        {/* Footer */}
         <motion.footer
-          className="text-center py-4 border-top order-5"
+          className="text-center py-4 border-top"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}

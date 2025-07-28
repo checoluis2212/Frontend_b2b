@@ -2,16 +2,17 @@ const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 export async function sendResponse(payload) {
   const endpoint = `${API_BASE}/api/responses`;
-  console.log('🌐 Enviando a:', endpoint, payload);
+  console.log('🌐 [sendResponse]', endpoint, payload);
 
   const res = await fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   });
+
   if (!res.ok) {
     const text = await res.text();
-    console.error('❌ Error:', res.status, text);
+    console.error('❌ [sendResponse] Error:', res.status, text);
     throw new Error(`Error ${res.status}: ${text}`);
   }
   return res.json();

@@ -1,8 +1,11 @@
 // src/services/api.js
 
-// Base URL de la API: en producción Vercel injecta VITE_API_URL, en local cae a localhost:3001
+// Base URL de la API (inyectada por Vite en producción o localhost en dev)
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
+/**
+ * Envía un clic de botón al backend
+ */
 export async function sendResponse(payload) {
   const endpoint = `${API_BASE}/api/responses`;
   console.log('🔔 Enviando al backend a:', endpoint, payload);
@@ -22,10 +25,16 @@ export async function sendResponse(payload) {
   return res.json();
 }
 
-// Opcional: helper para obtener respuestas en React
+/**
+ * Obtiene todas las respuestas guardadas
+ */
 export async function getResponses() {
-  const endpoint = `${API_BASE}/api/responses`;
+  const endpoint = `${API_BASE}/api/responses/all`;
   const res = await fetch(endpoint);
-  if (!res.ok) throw new Error(`Error al obtener respuestas: ${res.status}`);
+  if (!res.ok) {
+    const text = await res.text();
+    console.error('❌ Error al obtener respuestas:', res.status, text);
+    throw new Error(`Error al obtener respuestas: ${res.status}`);
+  }
   return res.json();
 }

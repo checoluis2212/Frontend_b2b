@@ -84,7 +84,7 @@ export default function Home() {
           <div className="col-12">
             <h2 className="h4 mb-3">¿Por qué elegir OCC?</h2>
             <ul>
-              <li>Amplia base de datos de candidatos.</li>
+              <li>Amplia base de datos de candidatos y empleos.</li>
               <li>Proceso ágil y personalizado.</li>
               <li>Soporte especializado en reclutamiento.</li>
               <li>Más de 1000 empresas confían en nosotros.</li>

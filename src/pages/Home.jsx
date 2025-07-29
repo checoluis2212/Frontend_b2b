@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
@@ -56,13 +57,6 @@ export default function Home() {
     <motion.div
       className="text-white"
       style={{ backgroundImage:`url(${bg})`, backgroundSize:'cover', backgroundPosition:'center', minHeight:'100vh' }}
-      <motion.div
-+      className="home-background text-white"
-+      style={{
-+        backgroundImage: `url(${bg})`,
-+        backgroundSize: 'cover',
-+        minHeight: '100vh'
-+      }}
       variants={container}
       initial="hidden"
       animate="visible"
@@ -84,7 +78,7 @@ export default function Home() {
           <div className="col-12">
             <h2 className="h4 mb-3">¿Por qué elegir OCC?</h2>
             <ul>
-              <li>Amplia base de datos de candidatos y empleos.</li>
+              <li>Amplia base de datos de candidatos.</li>
               <li>Proceso ágil y personalizado.</li>
               <li>Soporte especializado en reclutamiento.</li>
               <li>Más de 1000 empresas confían en nosotros.</li>

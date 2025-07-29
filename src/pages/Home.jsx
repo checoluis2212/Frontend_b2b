@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
@@ -35,18 +34,21 @@ export default function Home() {
     })();
   }, []);
 
+  // Opciones con sus rutas o URLs externas
   const options = [
-    { title: 'Cotizar Más de 10 vacantes',  btn: 'Cotizar ahora',    opt: 'cotizar',      path: '/cotizar' },
-    { title: 'Publicar Mi Primera Vacante', btn: 'Publicar ya',      opt: 'publicar',     path: '/publicar' },
-    { title: 'Estoy Buscando Empleo',       btn: 'Ver oportunidades',opt: 'oportunidades',path: '/buscando' },
+    { title: 'Cotizar Más de 10 vacantes',  key: 'cotizar',     url: 'https://reclutamiento.occ.com.mx/contactanos' },
+    { title: 'Publicar Mi Primera Vacante', key: 'publicar',    url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
+    { title: 'Estoy Buscando Empleo',       key: 'empleo',      url: 'https://www.occ.com.mx/' }
   ];
 
-  // 3) Envío de clics
-  const handleClick = async (buttonKey, path) => {
+  // 3) Envío de clics y redirección
+  const handleClick = async (option) => {
     if (!visitorId) return;
     const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
-    await sendResponse({ visitorId, button: buttonKey, utmParams });
-    navigate(path);
+    // Guardar interacción en BD
+    await sendResponse({ visitorId, button: option.key, utmParams });
+    // Redirigir a URL externa
+    window.location.href = option.url;
   };
 
   // Animaciones
@@ -78,7 +80,7 @@ export default function Home() {
           <div className="col-12">
             <h2 className="h4 mb-3">¿Por qué elegir OCC?</h2>
             <ul>
-              <li>Amplia base de datos de candidatos.</li>
+              <li>Amplia base de datos de candidatos y empleos.</li>
               <li>Proceso ágil y personalizado.</li>
               <li>Soporte especializado en reclutamiento.</li>
               <li>Más de 1000 empresas confían en nosotros.</li>
@@ -91,13 +93,13 @@ export default function Home() {
         </motion.h2>
 
         <section className="row g-4 mb-5 justify-content-center">
-          {options.map(({ title, btn, opt, path }) => (
-            <motion.div key={opt} className="col-12 col-md-4" variants={item} whileHover="hover">
+          {options.map(option => (
+            <motion.div key={option.key} className="col-12 col-md-4" variants={item} whileHover="hover">
               <motion.div className="card h-100 shadow-sm bg-dark bg-opacity-50 text-white" variants={item}>
                 <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{title}</h5>
-                  <button type="button" className="btn btn-primary mt-auto" onClick={() => handleClick(opt, path)}>
-                    {btn}
+                  <h5 className="card-title">{option.title}</h5>
+                  <button type="button" className="btn btn-primary mt-auto" onClick={() => handleClick(option)}>
+                    {option.title}
                   </button>
                 </div>
               </motion.div>
@@ -109,7 +111,7 @@ export default function Home() {
           <div className="col-md-4 offset-md-8">
             <h2 className="h4 mb-3">¿Por qué elegir OCC?</h2>
             <ul>
-              <li>Amplia base de datos de candidatos.</li>
+              <li>Amplia base de datos de candidatos y empleos.</li>
               <li>Proceso ágil y personalizado.</li>
               <li>Soporte especializado en reclutamiento.</li>
               <li>Más de 1000 empresas confían en nosotros.</li>

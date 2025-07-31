@@ -17,7 +17,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
 
-  // 1) Capturar UTM una sola vez
+  // Capturar UTM una sola vez
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {
       const params = new URLSearchParams(window.location.search);
@@ -31,7 +31,7 @@ export default function Home() {
     }
   }, []);
 
-  // 2) Generar visitorId
+  // Generar visitorId
   useEffect(() => {
     (async () => {
       const fp = await FingerprintJS.load();
@@ -68,6 +68,7 @@ export default function Home() {
       initial="hidden"
       animate="visible"
     >
+      {/* HEADER */}
       <motion.header className="py-4 text-center" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <motion.img src={logo} alt="OCC B2B" style={{ height: '100px' }} />
         <p className="mt-2 fs-6">
@@ -76,6 +77,7 @@ export default function Home() {
         </p>
       </motion.header>
 
+      {/* BOTONES */}
       <motion.main className="container py-5 text-center">
         <motion.h2 className="mb-4" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
           ¿Qué deseas hacer?
@@ -105,22 +107,23 @@ export default function Home() {
           </ul>
         </motion.section>
 
-        {/* CARRUSEL INFINITO */}
+        {/* CARRUSEL */}
         <h3 className="mt-5 mb-3">Marcas que confían en nosotros</h3>
         <div className="logo-carousel">
           <div className="logo-track">
-            <img src={amazon} alt="Amazon" />
-            <img src={bbva} alt="BBVA" />
-            <img src={dhl} alt="DHL" />
-            <img src={netflix} alt="Netflix" />
+            <img src={amazon} alt="Amazon" className="logo-item" />
+            <img src={bbva} alt="BBVA" className="logo-item" />
+            <img src={dhl} alt="DHL" className="logo-item" />
+            <img src={netflix} alt="Netflix" className="logo-item" />
             {/* Repetimos para loop infinito */}
-            <img src={amazon} alt="Amazon" />
-            <img src={bbva} alt="BBVA" />
-            <img src={dhl} alt="DHL" />
-            <img src={netflix} alt="Netflix" />
+            <img src={amazon} alt="Amazon" className="logo-item" />
+            <img src={bbva} alt="BBVA" className="logo-item" />
+            <img src={dhl} alt="DHL" className="logo-item" />
+            <img src={netflix} alt="Netflix" className="logo-item" />
           </div>
         </div>
 
+        {/* FOOTER */}
         <motion.footer className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
           <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
         </motion.footer>

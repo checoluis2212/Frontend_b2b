@@ -71,7 +71,6 @@ button:focus-visible {
   padding: 0;
   margin: 0 auto;
   max-width: 500px;       /* Para que no quede muy ancho */
-  text-align: justify;    /* Justificar texto */
 }
 
 .beneficios-text li {

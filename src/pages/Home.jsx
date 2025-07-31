@@ -10,7 +10,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
 
-  // 1) Capturar UTM SOLO la primera vez
+  // 1) Capturar UTM una sola vez
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {
       const params = new URLSearchParams(window.location.search);
@@ -24,7 +24,7 @@ export default function Home() {
     }
   }, []);
 
-  // 2) Generar y guardar visitorId
+  // 2) Generar visitorId
   useEffect(() => {
     (async () => {
       const fp = await FingerprintJS.load();
@@ -34,20 +34,18 @@ export default function Home() {
     })();
   }, []);
 
-  // Opciones con sus rutas o URLs externas
+  // Opciones con estilo y microcopy optimizado
   const options = [
-    { title: 'Cotizar Más de 10 vacantes',  key: 'cotizar',     url: 'https://reclutamiento.occ.com.mx/contactanos' },
-    { title: 'Publicar Mi Primera Vacante', key: 'publicar',    url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
-    { title: 'Estoy Buscando Empleo',       key: 'empleo',      url: 'https://www.occ.com.mx/' }
+    { title: 'Solicitar Cotización', key: 'cotizar', style: 'btn-primary', url: 'https://reclutamiento.occ.com.mx/contactanos' },
+    { title: 'Publicar Vacante', key: 'publicar', style: 'btn-outline-light', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
+    { title: 'Buscar Empleo', key: 'empleo', style: 'btn-outline-light', url: 'https://www.occ.com.mx/' }
   ];
 
-  // 3) Envío de clics y redirección
+  // 3) Manejo de clics
   const handleClick = async (option) => {
     if (!visitorId) return;
     const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
-    // Guardar interacción en BD
     await sendResponse({ visitorId, button: option.key, utmParams });
-    // Redirigir a URL externa
     window.location.href = option.url;
   };
 
@@ -58,70 +56,51 @@ export default function Home() {
   return (
     <motion.div
       className="text-white"
-      style={{ backgroundImage:`url(${bg})`, backgroundSize:'cover', backgroundPosition:'center', minHeight:'100vh' }}
+      style={{
+        backgroundImage:`linear-gradient(rgba(0,0,40,0.7), rgba(0,0,40,0.7)), url(${bg})`,
+        backgroundSize:'cover', backgroundPosition:'center', minHeight:'100vh'
+      }}
       variants={container}
       initial="hidden"
       animate="visible"
     >
-      <motion.header className="py-4 mb-5 text-white" initial={{opacity:0,y:-20}} animate={{opacity:1,y:0}} transition={{duration:0.6}}>
-        <div className="container d-flex align-items-center">
-          <motion.img src={logo} alt="OCC B2B" style={{height:'120px'}} className="me-3" initial={{scale:0.8}} animate={{scale:1}} transition={{type:'spring',stiffness:120}} />
-          <div className="ms-auto w-50 d-none d-md-block">
-            <motion.p initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.3}} className="fs-6 text-end mb-0">
-              Sin importar el tamaño, sector o ubicación de tu empresa,<br/>
-              estamos listos para ayudarte a crecer.
-            </motion.p>
-          </div>
-        </div>
+      <motion.header className="py-4 text-center" initial={{opacity:0,y:-20}} animate={{opacity:1,y:0}} transition={{duration:0.6}}>
+        <motion.img src={logo} alt="OCC B2B" style={{height:'100px'}} />
+        <p className="mt-2 fs-6">
+          Sin importar el tamaño, sector o ubicación de tu empresa,<br/>
+          estamos listos para ayudarte a crecer.
+        </p>
       </motion.header>
 
-      <motion.main className="container d-flex flex-column py-5">
-        <motion.section className="row mb-5 d-block d-md-none" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.8}}>
-          <div className="col-12">
-            <h2 className="h4 mb-3">¿Por qué elegir OCC?</h2>
-            <ul>
-              <li>Amplia base de datos de candidatos y empleos.</li>
-              <li>Proceso ágil y personalizado.</li>
-              <li>Soporte especializado en reclutamiento.</li>
-              <li>Más de 1000 empresas confían en nosotros.</li>
-            </ul>
-          </div>
-        </motion.section>
-
-        <motion.h2 className="text-start mb-4" initial={{opacity:0,y:-10}} animate={{opacity:1,y:0}} transition={{delay:0.4}}>
+      <motion.main className="container py-5 text-center">
+        <motion.h2 className="mb-4" initial={{opacity:0,y:-10}} animate={{opacity:1,y:0}} transition={{delay:0.3}}>
           ¿Qué deseas hacer?
         </motion.h2>
 
-        <section className="row g-4 mb-5 justify-content-center">
+        <section className="row g-3 mb-4 justify-content-center">
           {options.map(option => (
             <motion.div key={option.key} className="col-12 col-md-4" variants={item} whileHover="hover">
-              <motion.div className="card h-100 shadow-sm bg-dark bg-opacity-50 text-white" variants={item}>
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{option.title}</h5>
-                  <button type="button" className="btn btn-primary mt-auto" onClick={() => handleClick(option)}>
-                    {option.title}
-                  </button>
-                </div>
-              </motion.div>
+              <button
+                className={`btn ${option.style} w-100 py-3`}
+                onClick={() => handleClick(option)}
+              >
+                {option.title}
+              </button>
             </motion.div>
           ))}
         </section>
 
-        <motion.section className="row mb-5 d-none d-md-flex" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.8}}>
-          <div className="col-md-4 offset-md-8">
-            <h2 className="h4 mb-3">¿Por qué elegir OCC?</h2>
-            <ul>
-              <li>Amplia base de datos de candidatos y empleos.</li>
-              <li>Proceso ágil y personalizado.</li>
-              <li>Soporte especializado en reclutamiento.</li>
-              <li>Más de 1000 empresas confían en nosotros.</li>
-            </ul>
-          </div>
+        <motion.section className="mt-5" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.5}}>
+          <h3 className="mb-3">¿Por qué elegir OCC?</h3>
+          <ul className="list-unstyled">
+            <li><i className="bi bi-check-circle-fill me-2"></i> Amplia base de candidatos y empleos</li>
+            <li><i className="bi bi-check-circle-fill me-2"></i> Proceso ágil y personalizado</li>
+            <li><i className="bi bi-check-circle-fill me-2"></i> Soporte especializado en reclutamiento</li>
+            <li><i className="bi bi-check-circle-fill me-2"></i> Más de 1000 empresas confían en nosotros</li>
+          </ul>
         </motion.section>
 
-        <hr className="my-4" />
-
-        <motion.footer className="text-center py-4 border-top" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:1}}>
+        <motion.footer className="mt-5" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.8}}>
           <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
         </motion.footer>
       </motion.main>

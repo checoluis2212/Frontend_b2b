@@ -92,12 +92,12 @@ export default function Home() {
 
         <motion.section className="mt-5" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.5}}>
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
-          <ul style={{ listStyleType: listStyleType: 'none', padding: 0, textAlign: 'center' }}>
-            <li>Amplia base de candidatos y empleos</li>
-            <li>Proceso ágil y personalizado</li>
-            <li>Soporte especializado en reclutamiento</li>
-            <li>Más de 1000 empresas confían en nosotros</li>
-          </ul>
+          <ul style={{ listStyleType: 'none', padding: 0 }}>
+           <li><i className="bi bi-check-lg me-2"></i>Amplia base de candidatos y empleos</li>
+           <li><i className="bi bi-check-lg me-2"></i>Proceso ágil y personalizado</li>
+           <li><i className="bi bi-check-lg me-2"></i>Soporte especializado en reclutamiento</li>
+            <li><i className="bi bi-check-lg me-2"></i>Más de 1000 empresas confían en nosotros</li>
+           </ul>
         </motion.section>
 
         <motion.footer className="mt-5" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.8}}>

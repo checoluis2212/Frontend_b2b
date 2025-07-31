@@ -92,26 +92,26 @@ export default function Home() {
 
         {/* Logos en desktop */}
         <div className="d-none d-md-flex justify-content-center align-items-center gap-5 my-5">
-          <img src="/logos/amazon.png" alt="Amazon" style={{height: '40px'}} />
-          <img src="/logos/bbva.png" alt="BBVA" style={{height: '40px'}} />
-          <img src="/logos/dhl.png" alt="DHL" style={{height: '40px'}} />
-          <img src="/logos/netflix.png" alt="Netflix" style={{height: '40px'}} />
+          <img src="/assets/amazon.png" alt="Amazon" style={{height: '40px'}} />
+          <img src="/assets/bbva.png" alt="BBVA" style={{height: '40px'}} />
+          <img src="/assets/dhl.png" alt="DHL" style={{height: '40px'}} />
+          <img src="/assets/netflix.png" alt="Netflix" style={{height: '40px'}} />
         </div>
 
         {/* Carrusel de logos en móvil */}
         <div id="clientesCarousel" className="carousel slide d-md-none" data-bs-ride="carousel">
           <div className="carousel-inner text-center">
             <div className="carousel-item active">
-              <img src="/logos/amazon.png" className="d-block mx-auto" alt="Amazon" style={{height: '40px'}} />
+              <img src="/assets/amazon.png" className="d-block mx-auto" alt="Amazon" style={{height: '40px'}} />
             </div>
             <div className="carousel-item">
-              <img src="/logos/bbva.png" className="d-block mx-auto" alt="BBVA" style={{height: '40px'}} />
+              <img src="/assets/bbva.png" className="d-block mx-auto" alt="BBVA" style={{height: '40px'}} />
             </div>
             <div className="carousel-item">
-              <img src="/logos/dhl.png" className="d-block mx-auto" alt="DHL" style={{height: '40px'}} />
+              <img src="/assets/dhl.png" className="d-block mx-auto" alt="DHL" style={{height: '40px'}} />
             </div>
             <div className="carousel-item">
-              <img src="/logos/netflix.png" className="d-block mx-auto" alt="Netflix" style={{height: '40px'}} />
+              <img src="/assets/netflix.png" className="d-block mx-auto" alt="Netflix" style={{height: '40px'}} />
             </div>
           </div>
         </div>

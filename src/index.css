@@ -67,10 +67,11 @@ button:focus-visible {
   }
 }
 
+/* 🎯 Carrusel infinito con logos tamaño fijo */
 .logo-carousel {
   overflow: hidden;
   width: 100%;
-  padding: 15px 0;
+  padding: 10px 0;
 }
 
 .logo-track {
@@ -81,10 +82,15 @@ button:focus-visible {
 }
 
 .logo-track img {
-  height: 40px !important;   /* Fuerza altura */
-  width: auto !important;    /* Mantiene proporción */
-  max-width: 100px !important; /* Limita ancho */
+  height: 40px !important;    /* Fuerza altura */
+  width: auto !important;     /* Mantiene proporción */
+  max-width: 100px !important;/* Evita que se estire */
   object-fit: contain;
   flex-shrink: 0;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 

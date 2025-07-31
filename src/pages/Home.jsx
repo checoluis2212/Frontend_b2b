@@ -92,7 +92,7 @@ export default function Home() {
 
         <motion.section className="mt-5" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.5}}>
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
-          <ul style={{ listStyleType: 'disc', textAlign: 'left', maxWidth: '500px', margin: '0 auto' }}>
+          <ul style={{ listStyleType: listStyleType: 'none', padding: 0, textAlign: 'center' }}>
             <li>Amplia base de candidatos y empleos</li>
             <li>Proceso ágil y personalizado</li>
             <li>Soporte especializado en reclutamiento</li>

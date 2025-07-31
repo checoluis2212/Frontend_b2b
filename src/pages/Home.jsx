@@ -99,31 +99,35 @@ export default function Home() {
           ))}
         </section>
 
-        {/* LOGOS DESKTOP */}
-        <div className="d-none d-md-flex justify-content-center align-items-center gap-5 my-5">
-          <img src={amazon} alt="Amazon" style={{ height: '40px' }} />
-          <img src={bbva} alt="BBVA" style={{ height: '40px' }} />
-          <img src={dhl} alt="DHL" style={{ height: '40px' }} />
-          <img src={netflix} alt="Netflix" style={{ height: '40px' }} />
-        </div>
+        {/* LOGOS CON TÍTULO */}
+<h3 className="mt-5 mb-3">Marcas que confían en nosotros</h3>
 
-        {/* CARRUSEL LOGOS MÓVIL */}
-        <div id="clientesCarousel" className="carousel slide d-md-none" data-bs-ride="carousel">
-          <div className="carousel-inner text-center">
-            <div className="carousel-item active">
-              <img src={amazon} className="d-block mx-auto" alt="Amazon" style={{ height: '40px' }} />
-            </div>
-            <div className="carousel-item">
-              <img src={bbva} className="d-block mx-auto" alt="BBVA" style={{ height: '40px' }} />
-            </div>
-            <div className="carousel-item">
-              <img src={dhl} className="d-block mx-auto" alt="DHL" style={{ height: '40px' }} />
-            </div>
-            <div className="carousel-item">
-              <img src={netflix} className="d-block mx-auto" alt="Netflix" style={{ height: '40px' }} />
-            </div>
-          </div>
-        </div>
+{/* LOGOS DESKTOP */}
+<div className="d-none d-md-flex justify-content-center align-items-center gap-5 my-4">
+  <img src={amazon} alt="Amazon" style={{ height: '40px' }} />
+  <img src={bbva} alt="BBVA" style={{ height: '40px' }} />
+  <img src={dhl} alt="DHL" style={{ height: '40px' }} />
+  <img src={netflix} alt="Netflix" style={{ height: '40px' }} />
+</div>
+
+{/* CARRUSEL LOGOS MÓVIL */}
+<div id="clientesCarousel" className="carousel slide d-md-none" data-bs-ride="carousel" data-bs-interval="2000">
+  <div className="carousel-inner text-center">
+    <div className="carousel-item active">
+      <img src={amazon} className="d-block mx-auto" alt="Amazon" style={{ height: '40px' }} />
+    </div>
+    <div className="carousel-item">
+      <img src={bbva} className="d-block mx-auto" alt="BBVA" style={{ height: '40px' }} />
+    </div>
+    <div className="carousel-item">
+      <img src={dhl} className="d-block mx-auto" alt="DHL" style={{ height: '40px' }} />
+    </div>
+    <div className="carousel-item">
+      <img src={netflix} className="d-block mx-auto" alt="Netflix" style={{ height: '40px' }} />
+    </div>
+  </div>
+</div>
+
 
         {/* BENEFICIOS */}
         <motion.section className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>

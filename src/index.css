@@ -67,31 +67,24 @@ button:focus-visible {
   }
 }
 
-/* 🎯 Carrusel infinito de logos ajustado */
 .logo-carousel {
   overflow: hidden;
-  position: relative;
   width: 100%;
-  background: transparent;
   padding: 15px 0;
 }
 
 .logo-track {
   display: flex;
   align-items: center;
-  gap: 60px; /* espacio entre logos */
+  gap: 50px;
   animation: scroll 25s linear infinite;
 }
 
 .logo-track img {
-  height: 40px;        /* altura uniforme */
-  width: auto;         /* mantiene proporción */
-  object-fit: contain; /* evita deformación */
-  flex-shrink: 0;      /* evita que se aplasten */
-}
-
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  height: 40px !important;   /* Fuerza altura */
+  width: auto !important;    /* Mantiene proporción */
+  max-width: 100px !important; /* Limita ancho */
+  object-fit: contain;
+  flex-shrink: 0;
 }
 

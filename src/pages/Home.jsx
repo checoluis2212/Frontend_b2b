@@ -12,6 +12,7 @@ import dhl from '../assets/dhl.png';
 import netflix from '../assets/netflix.png';
 
 import { motion } from 'framer-motion';
+import './Home.css'; // CSS para el carrusel infinito
 
 export default function Home() {
   const navigate = useNavigate();
@@ -41,14 +42,12 @@ export default function Home() {
     })();
   }, []);
 
-  // Opciones con estilo
   const options = [
     { title: 'Solicitar Cotización', key: 'cotizar', style: 'btn-primary', url: 'https://reclutamiento.occ.com.mx/contactanos' },
     { title: 'Publicar Vacante', key: 'publicar', style: 'btn-outline-light', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
     { title: 'Buscar Empleo', key: 'empleo', style: 'btn-outline-light', url: 'https://www.occ.com.mx/' }
   ];
 
-  // 3) Manejo de clics
   const handleClick = async (option) => {
     if (!visitorId) return;
     const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
@@ -56,7 +55,6 @@ export default function Home() {
     window.location.href = option.url;
   };
 
-  // Animaciones
   const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.2 } } };
   const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }, hover: { scale: 1.05 } };
 
@@ -71,7 +69,6 @@ export default function Home() {
       initial="hidden"
       animate="visible"
     >
-      {/* HEADER */}
       <motion.header className="py-4 text-center" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <motion.img src={logo} alt="OCC B2B" style={{ height: '100px' }} />
         <p className="mt-2 fs-6">
@@ -81,7 +78,6 @@ export default function Home() {
       </motion.header>
 
       <motion.main className="container py-5 text-center">
-        {/* BOTONES PRINCIPALES */}
         <motion.h2 className="mb-4" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
           ¿Qué deseas hacer?
         </motion.h2>
@@ -99,36 +95,6 @@ export default function Home() {
           ))}
         </section>
 
-        {/* LOGOS CON TÍTULO */}
-<h3 className="mt-5 mb-3">Marcas que confían en nosotros</h3>
-
-{/* LOGOS DESKTOP */}
-<div className="d-none d-md-flex justify-content-center align-items-center gap-5 my-4">
-  <img src={amazon} alt="Amazon" style={{ height: '40px' }} />
-  <img src={bbva} alt="BBVA" style={{ height: '40px' }} />
-  <img src={dhl} alt="DHL" style={{ height: '40px' }} />
-  <img src={netflix} alt="Netflix" style={{ height: '40px' }} />
-</div>
-
-{/* CARRUSEL LOGOS MÓVIL */}
-<div id="clientesCarousel" className="carousel slide d-md-none" data-bs-ride="carousel" data-bs-interval="2000">
-  <div className="carousel-inner text-center">
-    <div className="carousel-item active">
-      <img src={amazon} className="d-block mx-auto" alt="Amazon" style={{ height: '40px' }} />
-    </div>
-    <div className="carousel-item">
-      <img src={bbva} className="d-block mx-auto" alt="BBVA" style={{ height: '40px' }} />
-    </div>
-    <div className="carousel-item">
-      <img src={dhl} className="d-block mx-auto" alt="DHL" style={{ height: '40px' }} />
-    </div>
-    <div className="carousel-item">
-      <img src={netflix} className="d-block mx-auto" alt="Netflix" style={{ height: '40px' }} />
-    </div>
-  </div>
-</div>
-
-
         {/* BENEFICIOS */}
         <motion.section className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
@@ -140,7 +106,22 @@ export default function Home() {
           </ul>
         </motion.section>
 
-        {/* FOOTER */}
+        {/* CARRUSEL INFINITO */}
+        <h3 className="mt-5 mb-3">Marcas que confían en nosotros</h3>
+        <div className="logo-carousel">
+          <div className="logo-track">
+            <img src={amazon} alt="Amazon" />
+            <img src={bbva} alt="BBVA" />
+            <img src={dhl} alt="DHL" />
+            <img src={netflix} alt="Netflix" />
+            {/* Repetimos para loop infinito */}
+            <img src={amazon} alt="Amazon" />
+            <img src={bbva} alt="BBVA" />
+            <img src={dhl} alt="DHL" />
+            <img src={netflix} alt="Netflix" />
+          </div>
+        </div>
+
         <motion.footer className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
           <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
         </motion.footer>

@@ -67,24 +67,27 @@ button:focus-visible {
   }
 }
 
+/* 🎯 Carrusel infinito de logos ajustado */
 .logo-carousel {
   overflow: hidden;
   position: relative;
   width: 100%;
   background: transparent;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
 .logo-track {
   display: flex;
-  width: calc(250px * 8); /* Ajusta según cantidad */
-  animation: scroll 20s linear infinite;
+  align-items: center;
+  gap: 60px; /* espacio entre logos */
+  animation: scroll 25s linear infinite;
 }
 
 .logo-track img {
-  height: 40px;
-  margin: 0 30px;
-  object-fit: contain;
+  height: 40px;        /* altura uniforme */
+  width: auto;         /* mantiene proporción */
+  object-fit: contain; /* evita deformación */
+  flex-shrink: 0;      /* evita que se aplasten */
 }
 
 @keyframes scroll {

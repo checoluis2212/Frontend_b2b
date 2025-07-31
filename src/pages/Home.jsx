@@ -2,8 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { sendResponse } from '../services/api';
+
+// Importar imágenes
 import logo from '../assets/logo.png';
 import bg from '../assets/background.jpg';
+import amazon from '../assets/amazon.png';
+import bbva from '../assets/bbva.png';
+import dhl from '../assets/dhl.png';
+import netflix from '../assets/netflix.png';
+
 import { motion } from 'framer-motion';
 
 export default function Home() {
@@ -34,7 +41,7 @@ export default function Home() {
     })();
   }, []);
 
-  // Opciones con estilo y microcopy optimizado
+  // Opciones con estilo
   const options = [
     { title: 'Solicitar Cotización', key: 'cotizar', style: 'btn-primary', url: 'https://reclutamiento.occ.com.mx/contactanos' },
     { title: 'Publicar Vacante', key: 'publicar', style: 'btn-outline-light', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
@@ -50,30 +57,32 @@ export default function Home() {
   };
 
   // Animaciones
-  const container = { hidden:{opacity:0}, visible:{opacity:1,transition:{staggerChildren:0.2}} };
-  const item      = { hidden:{opacity:0,y:20}, visible:{opacity:1,y:0,transition:{type:'spring',stiffness:100}}, hover:{scale:1.05} };
+  const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.2 } } };
+  const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }, hover: { scale: 1.05 } };
 
   return (
     <motion.div
       className="text-white"
       style={{
-        backgroundImage:`linear-gradient(rgba(0,0,40,0.7), rgba(0,0,40,0.7)), url(${bg})`,
-        backgroundSize:'cover', backgroundPosition:'center', minHeight:'100vh'
+        backgroundImage: `linear-gradient(rgba(0,0,40,0.7), rgba(0,0,40,0.7)), url(${bg})`,
+        backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh'
       }}
       variants={container}
       initial="hidden"
       animate="visible"
     >
-      <motion.header className="py-4 text-center" initial={{opacity:0,y:-20}} animate={{opacity:1,y:0}} transition={{duration:0.6}}>
-        <motion.img src={logo} alt="OCC B2B" style={{height:'100px'}} />
+      {/* HEADER */}
+      <motion.header className="py-4 text-center" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <motion.img src={logo} alt="OCC B2B" style={{ height: '100px' }} />
         <p className="mt-2 fs-6">
-          Sin importar el tamaño, sector o ubicación de tu empresa,<br/>
+          Sin importar el tamaño, sector o ubicación de tu empresa,<br />
           estamos listos para ayudarte a crecer.
         </p>
       </motion.header>
 
       <motion.main className="container py-5 text-center">
-        <motion.h2 className="mb-4" initial={{opacity:0,y:-10}} animate={{opacity:1,y:0}} transition={{delay:0.3}}>
+        {/* BOTONES PRINCIPALES */}
+        <motion.h2 className="mb-4" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
           ¿Qué deseas hacer?
         </motion.h2>
 
@@ -90,44 +99,45 @@ export default function Home() {
           ))}
         </section>
 
-        {/* Logos en desktop */}
+        {/* LOGOS DESKTOP */}
         <div className="d-none d-md-flex justify-content-center align-items-center gap-5 my-5">
-          <img src="/assets/amazon.png" alt="Amazon" style={{height: '40px'}} />
-          <img src="/assets/bbva.png" alt="BBVA" style={{height: '40px'}} />
-          <img src="/assets/dhl.png" alt="DHL" style={{height: '40px'}} />
-          <img src="/assets/netflix.png" alt="Netflix" style={{height: '40px'}} />
+          <img src={amazon} alt="Amazon" style={{ height: '40px' }} />
+          <img src={bbva} alt="BBVA" style={{ height: '40px' }} />
+          <img src={dhl} alt="DHL" style={{ height: '40px' }} />
+          <img src={netflix} alt="Netflix" style={{ height: '40px' }} />
         </div>
 
-        {/* Carrusel de logos en móvil */}
+        {/* CARRUSEL LOGOS MÓVIL */}
         <div id="clientesCarousel" className="carousel slide d-md-none" data-bs-ride="carousel">
           <div className="carousel-inner text-center">
             <div className="carousel-item active">
-              <img src="/assets/amazon.png" className="d-block mx-auto" alt="Amazon" style={{height: '40px'}} />
+              <img src={amazon} className="d-block mx-auto" alt="Amazon" style={{ height: '40px' }} />
             </div>
             <div className="carousel-item">
-              <img src="/assets/bbva.png" className="d-block mx-auto" alt="BBVA" style={{height: '40px'}} />
+              <img src={bbva} className="d-block mx-auto" alt="BBVA" style={{ height: '40px' }} />
             </div>
             <div className="carousel-item">
-              <img src="/assets/dhl.png" className="d-block mx-auto" alt="DHL" style={{height: '40px'}} />
+              <img src={dhl} className="d-block mx-auto" alt="DHL" style={{ height: '40px' }} />
             </div>
             <div className="carousel-item">
-              <img src="/assets/netflix.png" className="d-block mx-auto" alt="Netflix" style={{height: '40px'}} />
+              <img src={netflix} className="d-block mx-auto" alt="Netflix" style={{ height: '40px' }} />
             </div>
           </div>
         </div>
 
-        {/* Beneficios con paloma simple */}
-        <motion.section className="mt-5" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.5}}>
+        {/* BENEFICIOS */}
+        <motion.section className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
           <ul style={{ listStyleType: 'none', padding: 0, maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}>
-            <li>✔ Amplia base de candidatos y empleos</li>
-            <li>✔ Proceso ágil y personalizado</li>
-            <li>✔ Soporte especializado en reclutamiento</li>
-            <li>✔ Más de 1000 empresas confían en nosotros</li>
+            <li style={{ color: '#fff' }}>✔ Amplia base de candidatos y empleos</li>
+            <li style={{ color: '#fff' }}>✔ Proceso ágil y personalizado</li>
+            <li style={{ color: '#fff' }}>✔ Soporte especializado en reclutamiento</li>
+            <li style={{ color: '#fff' }}>✔ Más de 1000 empresas confían en nosotros</li>
           </ul>
         </motion.section>
 
-        <motion.footer className="mt-5" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.8}}>
+        {/* FOOTER */}
+        <motion.footer className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
           <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
         </motion.footer>
       </motion.main>

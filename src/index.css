@@ -67,7 +67,27 @@ button:focus-visible {
   }
 }
 
-/* 🎯 Carrusel infinito OCC */
+/* === BENEFICIOS === */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left !important; /* Para alineación */
+}
+
+.benefits-list li {
+  color: white !important;       /* Palomas blancas */
+  margin-bottom: 5px;
+}
+
+.benefits-list li::before {
+  content: "✔";
+  color: white !important;       /* Palomas blancas */
+  margin-right: 8px;
+}
+
+/* === CARRUSEL LOGOS === */
 .logo-carousel {
   overflow: hidden;
   width: 100%;
@@ -82,9 +102,9 @@ button:focus-visible {
 }
 
 .logo-item {
-  height: 40px !important;      /* Fija altura */
-  width: auto !important;       /* Mantiene proporción */
-  max-width: 120px !important;  /* Máximo ancho */
+  height: 40px !important;
+  width: auto !important;
+  max-width: 120px !important;
   object-fit: contain !important;
   flex-shrink: 0;
 }

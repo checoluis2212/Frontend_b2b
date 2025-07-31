@@ -90,14 +90,41 @@ export default function Home() {
           ))}
         </section>
 
+        {/* Logos en desktop */}
+        <div className="d-none d-md-flex justify-content-center align-items-center gap-5 my-5">
+          <img src="/logos/amazon.png" alt="Amazon" style={{height: '40px'}} />
+          <img src="/logos/bbva.png" alt="BBVA" style={{height: '40px'}} />
+          <img src="/logos/dhl.png" alt="DHL" style={{height: '40px'}} />
+          <img src="/logos/netflix.png" alt="Netflix" style={{height: '40px'}} />
+        </div>
+
+        {/* Carrusel de logos en móvil */}
+        <div id="clientesCarousel" className="carousel slide d-md-none" data-bs-ride="carousel">
+          <div className="carousel-inner text-center">
+            <div className="carousel-item active">
+              <img src="/logos/amazon.png" className="d-block mx-auto" alt="Amazon" style={{height: '40px'}} />
+            </div>
+            <div className="carousel-item">
+              <img src="/logos/bbva.png" className="d-block mx-auto" alt="BBVA" style={{height: '40px'}} />
+            </div>
+            <div className="carousel-item">
+              <img src="/logos/dhl.png" className="d-block mx-auto" alt="DHL" style={{height: '40px'}} />
+            </div>
+            <div className="carousel-item">
+              <img src="/logos/netflix.png" className="d-block mx-auto" alt="Netflix" style={{height: '40px'}} />
+            </div>
+          </div>
+        </div>
+
+        {/* Beneficios con paloma simple */}
         <motion.section className="mt-5" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.5}}>
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
-          <ul style={{ listStyleType: 'none', padding: 0 }}>
-           <li><i className="bi bi-check-lg me-2"></i>Amplia base de candidatos y empleos</li>
-           <li><i className="bi bi-check-lg me-2"></i>Proceso ágil y personalizado</li>
-           <li><i className="bi bi-check-lg me-2"></i>Soporte especializado en reclutamiento</li>
-            <li><i className="bi bi-check-lg me-2"></i>Más de 1000 empresas confían en nosotros</li>
-           </ul>
+          <ul style={{ listStyleType: 'none', padding: 0, maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}>
+            <li>✔ Amplia base de candidatos y empleos</li>
+            <li>✔ Proceso ágil y personalizado</li>
+            <li>✔ Soporte especializado en reclutamiento</li>
+            <li>✔ Más de 1000 empresas confían en nosotros</li>
+          </ul>
         </motion.section>
 
         <motion.footer className="mt-5" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.8}}>

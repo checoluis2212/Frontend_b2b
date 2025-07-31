@@ -67,10 +67,10 @@ button:focus-visible {
   }
 }
 
-/* 🎯 Carrusel infinito con logos tamaño fijo */
+/* 🎯 Carrusel infinito OCC */
 .logo-carousel {
   overflow: hidden;
-  width: 20%;
+  width: 100%;
   padding: 10px 0;
 }
 
@@ -81,11 +81,11 @@ button:focus-visible {
   animation: scroll 25s linear infinite;
 }
 
-.logo-track img {
-  height: 40px !important;    /* Fuerza altura */
-  width: auto !important;     /* Mantiene proporción */
-  max-width: 100px !important;/* Evita que se estire */
-  object-fit: contain;
+.logo-item {
+  height: 40px !important;      /* Fija altura */
+  width: auto !important;       /* Mantiene proporción */
+  max-width: 120px !important;  /* Máximo ancho */
+  object-fit: contain !important;
   flex-shrink: 0;
 }
 
@@ -93,4 +93,3 @@ button:focus-visible {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-

@@ -70,7 +70,7 @@ button:focus-visible {
 /* 🎯 Carrusel infinito con logos tamaño fijo */
 .logo-carousel {
   overflow: hidden;
-  width: 100%;
+  width: 20%;
   padding: 10px 0;
 }
 

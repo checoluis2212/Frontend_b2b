@@ -66,14 +66,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-.beneficios-text {
-  list-style: none;       /* Quitamos bullets */
-  padding: 0;
-  margin: 0 auto;
-  max-width: 500px;       /* Para que no quede muy ancho */
-}
-
-.beneficios-text li {
-  margin-bottom: 0.5rem;  /* Espaciado entre puntos */
-}
 

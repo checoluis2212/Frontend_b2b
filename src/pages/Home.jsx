@@ -12,7 +12,6 @@ import dhl from '../assets/dhl.png';
 import netflix from '../assets/netflix.png';
 
 import { motion } from 'framer-motion';
-import './index.css'; 
 
 export default function Home() {
   const navigate = useNavigate();

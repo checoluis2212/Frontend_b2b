@@ -12,7 +12,7 @@ import dhl from '../assets/dhl.png';
 import netflix from '../assets/netflix.png';
 
 import { motion } from 'framer-motion';
-import './Home.css'; // CSS para el carrusel infinito
+import './index.css'; 
 
 export default function Home() {
   const navigate = useNavigate();

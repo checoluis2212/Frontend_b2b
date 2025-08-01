@@ -18,6 +18,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
   const [hoveredButton, setHoveredButton] = useState(null);
+  const [loadingVisitorId, setLoadingVisitorId] = useState(true);
 
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {
@@ -34,10 +35,16 @@ export default function Home() {
 
   useEffect(() => {
     (async () => {
-      const fp = await FingerprintJS.load();
-      const { visitorId } = await fp.get();
-      setVisitorId(visitorId);
-      localStorage.setItem('visitorId', visitorId);
+      try {
+        const fp = await FingerprintJS.load();
+        const { visitorId } = await fp.get();
+        setVisitorId(visitorId);
+        localStorage.setItem('visitorId', visitorId);
+      } catch (err) {
+        console.error("❌ Error cargando visitorId:", err);
+      } finally {
+        setLoadingVisitorId(false); // Siempre terminamos el loading
+      }
     })();
   }, []);
 
@@ -48,14 +55,28 @@ export default function Home() {
   ];
 
   const handleClick = async (option) => {
-    if (!visitorId) return;
+    if (!visitorId) {
+      console.error("🚨 visitorId no está listo");
+      return;
+    }
+    if (!option.key) {
+      console.error("🚨 key del botón está vacío");
+      return;
+    }
+
     const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
-    await sendResponse({ visitorId, button: option.key, utmParams });
-    window.location.href = option.url;
+
+    console.log("📤 Enviando:", { visitorId, button: option.key, utmParams });
+
+    try {
+      await sendResponse({ visitorId, button: option.key, utmParams });
+      window.location.href = option.url;
+    } catch (error) {
+      console.error("❌ Error al enviar:", error);
+    }
   };
 
   const getButtonClass = (key) => {
-    // Azul por defecto en "cotizar", a menos que se esté haciendo hover en otro botón
     const activeKey = hoveredButton || 'cotizar';
     return activeKey === key ? 'btn-primary' : 'btn-outline-light';
   };
@@ -101,8 +122,9 @@ export default function Home() {
                 onMouseEnter={() => setHoveredButton(option.key)}
                 onMouseLeave={() => setHoveredButton(null)}
                 onClick={() => handleClick(option)}
+                disabled={loadingVisitorId}
               >
-                {option.title}
+                {loadingVisitorId ? 'Cargando...' : option.title}
               </button>
             </motion.div>
           ))}
@@ -113,28 +135,16 @@ export default function Home() {
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
           <ul className="benefits-list list-unstyled">
             <li><CheckIcon /> Amplia base de candidatos y empleos</li>
-            <li><CheckIcon /> Proceso ágil y asesoria personalizada</li>
-            <li><CheckIcon /> Capacitación sobre nuestra plataforma</li>
+            <li><CheckIcon /> Proceso ágil y personalizado</li>
+            <li><CheckIcon /> Soporte especializado en reclutamiento</li>
             <li><CheckIcon /> Más de 1000 empresas confían en nosotros</li>
           </ul>
         </motion.section>
 
         {/* Carrusel */}
-        <h3 className="mt-5 mb-3">Algunas de las marcas que confían en nosotros</h3>
+        <h3 className="mt-5 mb-3">Marcas que confían en nosotros</h3>
         <div className="logo-carousel">
           <div className="logo-track">
-            <img src={amazon} alt="Amazon" className="logo-item" />
-            <img src={bbva} alt="BBVA" className="logo-item" />
-            <img src={dhl} alt="DHL" className="logo-item" />
-            <img src={netflix} alt="Netflix" className="logo-item" />
-            <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-            <img src={salinas} alt="salinas" className="logo-item" />
-            <img src={amazon} alt="Amazon" className="logo-item" />
-            <img src={bbva} alt="BBVA" className="logo-item" />
-            <img src={dhl} alt="DHL" className="logo-item" />
-            <img src={netflix} alt="Netflix" className="logo-item" />
-            <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-            <img src={salinas} alt="salinas" className="logo-item" />
             <img src={amazon} alt="Amazon" className="logo-item" />
             <img src={bbva} alt="BBVA" className="logo-item" />
             <img src={dhl} alt="DHL" className="logo-item" />
@@ -152,3 +162,4 @@ export default function Home() {
     </motion.div>
   );
 }
+

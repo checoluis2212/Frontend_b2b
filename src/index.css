@@ -127,13 +127,18 @@ body {
   font-weight: 600;
 }
 
+/* Sección de logos (título + carrusel) */
 .logos-section {
   margin-top: 80px; 
 }
 
+/* Ajuste para el título de la sección de logos */
 .logos-section h3 {
   margin-bottom: 30px; 
+}
 
+/* Ajuste extra para el carrusel */
 .logo-carousel {
   margin-top: 10px; 
 }
+

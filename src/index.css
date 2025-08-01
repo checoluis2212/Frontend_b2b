@@ -127,7 +127,13 @@ body {
   font-weight: 600;
 }
 
-.logo-carousel {
-  margin-top: 40px; /* ajusta el valor según te guste, 40px es buen punto de partida */
+.logos-section {
+  margin-top: 80px; 
 }
+
+.logos-section h3 {
+  margin-bottom: 30px; 
+
+.logo-carousel {
+  margin-top: 10px; 
 

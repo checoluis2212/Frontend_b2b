@@ -176,7 +176,7 @@ button:focus-visible {
 
 /* Clase para el botón con flash */
 .btn-flash {
-  animation: flash 1.0s infinite;
+  animation: flash 2.0s infinite;
 }
 
 /* Forzar palomas blancas en cualquier formato */

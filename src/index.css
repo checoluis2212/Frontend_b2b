@@ -179,9 +179,5 @@ button:focus-visible {
   animation: flash 2.0s infinite;
 }
 
-/* Forzar palomas verdes a blanco sin tocar SVG */
-.benefits-list svg {
-  filter: brightness(0) invert(1);
-}
 
 

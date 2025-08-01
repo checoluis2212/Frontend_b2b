@@ -80,18 +80,18 @@ export default function Home() {
   };
 
   const getButtonClass = (key) => {
-  const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 768;
 
-  // En mobile siempre mostrar "cotizar" activo
-  if (isMobile) {
-    return key === 'cotizar' ? 'btn-primary' : 'btn-outline-light';
-  }
+    // En mobile siempre mostrar "cotizar" activo
+    if (isMobile) {
+      return key === 'cotizar' ? 'btn-primary' : 'btn-outline-light';
+    }
 
-  // En desktop: hover temporal, pero "cotizar" activo por defecto
-  return hoveredButton === key || (!hoveredButton && key === 'cotizar')
-    ? 'btn-primary'
-    : 'btn-outline-light';
-};
+    // En desktop: hover temporal, pero "cotizar" activo por defecto
+    return hoveredButton === key || (!hoveredButton && key === 'cotizar')
+      ? 'btn-primary'
+      : 'btn-outline-light';
+  };
 
   const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.2 } } };
   const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }, hover: { scale: 1.05 } };
@@ -132,6 +132,7 @@ export default function Home() {
               <button
                 className={`btn w-100 py-3 ${getButtonClass(option.key)}`}
                 onMouseEnter={() => !isMobile() && setHoveredButton(option.key)}
+                onMouseLeave={() => !isMobile() && setHoveredButton(null)} {/* 👈 Esto hace que vuelva a cotizar */}
                 onClick={() => {
                   setActiveButton(option.key);
                   handleClick(option);
@@ -157,37 +158,4 @@ export default function Home() {
 
         {/* Carrusel */}
         <div className="logos-section mt-5">
-          <h3 className="mb-3">Marcas que confían en nosotros</h3>
-          <div className="logo-carousel">
-            <div className="logo-track">
-              <img src={amazon} alt="Amazon" className="logo-item" />
-              <img src={bbva} alt="BBVA" className="logo-item" />
-              <img src={dhl} alt="DHL" className="logo-item" />
-              <img src={netflix} alt="Netflix" className="logo-item" />
-              <img src={palacio} alt="Palacio de Hierro" className="logo-item" />
-              <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-              <img src={lala} alt="Lala" className="logo-item" />
-              <img src={salinas} alt="Salinas" className="logo-item" />
-              <img src={thomson} alt="Thomson" className="logo-item" />
-
-              <img src={amazon} alt="Amazon" className="logo-item" />
-              <img src={bbva} alt="BBVA" className="logo-item" />
-              <img src={dhl} alt="DHL" className="logo-item" />
-              <img src={netflix} alt="Netflix" className="logo-item" />
-              <img src={palacio} alt="Palacio de Hierro" className="logo-item" />
-              <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-              <img src={lala} alt="Lala" className="logo-item" />
-              <img src={salinas} alt="Salinas" className="logo-item" />
-              <img src={thomson} alt="Thomson" className="logo-item" />
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <motion.footer className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
-          <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
-        </motion.footer>
-      </motion.main>
-    </motion.div>
-  );
-}
+          <h3 className="mb-3">Marca

@@ -10,7 +10,6 @@ import dhl from '../assets/dhl.png';
 import netflix from '../assets/netflix.png';
 import Walmart from '../assets/Walmart.png';
 import salinas from '../assets/salinas.png';
-import atento from '../assets/atento.png';
 import palacio from '../assets/palacio.png';
 import thomson from '../assets/thomson.png';
 import lala from '../assets/lala.png';
@@ -154,7 +153,6 @@ export default function Home() {
             <div className="logo-track">
               <img src={amazon} alt="Amazon" className="logo-item" />
               <img src={bbva} alt="BBVA" className="logo-item" />
-              <img src={atento} alt="Atento" className="logo-item" />
               <img src={dhl} alt="DHL" className="logo-item" />
               <img src={netflix} alt="Netflix" className="logo-item" />
               <img src={palacio} alt="Palacio de Hierro" className="logo-item" />
@@ -165,7 +163,6 @@ export default function Home() {
 
               <img src={amazon} alt="Amazon" className="logo-item" />
               <img src={bbva} alt="BBVA" className="logo-item" />
-              <img src={atento} alt="Atento" className="logo-item" />
               <img src={dhl} alt="DHL" className="logo-item" />
               <img src={netflix} alt="Netflix" className="logo-item" />
               <img src={palacio} alt="Palacio de Hierro" className="logo-item" />

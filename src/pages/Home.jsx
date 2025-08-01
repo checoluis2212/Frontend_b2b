@@ -1,3 +1,127 @@
+// src/pages/Home.jsx
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
+
+import logo from '../assets/logo.png';
+import '../index.css';
+
+export default function Home() {
+  const navigate = useNavigate();
+  const [visitorId, setVisitorId] = useState(null);
+
+  // Captura visitorId
+  useEffect(() => {
+    FingerprintJS.load().then(fp =>
+      fp.get().then(result => setVisitorId(result.visitorId))
+    );
+  }, []);
+
+  const handleClick = (ruta) => {
+    navigate(`/${ruta}`);
+  };
+
+  return (
+    <div className="home bg">
+      <div className="container text-center px-3 py-5 text-white">
+
+        <img src={logo} alt="Logo OCC" className="logo mb-3" />
+
+        <p className="intro">
+          Sin importar el tamaño, sector o ubicación de tu empresa,<br />
+          estamos listos para ayudarte a crecer.
+        </p>
+
+        <h2 className="mt-4 mb-3">¿Qué deseas hacer?</h2>
+
+        <button className="btn btn-primary w-100 mb-3"
+          onClick={() => handleClick('cotizar')}>
+          Solicitar Cotización (+10 vacantes)
+        </button>
+
+        <button className="btn btn-outline-light w-100 mb-3"
+          onClick={() => handleClick('publicar')}>
+          Publicar Mi Primera Vacante
+        </button>
+
+        <button className="btn btn-outline-light w-100 mb-4"
+          onClick={() => handleClick('empleo')}>
+          Buscar Empleo
+        </button>
+
+        <h3 className="mb-3">¿Por qué elegir OCC?</h3>
+
+        <ul className="benefits list-unstyled text-start mx-auto">
+          <li>Amplia base de candidatos y empleos</li>
+          <li>Proceso ágil y personalizado</li>
+          <li>Soporte especializado en reclutamiento</li>
+          <li>Más de 1000 empresas confían en nosotros</li>
+        </ul>
+
+      </div>
+    </div>
+  );
+}
+🎨 index.css (estilos móviles optimizados)
+Agrega esto en tu index.css o crea uno nuevo llamado home.css y lo importas en Home.jsx.
+
+css
+Copiar
+Editar
+/* Fondo con overlay */
+.bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+              url('./assets/background.jpg') no-repeat center center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Logo responsivo */
+.logo {
+  max-width: 100px;
+}
+
+/* Intro texto */
+.intro {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* Títulos */
+h2, h3 {
+  font-weight: 700;
+}
+
+/* Beneficios con check */
+.benefits {
+  max-width: 320px;
+}
+
+.benefits li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.benefits li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: white;
+  font-weight: bold;
+}
+¿Quieres también la versión desktop/tablet responsive con media queries o mantienes este enfoque solo para móviles?
+
+
+
+
+
+
+
+
+Tú dijiste:
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';

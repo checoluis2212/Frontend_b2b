@@ -17,7 +17,7 @@ import '../index.css';
 export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
-  const [activeButton, setActiveButton] = useState('cotizar'); // Azul inicial
+  const [hoveredButton, setHoveredButton] = useState(null); // 🔹 Botón que está en hover
 
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {
@@ -42,7 +42,7 @@ export default function Home() {
   }, []);
 
   const options = [
-    { title: 'Solicitar Cotización', key: 'cotizar', url: 'https://reclutamiento.occ.com.mx/contactanos' },
+    { title: 'Solicitar Cotización (+10 vacantes)', key: 'cotizar', url: 'https://reclutamiento.occ.com.mx/contactanos' },
     { title: 'Publicar Vacante', key: 'publicar', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
     { title: 'Buscar Empleo', key: 'empleo', url: 'https://www.occ.com.mx/' }
   ];
@@ -52,6 +52,11 @@ export default function Home() {
     const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
     await sendResponse({ visitorId, button: option.key, utmParams });
     window.location.href = option.url;
+  };
+
+  const getButtonClass = (key) => {
+    const activeKey = hoveredButton || 'cotizar';
+    return activeKey === key ? 'btn-primary btn-enfasis' : 'btn-outline-light';
   };
 
   const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.2 } } };
@@ -91,8 +96,9 @@ export default function Home() {
               whileHover="hover"
             >
               <button
-                className={`btn w-100 py-3 ${activeButton === option.key ? 'btn-primary' : 'btn-outline-light'}`}
-                onMouseEnter={() => setActiveButton(option.key)}
+                className={`btn w-100 py-3 ${getButtonClass(option.key)}`}
+                onMouseEnter={() => setHoveredButton(option.key)}
+                onMouseLeave={() => setHoveredButton(null)}
                 onClick={() => handleClick(option)}
               >
                 {option.title}
@@ -116,18 +122,6 @@ export default function Home() {
         <h3 className="mt-5 mb-3">Marcas que confían en nosotros</h3>
         <div className="logo-carousel">
           <div className="logo-track">
-            <img src={amazon} alt="Amazon" className="logo-item" />
-            <img src={bbva} alt="BBVA" className="logo-item" />
-            <img src={dhl} alt="DHL" className="logo-item" />
-            <img src={netflix} alt="Netflix" className="logo-item" />
-            <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-            <img src={salinas} alt="salinas" className="logo-item" />
-            <img src={amazon} alt="Amazon" className="logo-item" />
-            <img src={bbva} alt="BBVA" className="logo-item" />
-            <img src={dhl} alt="DHL" className="logo-item" />
-            <img src={netflix} alt="Netflix" className="logo-item" />
-            <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-            <img src={salinas} alt="salinas" className="logo-item" />
             <img src={amazon} alt="Amazon" className="logo-item" />
             <img src={bbva} alt="BBVA" className="logo-item" />
             <img src={dhl} alt="DHL" className="logo-item" />

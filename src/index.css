@@ -139,3 +139,24 @@ button:focus-visible {
     transform: translateX(-50%);
   }
 }
+
+/* Botón primario */
+.btn-primary {
+  background-color: #0056b3; /* Azul OCC */
+  border-color: #0056b3;
+}
+.btn-primary:hover {
+  background-color: #004494; /* Azul más oscuro al hover */
+  border-color: #004494;
+}
+
+/* Botón outline */
+.btn-outline-light {
+  color: #fff;
+  border-color: #fff;
+}
+.btn-outline-light:hover {
+  background-color: #0056b3; /* Azul OCC en hover */
+  border-color: #0056b3;
+  color: #fff;
+}

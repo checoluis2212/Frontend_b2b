@@ -87,29 +87,25 @@ button:focus-visible {
   margin-right: 8px;
 }
 
-/* === CARRUSEL LOGOS === */
+/* === CARRUSEL LOGOS FIX === */
 .logo-carousel {
   overflow: hidden;
   width: 100%;
   padding: 10px 0;
+  height: 60px; /* altura controlada */
 }
 
 .logo-track {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
   animation: scroll 25s linear infinite;
 }
 
 .logo-item {
-  height: 40px !important;
-  width: auto !important;
-  max-width: 120px !important;
+  height: 40px !important;      /* Altura fija */
+  width: auto !important;       /* Mantener proporción */
+  max-width: 100px !important;  /* Limitar ancho */
   object-fit: contain !important;
   flex-shrink: 0;
-}
-
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }

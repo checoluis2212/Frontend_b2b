@@ -18,6 +18,7 @@ import '../index.css';
 export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
+  const [flashButton, setFlashButton] = useState('cotizar'); // Control dinámico de flash
 
   // Capturar UTM una vez
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function Home() {
   }, []);
 
   const options = [
-    { title: 'Solicitar Cotización', key: 'cotizar', style: 'btn-primary btn-flash', url: 'https://reclutamiento.occ.com.mx/contactanos' },
+    { title: 'Solicitar Cotización', key: 'cotizar', style: 'btn-primary', url: 'https://reclutamiento.occ.com.mx/contactanos' },
     { title: 'Publicar Vacante', key: 'publicar', style: 'btn-outline-light', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
     { title: 'Buscar Empleo', key: 'empleo', style: 'btn-outline-light', url: 'https://www.occ.com.mx/' }
   ];
@@ -80,22 +81,51 @@ export default function Home() {
         </motion.h2>
         <section className="row g-3 mb-4 justify-content-center">
           {options.map(option => (
-            <motion.div key={option.key} className="col-12 col-md-4" variants={item} whileHover="hover">
-              <button className={`btn ${option.style} w-100 py-3`} onClick={() => handleClick(option)}>
+            <motion.div 
+              key={option.key} 
+              className="col-12 col-md-4" 
+              variants={item} 
+              whileHover="hover"
+            >
+              <button
+                className={`btn ${option.style} w-100 py-3 ${flashButton === option.key ? 'btn-flash' : ''}`}
+                onMouseEnter={() => setFlashButton(option.key)}
+                onClick={() => handleClick(option)}
+              >
                 {option.title}
               </button>
             </motion.div>
           ))}
         </section>
 
-        {/* Beneficios */}
+        {/* Beneficios con palomas SVG Bootstrap blancas */}
         <motion.section className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
-          <ul className="benefits-list">
-            <li>Amplia base de candidatos y empleos</li>
-            <li>Proceso ágil y personalizado</li>
-            <li>Soporte especializado en reclutamiento</li>
-            <li>Más de 1000 empresas confían en nosotros</li>
+          <ul className="benefits-list list-unstyled">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-check-circle-fill me-2" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.97 10.03a.75.75 0 0 0 1.07-.02L10.97 7l-1.414-1.414L7.5 8.086 6.354 6.94 4.94 8.354 6.97 10.03z"/>
+              </svg>
+              Amplia base de candidatos y empleos
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-check-circle-fill me-2" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.97 10.03a.75.75 0 0 0 1.07-.02L10.97 7l-1.414-1.414L7.5 8.086 6.354 6.94 4.94 8.354 6.97 10.03z"/>
+              </svg>
+              Proceso ágil y personalizado
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-check-circle-fill me-2" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.97 10.03a.75.75 0 0 0 1.07-.02L10.97 7l-1.414-1.414L7.5 8.086 6.354 6.94 4.94 8.354 6.97 10.03z"/>
+              </svg>
+              Soporte especializado en reclutamiento
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" className="bi bi-check-circle-fill me-2" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.97 10.03a.75.75 0 0 0 1.07-.02L10.97 7l-1.414-1.414L7.5 8.086 6.354 6.94 4.94 8.354 6.97 10.03z"/>
+              </svg>
+              Más de 1000 empresas confían en nosotros
+            </li>
           </ul>
         </motion.section>
 

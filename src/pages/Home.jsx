@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { sendResponse } from '../services/api';
 
-// Imágenes
 import logo from '../assets/logo.png';
 import bg from '../assets/background.jpg';
 import amazon from '../assets/amazon.png';
@@ -12,18 +11,19 @@ import dhl from '../assets/dhl.png';
 import netflix from '../assets/netflix.png';
 
 import { motion } from 'framer-motion';
+import '../index.css'; // Asegúrate de importar el CSS
 
 export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
 
-  // Capturar UTM
+  // Capturar UTM una vez
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {
       const params = new URLSearchParams(window.location.search);
       const utm = {};
-      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
-        if (params.has(key)) utm[key.replace('utm_', '')] = params.get(key);
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(key => {
+        if (params.has(key)) utm[key.replace('utm_','')] = params.get(key);
       });
       if (Object.keys(utm).length) {
         localStorage.setItem('utmParams', JSON.stringify(utm));
@@ -58,47 +58,36 @@ export default function Home() {
   const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }, hover: { scale: 1.05 } };
 
   return (
-    <motion.div
-      className="text-white"
-      style={{
-        backgroundImage: `linear-gradient(rgba(0,0,40,0.7), rgba(0,0,40,0.7)), url(${bg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}
-      variants={container}
-      initial="hidden"
-      animate="visible"
-    >
+    <motion.div className="home-wrapper text-white" variants={container} initial="hidden" animate="visible">
+      
       {/* HEADER */}
       <motion.header className="py-4 text-center" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-        <motion.img src={logo} alt="OCC B2B" style={{ height: '100px' }} />
+        <motion.img src={logo} alt="OCC B2B" className="logo-header" />
         <p className="mt-2 fs-6">
           Sin importar el tamaño, sector o ubicación de tu empresa,<br />
           estamos listos para ayudarte a crecer.
         </p>
       </motion.header>
 
-      {/* BOTONES */}
-      <motion.main className="container py-5 text-center">
+      {/* MAIN */}
+      <motion.main className="content-container text-center">
+        
+        {/* Botones */}
         <motion.h2 className="mb-4" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
           ¿Qué deseas hacer?
         </motion.h2>
-
         <section className="row g-3 mb-4 justify-content-center">
           {options.map(option => (
             <motion.div key={option.key} className="col-12 col-md-4" variants={item} whileHover="hover">
-              <button
-                className={`btn ${option.style} w-100 py-3`}
-                onClick={() => handleClick(option)}
-              >
+              <button className={`btn ${option.style} w-100 py-3`} onClick={() => handleClick(option)}>
                 {option.title}
               </button>
             </motion.div>
           ))}
         </section>
 
-        {/* BENEFICIOS */}
-        <motion.section className="mt-5 benefits-section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+        {/* Beneficios */}
+        <motion.section className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
           <ul className="benefits-list">
             <li>Amplia base de candidatos y empleos</li>
@@ -108,7 +97,7 @@ export default function Home() {
           </ul>
         </motion.section>
 
-        {/* CARRUSEL */}
+        {/* Carrusel de logos */}
         <h3 className="mt-5 mb-3">Marcas que confían en nosotros</h3>
         <div className="logo-carousel">
           <div className="logo-track">
@@ -123,7 +112,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* FOOTER */}
+        {/* Footer */}
         <motion.footer className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
           <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
         </motion.footer>

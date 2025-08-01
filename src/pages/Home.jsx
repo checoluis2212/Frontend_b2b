@@ -80,12 +80,18 @@ export default function Home() {
   };
 
   const getButtonClass = (key) => {
-    if (isMobile()) {
-      return activeButton === key ? 'btn-primary' : 'btn-outline-light';
-    }
-    const activeKey = hoveredButton || 'cotizar';
-    return activeKey === key ? 'btn-primary' : 'btn-outline-light';
-  };
+  const isMobile = window.innerWidth <= 768;
+
+  // En mobile siempre mostrar "cotizar" activo
+  if (isMobile) {
+    return key === 'cotizar' ? 'btn-primary' : 'btn-outline-light';
+  }
+
+  // En desktop: hover temporal, pero "cotizar" activo por defecto
+  return hoveredButton === key || (!hoveredButton && key === 'cotizar')
+    ? 'btn-primary'
+    : 'btn-outline-light';
+};
 
   const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.2 } } };
   const item = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } }, hover: { scale: 1.05 } };

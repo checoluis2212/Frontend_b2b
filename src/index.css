@@ -160,3 +160,13 @@ button:focus-visible {
   border-color: #0056b3;
   color: #fff;
 }
+
+/* Palomas blancas */
+.benefits-list li::before {
+  color: #ffffff !important; /* Blanco */
+}
+
+/* Si usas iconos con la clase text-success */
+.text-success {
+  color: #ffffff !important;
+}

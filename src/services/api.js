@@ -1,10 +1,20 @@
+// src/services/api.js
+
+// En .env.local (desarrollo):
+// VITE_API_URL=http://localhost:3001
+//
+// En producción (Render):
+// VITE_API_URL=https://backend-b2b.onrender.com
+
+// Si no está definida VITE_API_URL, usamos rutas relativas ('')
 const API_BASE = import.meta.env.VITE_API_URL || '';
 
 export async function sendResponse(payload) {
-  const endpoint = `${API_BASE}/api/responses`;
-  console.log('🌐 [sendResponse] endpoint →', endpoint, payload);
+  const url = `${API_BASE}/api/responses`;
+  // eslint-disable-next-line no-console
+  console.log('🌐 [sendResponse] →', url, payload);
 
-  const res = await fetch(endpoint, {
+  const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -14,14 +24,18 @@ export async function sendResponse(payload) {
     const text = await res.text();
     throw new Error(`Error ${res.status}: ${text}`);
   }
+
   return res.json();
 }
 
 export async function getResponses() {
-  const endpoint = `${API_BASE}/api/responses/all`;
-  console.log('🌐 [getResponses] endpoint →', endpoint);
+  const url = `${API_BASE}/api/responses/all`;
+  // eslint-disable-next-line no-console
+  console.log('🌐 [getResponses] →', url);
 
-  const res = await fetch(endpoint);
-  if (!res.ok) throw new Error(`Error ${res.status}`);
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Error ${res.status}`);
+  }
   return res.json();
 }

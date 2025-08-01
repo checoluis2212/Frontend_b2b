@@ -114,22 +114,28 @@ button:focus-visible {
 .logo-carousel {
   overflow: hidden;
   width: 100%;
-  margin-top: 20px;
 }
 
 .logo-track {
   display: flex;
-  gap: 40px;
+  gap: 40px; /* Espacio entre logos */
   animation: scroll 20s linear infinite;
-  width: max-content;
 }
 
 .logo-item {
-  height: 40px;
+  height: 40px; /* Tamaño estándar para todos */
   object-fit: contain;
 }
 
+.logo-item.walmart {
+  height: 30px; /* Walmart un poco más pequeño */
+}
+
 @keyframes scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }

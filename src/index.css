@@ -169,7 +169,7 @@ button:focus-visible {
     background-color: #0056b3; /* Azul OCC normal */
   }
   50% {
-    box-shadow: 0 0 20px #ffffff;
+    box-shadow: 0 0 10px #ffffff;
     background-color: #007bff; /* Azul más brillante */
   }
 }
@@ -177,29 +177,5 @@ button:focus-visible {
 /* Clase para el botón con flash */
 .btn-flash {
   animation: flash 2.0s infinite;
-}
-
-/* Forzar palomas blancas en cualquier formato */
-
-/* Si son pseudo-elementos (::before) */
-.benefits-list li::before {
-  color: #fff !important;
-}
-
-/* Si son íconos de Bootstrap o FontAwesome */
-.benefits-list i {
-  color: #fff !important;
-}
-
-/* Si son SVG inline (Bootstrap Icons, Material Icons, etc.) */
-.benefits-list svg {
-  color: #fff !important;
-  fill: #fff !important;
-}
-
-/* Si algún elemento tiene text-success */
-.benefits-list .text-success {
-  color: #fff !important;
-  fill: #fff !important;
 }
 

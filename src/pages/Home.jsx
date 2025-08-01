@@ -43,7 +43,7 @@ export default function Home() {
 
   const options = [
     { title: 'Solicitar Cotización (+10 vacantes)', key: 'cotizar', url: 'https://reclutamiento.occ.com.mx/contactanos' },
-    { title: 'Publicar Mi Pirmera Vacante', key: 'publicar', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
+    { title: 'Publicar Mi Primera Vacante', key: 'publicar', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
     { title: 'Buscar Empleo', key: 'empleo', url: 'https://www.occ.com.mx/' }
   ];
 

@@ -170,3 +170,20 @@ button:focus-visible {
 .text-success {
   color: #ffffff !important;
 }
+
+/* Animación flash */
+@keyframes flash {
+  0%, 100% {
+    box-shadow: 0 0 0px #ffffff;
+    background-color: #0056b3; /* Azul OCC normal */
+  }
+  50% {
+    box-shadow: 0 0 20px #ffffff;
+    background-color: #007bff; /* Azul más brillante */
+  }
+}
+
+/* Clase para el botón con flash */
+.btn-flash {
+  animation: flash 1.5s infinite;
+}

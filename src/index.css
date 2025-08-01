@@ -58,7 +58,7 @@ body {
 }
 
 .benefits-list li::before {
-  content: none; /* Eliminamos ✔ ya que usamos SVG */
+  content: none !important; /* Eliminamos ✔ verde */
 }
 
 /* Carrusel Logos */

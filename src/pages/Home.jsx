@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { sendResponse } from '../services/api';
 
-// Importar imágenes
+// Imágenes
 import logo from '../assets/logo.png';
 import bg from '../assets/background.jpg';
 import amazon from '../assets/amazon.png';
@@ -22,8 +22,8 @@ export default function Home() {
     if (!localStorage.getItem('utmParams')) {
       const params = new URLSearchParams(window.location.search);
       const utm = {};
-      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(key => {
-        if (params.has(key)) utm[key.replace('utm_','')] = params.get(key);
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(key => {
+        if (params.has(key)) utm[key.replace('utm_', '')] = params.get(key);
       });
       if (Object.keys(utm).length) {
         localStorage.setItem('utmParams', JSON.stringify(utm));
@@ -62,7 +62,8 @@ export default function Home() {
       className="text-white"
       style={{
         backgroundImage: `linear-gradient(rgba(0,0,40,0.7), rgba(0,0,40,0.7)), url(${bg})`,
-        backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh'
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
       variants={container}
       initial="hidden"
@@ -97,7 +98,7 @@ export default function Home() {
         </section>
 
         {/* BENEFICIOS */}
-        <motion.section className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+        <motion.section className="mt-5 benefits-section" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
           <ul className="benefits-list">
             <li>Amplia base de candidatos y empleos</li>
@@ -115,7 +116,6 @@ export default function Home() {
             <img src={bbva} alt="BBVA" className="logo-item" />
             <img src={dhl} alt="DHL" className="logo-item" />
             <img src={netflix} alt="Netflix" className="logo-item" />
-            {/* Repetimos para loop infinito */}
             <img src={amazon} alt="Amazon" className="logo-item" />
             <img src={bbva} alt="BBVA" className="logo-item" />
             <img src={dhl} alt="DHL" className="logo-item" />

@@ -13,7 +13,7 @@ import Walmart from '../assets/Walmart.png';
 import salinas from '../assets/salinas.png';
 
 import { motion } from 'framer-motion';
-import '../index.css'; // Asegúrate de importar el CSS
+import '../index.css'; 
 
 export default function Home() {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ export default function Home() {
   }, []);
 
   const options = [
-    { title: 'Solicitar Cotización', key: 'cotizar', style: 'btn-primary', url: 'https://reclutamiento.occ.com.mx/contactanos' },
+    { title: 'Solicitar Cotización', key: 'cotizar', style: 'btn-primary btn-flash', url: 'https://reclutamiento.occ.com.mx/contactanos' },
     { title: 'Publicar Vacante', key: 'publicar', style: 'btn-outline-light', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
     { title: 'Buscar Empleo', key: 'empleo', style: 'btn-outline-light', url: 'https://www.occ.com.mx/' }
   ];

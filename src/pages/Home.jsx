@@ -9,8 +9,8 @@ import amazon from '../assets/amazon.png';
 import bbva from '../assets/bbva.png';
 import dhl from '../assets/dhl.png';
 import netflix from '../assets/netflix.png';
-import netflix from '../assets/Walmart.png';
-import netflix from '../assets/salinas.png';
+import Walmart from '../assets/Walmart.png';
+import salinas from '../assets/salinas.png';
 
 import { motion } from 'framer-motion';
 import '../index.css'; // Asegúrate de importar el CSS
@@ -111,8 +111,8 @@ export default function Home() {
             <img src={bbva} alt="BBVA" className="logo-item" />
             <img src={dhl} alt="DHL" className="logo-item" />
             <img src={netflix} alt="Netflix" className="logo-item" />
-            <img src={Walmart} alt="Netflix" className="logo-item" />
-            <img src={salinas} alt="Netflix" className="logo-item" />
+            <img src={Walmart} alt="Walmart" className="logo-item" />
+            <img src={salinas} alt="salinas" className="logo-item" />
           </div>
         </div>
 

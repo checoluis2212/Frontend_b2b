@@ -17,7 +17,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
 
-  // Capturar UTM una sola vez
+  // Capturar UTM
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {
       const params = new URLSearchParams(window.location.search);
@@ -99,11 +99,11 @@ export default function Home() {
         {/* BENEFICIOS */}
         <motion.section className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
-          <ul style={{ listStyleType: 'none', padding: 0, maxWidth: '500px', margin: '0 auto', textAlign: 'left' }}>
-            <li style={{ color: '#fff' }}>✔ Amplia base de candidatos y empleos</li>
-            <li style={{ color: '#fff' }}>✔ Proceso ágil y personalizado</li>
-            <li style={{ color: '#fff' }}>✔ Soporte especializado en reclutamiento</li>
-            <li style={{ color: '#fff' }}>✔ Más de 1000 empresas confían en nosotros</li>
+          <ul className="benefits-list">
+            <li>Amplia base de candidatos y empleos</li>
+            <li>Proceso ágil y personalizado</li>
+            <li>Soporte especializado en reclutamiento</li>
+            <li>Más de 1000 empresas confían en nosotros</li>
           </ul>
         </motion.section>
 

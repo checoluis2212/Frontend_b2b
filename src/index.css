@@ -137,3 +137,12 @@ body {
   margin-bottom: 40px !important; /* Baja el carrusel más */
 }
 
+
+  /* ❌ Eliminar hover en mobile */
+  .btn-primary:hover,
+  .btn-outline-light:hover {
+    background-color: inherit !important;
+    border-color: inherit !important;
+    color: inherit !important;
+  }
+}

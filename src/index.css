@@ -155,4 +155,10 @@ body {
   }
 }
 
+/* 🔹 Ocultar texto de encabezado en mobile */
+@media (max-width: 768px) {
+  .home-wrapper p {
+    display: none !important;
+  }
+}
 

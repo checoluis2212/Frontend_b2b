@@ -10,6 +10,10 @@ import dhl from '../assets/dhl.png';
 import netflix from '../assets/netflix.png';
 import Walmart from '../assets/Walmart.png';
 import salinas from '../assets/salinas.png';
+import atento from '../assets/atento.png';
+import palacio from '../assets/palacio.png';
+import thomson from '../assets/thomson.png';
+import lala from '../assets/lala.png';
 
 import { motion } from 'framer-motion';
 import '../index.css'; 
@@ -20,6 +24,7 @@ export default function Home() {
   const [hoveredButton, setHoveredButton] = useState(null);
   const [loadingVisitorId, setLoadingVisitorId] = useState(true);
 
+  // Guardar UTM en primera carga
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {
       const params = new URLSearchParams(window.location.search);
@@ -33,6 +38,7 @@ export default function Home() {
     }
   }, []);
 
+  // Obtener visitorId
   useEffect(() => {
     (async () => {
       try {
@@ -43,7 +49,7 @@ export default function Home() {
       } catch (err) {
         console.error("❌ Error cargando visitorId:", err);
       } finally {
-        setLoadingVisitorId(false); // Siempre terminamos el loading
+        setLoadingVisitorId(false);
       }
     })();
   }, []);
@@ -142,33 +148,35 @@ export default function Home() {
         </motion.section>
 
         {/* Carrusel */}
-        {/* Sección de logos */}
-        <div className="logos-section">
-        <h3>Marcas que confían en nosotros</h3>
-        <div className="logo-carousel">
-        <div className="logo-track">
-          <img src={amazon} alt="Amazon" className="logo-item" />
-          <img src={bbva} alt="BBVA" className="logo-item" />
-          <img src={dhl} alt="DHL" className="logo-item" />
-          <img src={netflix} alt="Netflix" className="logo-item" />
-          <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-          <img src={salinas} alt="Salinas" className="logo-item" />
-          <img src={amazon} alt="Amazon" className="logo-item" />
-          <img src={bbva} alt="BBVA" className="logo-item" />
-          <img src={dhl} alt="DHL" className="logo-item" />
-          <img src={netflix} alt="Netflix" className="logo-item" />
-          <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-          <img src={salinas} alt="Salinas" className="logo-item" />
-          <img src={amazon} alt="Amazon" className="logo-item" />
-          <img src={bbva} alt="BBVA" className="logo-item" />
-          <img src={dhl} alt="DHL" className="logo-item" />
-          <img src={netflix} alt="Netflix" className="logo-item" />
-          <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-          <img src={salinas} alt="Salinas" className="logo-item" />
-          {/* Resto de logos */}
-    </div>
-  </div>
-</div>
+        <div className="logos-section mt-5">
+          <h3 className="mb-3">Marcas que confían en nosotros</h3>
+          <div className="logo-carousel">
+            <div className="logo-track">
+              <img src={amazon} alt="Amazon" className="logo-item" />
+              <img src={bbva} alt="BBVA" className="logo-item" />
+              <img src={atento} alt="Atento" className="logo-item" />
+              <img src={dhl} alt="DHL" className="logo-item" />
+              <img src={netflix} alt="Netflix" className="logo-item" />
+              <img src={palacio} alt="Palacio de Hierro" className="logo-item" />
+              <img src={Walmart} alt="Walmart" className="logo-item walmart" />
+              <img src={lala} alt="Lala" className="logo-item" />
+              <img src={salinas} alt="Salinas" className="logo-item" />
+              <img src={thomson} alt="Thomson" className="logo-item" />
+
+              <img src={amazon} alt="Amazon" className="logo-item" />
+              <img src={bbva} alt="BBVA" className="logo-item" />
+              <img src={atento} alt="Atento" className="logo-item" />
+              <img src={dhl} alt="DHL" className="logo-item" />
+              <img src={netflix} alt="Netflix" className="logo-item" />
+              <img src={palacio} alt="Palacio de Hierro" className="logo-item" />
+              <img src={Walmart} alt="Walmart" className="logo-item walmart" />
+              <img src={lala} alt="Lala" className="logo-item" />
+              <img src={salinas} alt="Salinas" className="logo-item" />
+              <img src={thomson} alt="Thomson" className="logo-item" />
+            </div>
+          </div>
+        </div>
+
         {/* Footer */}
         <motion.footer className="mt-5" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}>
           <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
@@ -177,4 +185,3 @@ export default function Home() {
     </motion.div>
   );
 }
-

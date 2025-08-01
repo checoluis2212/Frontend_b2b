@@ -127,4 +127,7 @@ body {
   font-weight: 600;
 }
 
+.logo-carousel {
+  margin-top: 40px; /* ajusta el valor según te guste, 40px es buen punto de partida */
+}
 

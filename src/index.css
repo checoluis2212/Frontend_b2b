@@ -67,37 +67,54 @@ button:focus-visible {
   }
 }
 
-/* === Beneficios === */
-.benefits-section {
-  text-align: center;
+/* Fondo general */
+.home-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(rgba(0,0,40,0.7), rgba(0,0,40,0.7)), url('./assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Contenido centrado */
+.content-container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Logo Header */
+.logo-header {
+  height: 100px;
+}
+
+/* Lista de beneficios */
 .benefits-list {
   list-style: none;
   padding: 0;
   margin: 0 auto;
-  max-width: 500px;
   text-align: center;
 }
 
 .benefits-list li {
-  position: relative;
-  margin-bottom: 10px;
-  padding-left: 0;
   color: #fff;
+  margin-bottom: 8px;
 }
 
 .benefits-list li::before {
   content: "✔";
-  color: #fff;
+  color: white;
   margin-right: 8px;
 }
 
-/* === Carrusel Logos === */
+/* Carrusel Logos */
 .logo-carousel {
   overflow: hidden;
   width: 100%;
-  padding: 15px 0;
+  margin-top: 20px;
 }
 
 .logo-track {
@@ -109,7 +126,6 @@ button:focus-visible {
 
 .logo-item {
   height: 40px;
-  width: auto;
   object-fit: contain;
 }
 

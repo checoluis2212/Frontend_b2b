@@ -17,7 +17,7 @@ import '../index.css';
 export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(null);
-  const [hoveredButton, setHoveredButton] = useState(null); // 🔹 Botón que está en hover
+  const [hoveredButton, setHoveredButton] = useState(null);
 
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {
@@ -55,8 +55,9 @@ export default function Home() {
   };
 
   const getButtonClass = (key) => {
+    // Azul por defecto en "cotizar", a menos que se esté haciendo hover en otro botón
     const activeKey = hoveredButton || 'cotizar';
-    return activeKey === key ? 'btn-primary btn-enfasis' : 'btn-outline-light';
+    return activeKey === key ? 'btn-primary' : 'btn-outline-light';
   };
 
   const container = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.2 } } };

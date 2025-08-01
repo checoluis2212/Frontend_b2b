@@ -161,15 +161,6 @@ button:focus-visible {
   color: #fff;
 }
 
-/* Palomas blancas */
-.benefits-list li::before {
-  color: #ffffff !important; /* Blanco */
-}
-
-/* Si usas iconos con la clase text-success */
-.text-success {
-  color: #ffffff !important;
-}
 
 /* Animación flash */
 @keyframes flash {
@@ -187,3 +178,28 @@ button:focus-visible {
 .btn-flash {
   animation: flash 1.5s infinite;
 }
+
+/* Forzar palomas blancas en cualquier formato */
+
+/* Si son pseudo-elementos (::before) */
+.benefits-list li::before {
+  color: #fff !important;
+}
+
+/* Si son íconos de Bootstrap o FontAwesome */
+.benefits-list i {
+  color: #fff !important;
+}
+
+/* Si son SVG inline (Bootstrap Icons, Material Icons, etc.) */
+.benefits-list svg {
+  color: #fff !important;
+  fill: #fff !important;
+}
+
+/* Si algún elemento tiene text-success */
+.benefits-list .text-success {
+  color: #fff !important;
+  fill: #fff !important;
+}
+

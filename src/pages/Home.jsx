@@ -43,7 +43,7 @@ export default function Home() {
 
   const options = [
     { title: 'Solicitar Cotización (+10 vacantes)', key: 'cotizar', url: 'https://reclutamiento.occ.com.mx/contactanos' },
-    { title: 'Publicar Vacante', key: 'publicar', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
+    { title: 'Publicar Mi Pirmera Vacante', key: 'publicar', url: 'https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta' },
     { title: 'Buscar Empleo', key: 'empleo', url: 'https://www.occ.com.mx/' }
   ];
 
@@ -113,14 +113,14 @@ export default function Home() {
           <h3 className="mb-3">¿Por qué elegir OCC?</h3>
           <ul className="benefits-list list-unstyled">
             <li><CheckIcon /> Amplia base de candidatos y empleos</li>
-            <li><CheckIcon /> Proceso ágil y personalizado</li>
-            <li><CheckIcon /> Soporte especializado en reclutamiento</li>
+            <li><CheckIcon /> Proceso ágil y asesoria personalizada</li>
+            <li><CheckIcon /> Capacitación sobre nuestra plataforma</li>
             <li><CheckIcon /> Más de 1000 empresas confían en nosotros</li>
           </ul>
         </motion.section>
 
         {/* Carrusel */}
-        <h3 className="mt-5 mb-3">Marcas que confían en nosotros</h3>
+        <h3 className="mt-5 mb-3">Algunas de las marcas que confían en nosotros</h3>
         <div className="logo-carousel">
           <div className="logo-track">
             <img src={amazon} alt="Amazon" className="logo-item" />

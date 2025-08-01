@@ -174,10 +174,6 @@ button:focus-visible {
   }
 }
 
-/* Clase para el botón con flash */
-.btn-flash {
-  animation: flash 2.0s infinite;
-}
 
 
 

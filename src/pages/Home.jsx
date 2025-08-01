@@ -151,6 +151,18 @@ export default function Home() {
             <img src={netflix} alt="Netflix" className="logo-item" />
             <img src={Walmart} alt="Walmart" className="logo-item walmart" />
             <img src={salinas} alt="salinas" className="logo-item" />
+            <img src={amazon} alt="Amazon" className="logo-item" />
+            <img src={bbva} alt="BBVA" className="logo-item" />
+            <img src={dhl} alt="DHL" className="logo-item" />
+            <img src={netflix} alt="Netflix" className="logo-item" />
+            <img src={Walmart} alt="Walmart" className="logo-item walmart" />
+            <img src={salinas} alt="salinas" className="logo-item" />
+            <img src={amazon} alt="Amazon" className="logo-item" />
+            <img src={bbva} alt="BBVA" className="logo-item" />
+            <img src={dhl} alt="DHL" className="logo-item" />
+            <img src={netflix} alt="Netflix" className="logo-item" />
+            <img src={Walmart} alt="Walmart" className="logo-item walmart" />
+            <img src={salinas} alt="salinas" className="logo-item" />
           </div>
         </div>
 

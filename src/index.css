@@ -137,5 +137,22 @@ body {
   margin-bottom: 40px !important; /* Baja el carrusel más */
 }
 
+/* 🔹 Quitar hover en mobile */
+@media (max-width: 768px) {
+  .btn-primary:hover,
+  .btn-outline-light:hover {
+    background-color: inherit !important;
+    border-color: inherit !important;
+    color: inherit !important;
+  }
+}
+
+/* 🔹 Reducir tamaño de botones en mobile */
+@media (max-width: 768px) {
+  .btn {
+    padding: 10px 0 !important;
+    font-size: 14px !important;
+  }
+}
 
 

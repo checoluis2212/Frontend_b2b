@@ -80,8 +80,10 @@ export default function Home() {
 
   const getButtonClass = (key) => {
     if (isMobileDevice) {
-      return key === 'cotizar' ? 'btn-primary' : 'btn-outline-light';
+      // 🔹 Mobile: todos los botones iguales (sin azul fijo)
+      return 'btn-outline-light';
     }
+    // 🔹 Desktop: Cotizar activo, otros según hover
     return hoveredButton === key || (!hoveredButton && key === 'cotizar')
       ? 'btn-primary'
       : 'btn-outline-light';
@@ -123,7 +125,8 @@ export default function Home() {
               variants={item} 
               whileHover={!isMobileDevice ? "hover" : undefined}
             >
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }} // 👈 efecto de “clic” en mobile y desktop
                 className={`btn w-100 py-3 ${getButtonClass(option.key)}`}
                 onMouseEnter={() => !isMobileDevice && setHoveredButton(option.key)}
                 onMouseLeave={() => !isMobileDevice && setHoveredButton(null)}
@@ -133,7 +136,7 @@ export default function Home() {
                 }}
               >
                 {loadingVisitorId ? 'Procesando...' : option.title}
-              </button>
+              </motion.button>
             </motion.div>
           ))}
         </section>

@@ -19,12 +19,12 @@ import '../index.css';
 
 export default function Home() {
   const navigate = useNavigate();
-  const [visitorId, setVisitorId] = useState(null);
+  const [visitorId, setVisitorId] = useState(localStorage.getItem('visitorId') || null);
   const [hoveredButton, setHoveredButton] = useState(null);
-  const [activeButton, setActiveButton] = useState('cotizar'); // para mobile
-  const [loadingVisitorId, setLoadingVisitorId] = useState(true);
+  const [activeButton, setActiveButton] = useState('cotizar');
+  const [loadingVisitorId, setLoadingVisitorId] = useState(!visitorId);
 
-  const isMobile = () => window.innerWidth <= 768;
+  const isMobileDevice = window.innerWidth <= 768;
 
   // Guardar UTM
   useEffect(() => {
@@ -40,20 +40,24 @@ export default function Home() {
     }
   }, []);
 
-  // Obtener visitorId
+  // Obtener visitorId (si no está en localStorage)
   useEffect(() => {
-    (async () => {
-      try {
-        const fp = await FingerprintJS.load();
-        const { visitorId } = await fp.get();
-        setVisitorId(visitorId);
-        localStorage.setItem('visitorId', visitorId);
-      } catch (err) {
-        console.error("❌ Error cargando visitorId:", err);
-      } finally {
-        setLoadingVisitorId(false);
-      }
-    })();
+    if (!visitorId) {
+      (async () => {
+        try {
+          const fp = await FingerprintJS.load();
+          const { visitorId: fpId } = await fp.get();
+          setVisitorId(fpId);
+          localStorage.setItem('visitorId', fpId);
+        } catch (err) {
+          console.error("❌ Error cargando visitorId:", err);
+        } finally {
+          setLoadingVisitorId(false);
+        }
+      })();
+    } else {
+      setLoadingVisitorId(false);
+    }
   }, []);
 
   const options = [
@@ -62,32 +66,22 @@ export default function Home() {
     { title: 'Buscar Empleo', key: 'empleo', url: 'https://www.occ.com.mx/' }
   ];
 
-  const handleClick = async (option) => {
-    if (!visitorId) {
-      console.error("🚨 visitorId no está listo");
-      return;
-    }
-
+  const handleClick = (option) => {
     const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
     console.log("📤 Enviando:", { visitorId, button: option.key, utmParams });
 
-    try {
-      await sendResponse({ visitorId, button: option.key, utmParams });
-      window.location.href = option.url;
-    } catch (error) {
-      console.error("❌ Error al enviar:", error);
-    }
+    // Enviar tracking en segundo plano
+    sendResponse({ visitorId, button: option.key, utmParams })
+      .catch(error => console.error("❌ Error al enviar:", error));
+
+    // Redirigir de inmediato
+    window.location.href = option.url;
   };
 
   const getButtonClass = (key) => {
-    const isMobile = window.innerWidth <= 768;
-
-    // En mobile siempre mostrar "cotizar" activo
-    if (isMobile) {
+    if (isMobileDevice) {
       return key === 'cotizar' ? 'btn-primary' : 'btn-outline-light';
     }
-
-    // En desktop: hover temporal, pero "cotizar" activo por defecto
     return hoveredButton === key || (!hoveredButton && key === 'cotizar')
       ? 'btn-primary'
       : 'btn-outline-light';
@@ -127,22 +121,18 @@ export default function Home() {
               key={option.key} 
               className="col-12 col-md-4" 
               variants={item} 
-              whileHover="hover"
+              whileHover={!isMobileDevice ? "hover" : undefined}
             >
               <button
                 className={`btn w-100 py-3 ${getButtonClass(option.key)}`}
-                onMouseEnter={() => !isMobile() && setHoveredButton(option.key)}
-                onMouseLeave={() => {
-                  // 👈 Esto hace que vuelva a cotizar
-                  if (!isMobile()) setHoveredButton(null);
-                }}
+                onMouseEnter={() => !isMobileDevice && setHoveredButton(option.key)}
+                onMouseLeave={() => !isMobileDevice && setHoveredButton(null)}
                 onClick={() => {
                   setActiveButton(option.key);
                   handleClick(option);
                 }}
-                disabled={loadingVisitorId}
               >
-                {loadingVisitorId ? 'Cargando...' : option.title}
+                {loadingVisitorId ? 'Procesando...' : option.title}
               </button>
             </motion.div>
           ))}

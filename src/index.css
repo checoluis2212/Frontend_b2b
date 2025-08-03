@@ -162,3 +162,12 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  .btn:focus,
+  .btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+  }
+}
+

@@ -26,6 +26,16 @@ export default function Home() {
 
   const isMobileDevice = window.innerWidth <= 768;
 
+  // 🔹 Reset de focus/active al entrar en mobile
+  useEffect(() => {
+    if (isMobileDevice) {
+      setTimeout(() => {
+        document.activeElement?.blur();
+        document.querySelectorAll('button').forEach(btn => btn.blur());
+      }, 50);
+    }
+  }, []);
+
   // Guardar UTM
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {

@@ -80,10 +80,10 @@ export default function Home() {
 
   const getButtonClass = (key) => {
     if (isMobileDevice) {
-      // 🔹 Mobile: todos los botones iguales (sin azul fijo)
+      // 🔹 Mobile: siempre outline, sin azul al regresar
       return 'btn-outline-light';
     }
-    // 🔹 Desktop: Cotizar activo, otros según hover
+    // 🔹 Desktop: Cotizar activo por defecto
     return hoveredButton === key || (!hoveredButton && key === 'cotizar')
       ? 'btn-primary'
       : 'btn-outline-light';

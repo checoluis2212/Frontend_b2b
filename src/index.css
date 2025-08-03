@@ -20,7 +20,7 @@ body {
 /* Fondo general */
 .home-wrapper {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   background: linear-gradient(rgba(0,0,40,0.7), rgba(0,0,40,0.7)), url('./assets/background.jpg');
   background-size: cover;
   background-position: center;

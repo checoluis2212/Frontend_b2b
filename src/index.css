@@ -11,16 +11,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+html, body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-x: hidden !important; /* 🔹 Evita scroll horizontal */
 }
 
 /* Fondo general */
 .home-wrapper {
   min-height: 100vh;
-  width: 100%;
+  width: 100%; /* 🔹 Antes estaba en 100vw */
   background: linear-gradient(rgba(0,0,40,0.7), rgba(0,0,40,0.7)), url('./assets/background.jpg');
   background-size: cover;
   background-position: center;
@@ -71,6 +72,8 @@ body {
   display: flex;
   gap: 40px;
   animation: scroll 20s linear infinite;
+  will-change: transform; /* 🔹 Mejora rendimiento */
+  width: max-content; /* 🔹 Evita que empuje el layout */
 }
 
 .logo-item {
@@ -162,6 +165,7 @@ body {
   }
 }
 
+/* 🔹 Evitar azul en mobile al regresar */
 @media (max-width: 768px) {
   .btn:focus,
   .btn:active {
@@ -171,3 +175,8 @@ body {
   }
 }
 
+/* 🔹 Fix para Bootstrap row que causa overflow */
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}

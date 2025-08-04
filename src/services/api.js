@@ -16,8 +16,20 @@ function buildUrl(path) {
 export async function sendResponse(payload) {
   const url = buildUrl('/api/responses');
 
+  // 🔹 Recuperar UTM de localStorage
+  const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
+
+  // 🔹 Fusionar payload con UTM
+  const fullPayload = {
+    ...payload,
+    utm_source: utmParams.source || '(not set)',
+    utm_medium: utmParams.medium || '(not set)',
+    utm_campaign: utmParams.campaign || '(not set)'
+  };
+
+  console.time("⏱️ [sendResponse] Tiempo total");
   console.log("📤 [sendResponse] URL:", url);
-  console.log("📦 [sendResponse] Payload:", payload);
+  console.log("📦 [sendResponse] Payload:", fullPayload);
 
   try {
     const res = await fetch(url, {
@@ -26,7 +38,7 @@ export async function sendResponse(payload) {
         "Content-Type": "application/json",
         "x-api-key": API_KEY // 👈 API Key obligatoria
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(fullPayload),
     });
 
     if (!res.ok) {
@@ -37,9 +49,11 @@ export async function sendResponse(payload) {
 
     const data = await res.json();
     console.log("✅ [sendResponse] Respuesta:", data);
+    console.timeEnd("⏱️ [sendResponse] Tiempo total");
     return data;
   } catch (err) {
     console.error("🔥 [sendResponse] Falló la petición:", err);
+    console.timeEnd("⏱️ [sendResponse] Tiempo total");
     throw err;
   }
 }

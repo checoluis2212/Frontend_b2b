@@ -1,30 +1,18 @@
-// src/services/api.js
-
-// 🔹 URL Base de la API
-// En desarrollo (archivo .env.local):
-// VITE_API_URL=http://localhost:3001
-//
-// En producción (Vercel):
-// VITE_API_URL=https://backend-b2b.onrender.com
-
 const API_BASE = import.meta.env.VITE_API_URL;
+const API_KEY  = import.meta.env.VITE_API_KEY;
 
 if (!API_BASE) {
-  console.warn("⚠️ [API] VITE_API_URL no está definida. Usando dominio actual como fallback.");
+  console.warn("⚠️ [API] VITE_API_URL no está definida.");
+}
+if (!API_KEY) {
+  console.warn("⚠️ [API] VITE_API_KEY no está definida.");
 }
 
-/**
- * 🔹 Helper para construir URLs
- */
 function buildUrl(path) {
   return `${API_BASE || ''}${path}`;
 }
 
-/**
- * 🔹 Enviar respuesta (POST /api/responses)
- * @param {Object} payload - Datos a enviar
- * @returns {Promise<Object>}
- */
+// 🔹 POST /api/responses
 export async function sendResponse(payload) {
   const url = buildUrl('/api/responses');
 
@@ -34,7 +22,10 @@ export async function sendResponse(payload) {
   try {
     const res = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "x-api-key": API_KEY // 👈 API Key obligatoria
+      },
       body: JSON.stringify(payload),
     });
 
@@ -53,17 +44,18 @@ export async function sendResponse(payload) {
   }
 }
 
-/**
- * 🔹 Obtener todas las respuestas (GET /api/responses/all)
- * @returns {Promise<Array>}
- */
+// 🔹 GET /api/responses/all
 export async function getResponses() {
   const url = buildUrl('/api/responses/all');
 
   console.log("📥 [getResponses] URL:", url);
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      headers: {
+        "x-api-key": API_KEY // 👈 API Key obligatoria
+      }
+    });
 
     if (!res.ok) {
       const text = await res.text();
@@ -80,18 +72,18 @@ export async function getResponses() {
   }
 }
 
-/**
- * 🔹 Ejemplo extra: Obtener respuesta por ID (GET /api/responses/:id)
- * @param {string} id
- * @returns {Promise<Object>}
- */
+// 🔹 GET /api/responses/:id
 export async function getResponseById(id) {
   const url = buildUrl(`/api/responses/${id}`);
 
   console.log(`📥 [getResponseById] URL: ${url}`);
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, {
+      headers: {
+        "x-api-key": API_KEY // 👈 API Key obligatoria
+      }
+    });
 
     if (!res.ok) {
       const text = await res.text();
@@ -108,18 +100,19 @@ export async function getResponseById(id) {
   }
 }
 
-/**
- * 🔹 Ejemplo extra: Eliminar respuesta por ID (DELETE /api/responses/:id)
- * @param {string} id
- * @returns {Promise<Object>}
- */
+// 🔹 DELETE /api/responses/:id
 export async function deleteResponse(id) {
   const url = buildUrl(`/api/responses/${id}`);
 
   console.log(`🗑️ [deleteResponse] URL: ${url}`);
 
   try {
-    const res = await fetch(url, { method: "DELETE" });
+    const res = await fetch(url, { 
+      method: "DELETE",
+      headers: {
+        "x-api-key": API_KEY // 👈 API Key obligatoria
+      }
+    });
 
     if (!res.ok) {
       const text = await res.text();

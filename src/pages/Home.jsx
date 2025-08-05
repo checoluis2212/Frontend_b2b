@@ -15,18 +15,17 @@ import thomson from '../assets/thomson.png';
 import lala from '../assets/lala.png';
 
 import { motion } from 'framer-motion';
-import '../index.css'; 
+import '../index.css';
 
 export default function Home() {
   const navigate = useNavigate();
   const [visitorId, setVisitorId] = useState(localStorage.getItem('visitorId') || null);
   const [hoveredButton, setHoveredButton] = useState(null);
-  const [activeButton, setActiveButton] = useState('cotizar');
   const [loadingVisitorId, setLoadingVisitorId] = useState(!visitorId);
 
   const isMobileDevice = window.innerWidth <= 768;
 
-  // 🔹 Reset de focus/active al entrar en mobile
+  // 🔹 Reset focus en mobile
   useEffect(() => {
     if (isMobileDevice) {
       setTimeout(() => {
@@ -34,9 +33,9 @@ export default function Home() {
         document.querySelectorAll('button').forEach(btn => btn.blur());
       }, 50);
     }
-  }, []);
+  }, [isMobileDevice]);
 
-  // Guardar UTM
+  // 🔹 Guardar UTM params
   useEffect(() => {
     if (!localStorage.getItem('utmParams')) {
       const params = new URLSearchParams(window.location.search);
@@ -50,7 +49,7 @@ export default function Home() {
     }
   }, []);
 
-  // Obtener visitorId (si no está en localStorage)
+  // 🔹 Obtener visitorId si no existe
   useEffect(() => {
     if (!visitorId) {
       (async () => {
@@ -68,7 +67,7 @@ export default function Home() {
     } else {
       setLoadingVisitorId(false);
     }
-  }, []);
+  }, [visitorId]);
 
   const options = [
     { title: 'Solicitar Cotización (+10 vacantes)', key: 'cotizar', url: 'https://reclutamiento.occ.com.mx/contactanos' },
@@ -78,13 +77,12 @@ export default function Home() {
 
   const handleClick = (option) => {
     const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
-    console.log("📤 Enviando:", { visitorId, button: option.key, utmParams });
 
-    // Enviar tracking en segundo plano
+    // 🔹 Enviar tracking en segundo plano
     sendResponse({ visitorId, button: option.key, utmParams })
-      .catch(error => console.error("❌ Error al enviar:", error));
+      .catch(() => {});
 
-    // Obtener linker_param de GA4 y redirigir con _gl
+    // 🔹 Redirigir con linker_param si está disponible
     if (window.gtag) {
       window.gtag('get', 'G-GP2B693V8Y', 'linker_param', (linkerParam) => {
         const urlConLinker = option.url.includes('?')
@@ -93,17 +91,12 @@ export default function Home() {
         window.location.href = urlConLinker;
       });
     } else {
-      // Fallback si gtag aún no está listo
       window.location.href = option.url;
     }
   };
 
   const getButtonClass = (key) => {
-    if (isMobileDevice) {
-      // 🔹 Mobile: siempre outline, sin azul al regresar
-      return 'btn-outline-light';
-    }
-    // 🔹 Desktop: Cotizar activo por defecto
+    if (isMobileDevice) return 'btn-outline-light';
     return hoveredButton === key || (!hoveredButton && key === 'cotizar')
       ? 'btn-primary'
       : 'btn-outline-light';
@@ -146,14 +139,11 @@ export default function Home() {
               whileHover={!isMobileDevice ? "hover" : undefined}
             >
               <motion.button
-                whileTap={{ scale: 0.95 }} // 👈 efecto de “clic” en mobile y desktop
+                whileTap={{ scale: 0.95 }}
                 className={`btn w-100 py-3 ${getButtonClass(option.key)}`}
                 onMouseEnter={() => !isMobileDevice && setHoveredButton(option.key)}
                 onMouseLeave={() => !isMobileDevice && setHoveredButton(null)}
-                onClick={() => {
-                  setActiveButton(option.key);
-                  handleClick(option);
-                }}
+                onClick={() => handleClick(option)}
               >
                 {loadingVisitorId ? 'Procesando...' : option.title}
               </motion.button>
@@ -177,25 +167,10 @@ export default function Home() {
           <h3 className="mb-3">Marcas que confían en nosotros</h3>
           <div className="logo-carousel">
             <div className="logo-track">
-              <img src={amazon} alt="Amazon" className="logo-item" />
-              <img src={bbva} alt="BBVA" className="logo-item" />
-              <img src={dhl} alt="DHL" className="logo-item" />
-              <img src={netflix} alt="Netflix" className="logo-item" />
-              <img src={palacio} alt="Palacio de Hierro" className="logo-item" />
-              <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-              <img src={lala} alt="Lala" className="logo-item" />
-              <img src={salinas} alt="Salinas" className="logo-item" />
-              <img src={thomson} alt="Thomson" className="logo-item" />
-
-              <img src={amazon} alt="Amazon" className="logo-item" />
-              <img src={bbva} alt="BBVA" className="logo-item" />
-              <img src={dhl} alt="DHL" className="logo-item" />
-              <img src={netflix} alt="Netflix" className="logo-item" />
-              <img src={palacio} alt="Palacio de Hierro" className="logo-item" />
-              <img src={Walmart} alt="Walmart" className="logo-item walmart" />
-              <img src={lala} alt="Lala" className="logo-item" />
-              <img src={salinas} alt="Salinas" className="logo-item" />
-              <img src={thomson} alt="Thomson" className="logo-item" />
+              {[amazon, bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson,
+                amazon, bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson].map((logoSrc, idx) => (
+                <img key={idx} src={logoSrc} alt="Logo" className="logo-item" />
+              ))}
             </div>
           </div>
         </div>

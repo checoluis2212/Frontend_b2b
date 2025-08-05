@@ -84,8 +84,18 @@ export default function Home() {
     sendResponse({ visitorId, button: option.key, utmParams })
       .catch(error => console.error("❌ Error al enviar:", error));
 
-    // Redirigir de inmediato
-    window.location.href = option.url;
+    // Obtener linker_param de GA4 y redirigir con _gl
+    if (window.gtag) {
+      window.gtag('get', 'G-GP2B693V8Y', 'linker_param', (linkerParam) => {
+        const urlConLinker = option.url.includes('?')
+          ? `${option.url}&${linkerParam}`
+          : `${option.url}?${linkerParam}`;
+        window.location.href = urlConLinker;
+      });
+    } else {
+      // Fallback si gtag aún no está listo
+      window.location.href = option.url;
+    }
   };
 
   const getButtonClass = (key) => {

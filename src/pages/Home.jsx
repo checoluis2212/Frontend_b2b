@@ -78,21 +78,12 @@ export default function Home() {
   const handleClick = (option) => {
     const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
 
-    // 🔹 Enviar tracking en segundo plano
+    // 🔹 Enviar tracking sin bloquear la redirección
     sendResponse({ visitorId, button: option.key, utmParams })
       .catch(() => {});
 
-    // 🔹 Redirigir con linker_param si está disponible
-    if (window.gtag) {
-      window.gtag('get', 'G-GP2B693V8Y', 'linker_param', (linkerParam) => {
-        const urlConLinker = option.url.includes('?')
-          ? `${option.url}&${linkerParam}`
-          : `${option.url}?${linkerParam}`;
-        window.location.href = urlConLinker;
-      });
-    } else {
-      window.location.href = option.url;
-    }
+    // 🔹 Redirigir directo (GA4 agregará _gl si aplica)
+    window.location.href = option.url;
   };
 
   const getButtonClass = (key) => {

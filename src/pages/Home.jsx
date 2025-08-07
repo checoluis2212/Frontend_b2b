@@ -79,11 +79,12 @@ export default function Home() {
     const utmParams = JSON.parse(localStorage.getItem('utmParams') || '{}');
 
     // 🔹 Enviar tracking sin bloquear la redirección
-    sendResponse({ visitorId, button: option.key, utmParams })
-      .catch(() => {});
+    sendResponse({ visitorId, button: option.key, utmParams }).catch(() => {});
 
-    // 🔹 Redirigir directo (GA4 agregará _gl si aplica)
-    window.location.href = option.url;
+    // 🔹 Redirigir con visitorId como query param
+    const url = new URL(option.url);
+    url.searchParams.set('visitorId', visitorId);
+    window.location.href = url.toString();
   };
 
   const getButtonClass = (key) => {
@@ -136,7 +137,7 @@ export default function Home() {
                 onMouseLeave={() => !isMobileDevice && setHoveredButton(null)}
                 onClick={() => handleClick(option)}
               >
-                {loadingVisitorId ? 'Procesando...' : option.title}
+                {loadingVisitorId ? 'Procesando…' : option.title}
               </motion.button>
             </motion.div>
           ))}

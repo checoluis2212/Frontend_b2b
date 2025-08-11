@@ -1,6 +1,36 @@
 <!doctype html>
 <html lang="es">
   <head>
+<script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@4/dist/fp.min.js"></script>
+<script>
+(async () => {
+  const setCookie = (k,v,days=365) => {
+    document.cookie = `${k}=${encodeURIComponent(v)}; path=/; domain=.occ.com.mx; max-age=${60*60*24*days}; Secure; SameSite=Lax`;
+  };
+  const getCookie = (k) =>
+    (document.cookie.split('; ').find(r=>r.startsWith(k+'='))||'').split('=')[1];
+
+  // 1) Generar o leer VID (fingerprint)
+  let vid = getCookie('vid');
+  if (!vid) {
+    const fp = await FingerprintJS.load();
+    vid = (await fp.get()).visitorId;
+    setCookie('vid', vid, 365);
+  }
+
+  // 2) Guardar UTMs en cookies si existen en la URL
+  const qs = new URLSearchParams(location.search);
+  const ref = document.referrer ? new URL(document.referrer) : null;
+  const utm_source   = qs.get('utm_source')   || getCookie('utm_source')   || (ref ? ref.hostname : 'direct');
+  const utm_medium   = qs.get('utm_medium')   || getCookie('utm_medium')   || (ref ? 'referral'    : 'direct');
+  const utm_campaign = qs.get('utm_campaign') || getCookie('utm_campaign') || '(not set)';
+
+  setCookie('utm_source', utm_source, 90);
+  setCookie('utm_medium', utm_medium, 90);
+  setCookie('utm_campaign', utm_campaign, 90);
+})();
+</script>
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

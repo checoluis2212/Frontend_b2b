@@ -13,20 +13,20 @@ export default function ReclutamientoNative() {
   const [err, setErr] = useState('');
   const formRef = useRef(null);
 
-  // Rellena hidden con visitorid/UTMs como respaldo (tu script global también lo hace)
-  useEffect(() => {
-    const f = formRef.current;
-    if (!f) return;
+  // 👉 helper para llenar los hidden (lo usamos al montar y tras reset)
+  function fillHidden() {
+    const f = formRef.current; if (!f) return;
     const vid = getCookie('vid') || getLS('visitorId') || '';
-    const us = getCookie('utm_source')   || getLS('utm_source')   || '';
-    const um = getCookie('utm_medium')   || getLS('utm_medium')   || '';
-    const uc = getCookie('utm_campaign') || getLS('utm_campaign') || '';
-
+    const us  = getCookie('utm_source')   || getLS('utm_source')   || '';
+    const um  = getCookie('utm_medium')   || getLS('utm_medium')   || '';
+    const uc  = getCookie('utm_campaign') || getLS('utm_campaign') || '';
     if (vid) f.visitorid.value = vid;
-    if (us) f.utm_source.value = us;
-    if (um) f.utm_medium.value = um;
-    if (uc) f.utm_campaign.value = uc;
-  }, []);
+    if (us)  f.utm_source.value = us;
+    if (um)  f.utm_medium.value = um;
+    if (uc)  f.utm_campaign.value = uc;
+  }
+
+  useEffect(() => { fillHidden(); }, []);
 
   async function handleSubmit(e){
     e.preventDefault();
@@ -35,7 +35,6 @@ export default function ReclutamientoNative() {
     const fd = new FormData(e.currentTarget);
     const fields = Object.fromEntries(fd.entries());
 
-    // payload esperado por /api/lead (backend ya creado)
     const payload = {
       fields,
       context: {
@@ -52,6 +51,7 @@ export default function ReclutamientoNative() {
         body: JSON.stringify(payload)
       });
       if (!res.ok) throw new Error('HTTP '+res.status);
+
       setOk(true);
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -66,7 +66,9 @@ export default function ReclutamientoNative() {
         utm_medium: fields.utm_medium || '',
         utm_campaign: fields.utm_campaign || ''
       });
+
       e.currentTarget.reset();
+      fillHidden(); // 👈 repone visitorid/UTMs tras el reset
     } catch (e) {
       setErr('No se pudo enviar. Intenta de nuevo.');
       console.error(e);
@@ -95,7 +97,6 @@ export default function ReclutamientoNative() {
             {err && <div style={{background:'#fdecea', color:'#b3261e', padding:'10px 12px', borderRadius:10, marginBottom:12}}>{err}</div>}
 
             <form ref={formRef} onSubmit={handleSubmit} className="hs-lookalike">
-              {/* Fila 1 */}
               <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
                 <div>
                   <label>Nombre*</label>
@@ -107,17 +108,15 @@ export default function ReclutamientoNative() {
                 </div>
               </div>
 
-              {/* Fila 2 */}
               <div style={{marginTop:12}}>
                 <label>Email empresarial*</label>
                 <input name="email" type="email" required placeholder="tucorreo@empresa.com" />
               </div>
 
-              {/* Fila 3 */}
               <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12, marginTop:12}}>
                 <div>
                   <label>Número de teléfono*</label>
-                  <input name="phone" required placeholder="+52 ..." />
+                  <input name="phone" type="tel" required placeholder="+52 ..." /> {/* 👈 tel */}
                 </div>
                 <div>
                   <label>Nombre de la empresa*</label>
@@ -125,7 +124,6 @@ export default function ReclutamientoNative() {
                 </div>
               </div>
 
-              {/* Fila 4 */}
               <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12, marginTop:12}}>
                 <div>
                   <label>Puesto*</label>
@@ -151,19 +149,17 @@ export default function ReclutamientoNative() {
                 </div>
               </div>
 
-              {/* Fila 5 */}
               <div style={{marginTop:12}}>
                 <label>RFC*</label>
-                <input name="rfc" required placeholder="RFC de la empresa" />
+                <input name="rfc" required placeholder="RFC de la empresa"
+                       pattern="[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}" title="Formato RFC válido" />
               </div>
 
-              {/* Consent opcional (GDPR) */}
               <div style={{marginTop:14, display:'flex', gap:8, alignItems:'flex-start', color:'#334155', fontSize:13}}>
                 <input type="checkbox" id="consent" name="consent_marketing" value="1" />
                 <label htmlFor="consent">Acepto recibir otras comunicaciones de OCC.</label>
               </div>
 
-              {/* Hidden para tracking */}
               <input type="hidden" name="visitorid" />
               <input type="hidden" name="utm_source" />
               <input type="hidden" name="utm_medium" />

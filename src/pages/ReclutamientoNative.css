@@ -25,12 +25,11 @@
 
 /* Título “pill” blanco fuera del card */
 .RN__titleOutside{
-  display:inline-block;
-  align-self:flex-end;
-  background:#fff; color:var(--ink);
   padding:14px 18px; border-radius:16px;
   font-size:22px; font-weight:700; line-height:1.2;
   box-shadow:0 8px 20px rgba(3,10,36,.16);
+  text-align: center;
+  color: #ffffff;
 }
 
 /* ====== Tarjeta del formulario ====== */

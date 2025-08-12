@@ -20,7 +20,7 @@
 /* Izquierda */
 .RN__left{ color:#fff; padding:8px; }
 .RN__left h1{ font-size:56px; line-height:1.05; margin:0 0 18px; letter-spacing:.2px; }
-.RN__left p{ font-size:18px; opacity:.92; margin:0; }
+.RN__left p{ font-size:18px; opacity:.92; margin:0; margin-top: 100px; }
 
 /* Derecha */
 .RN__right{

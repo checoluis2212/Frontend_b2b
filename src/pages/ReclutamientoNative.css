@@ -5,9 +5,22 @@
 }
 
 /* ====== Layout ====== */
-.RN__wrap{ background:#0b1b46; min-height:100vh; }
-.RN__bar{ background:var(--blue); height:56px; }
-.RN__container{ max-width:1280px; margin:0 auto; padding:40px 24px; margin-top: 75px; }
+.RN__wrap{
+  background:#0b1b46;
+  min-height:100vh;
+  /* fondo que tenías inline */
+  background-image:url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.RN__bar{
+  background:var(--blue);
+  height:56px;
+  /* padding que tenías inline */
+  padding:20px;
+}
+.RN__container{ max-width:1280px; margin:0 auto; padding:40px 24px; margin-top:75px; }
 
 /* 1 columna de texto + 1 columna fija para el card */
 .RN__grid{
@@ -20,12 +33,12 @@
 /* Izquierda */
 .RN__left{ color:#fff; padding:8px; }
 .RN__left h1{ font-size:56px; line-height:1.05; margin:0 0 18px; letter-spacing:.2px; }
-.RN__left p{ font-size:18px; opacity:.92; margin:0; margin-top: 100px; }
+.RN__left p{ font-size:18px; opacity:.92; margin:0; margin-top:100px; }
 
 /* Derecha */
 .RN__right{
   display:flex;
-  align-items: center;
+  align-items:center;
   flex-direction:column;
   gap:16px;
   width:640px;
@@ -47,7 +60,7 @@
 /* ====== Card ====== */
 .RN__card{
   width:70%;
-  background-color: azure;
+  background-color:azure;
   border-radius:24px;
   padding:28px;
   box-shadow:0 16px 36px rgba(3,10,36,.20);
@@ -89,7 +102,7 @@
 .RN__select{ position:relative; }
 .RN__select select{ appearance:none; -webkit-appearance:none; padding-right:44px; }
 .RN__select::after{
-  content:''; position:absolute; right:18px; top:50%; transform:translateY(-50%); /* centrado fino */
+  content:''; position:absolute; right:18px; top:50%; transform:translateY(-50%);
   width:18px; height:18px;
   pointer-events:none; background-size:18px 18px; background-repeat:no-repeat;
   background-image:url("data:image/svg+xml;utf8,\
@@ -101,7 +114,7 @@
 
 .RN__check{
   display:flex;
-  align-items:center;           
+  align-items:center;
   gap:12px;
   color:#334155;
   font-size:13px;
@@ -111,7 +124,7 @@
 .RN__check input[type="checkbox"]{
   appearance:none; -webkit-appearance:none; margin:0;
   width:15px; height:15px;
-  margin-right: 10px;
+  margin-right:10px;
   border-radius:6px;
   border:1.5px solid #d1dae8;
   background:#fff; position:relative; cursor:pointer;
@@ -122,7 +135,7 @@
   background:var(--blue); border-color:var(--blue);
 }
 .RN__check input[type="checkbox"]:checked::after{
-  content:''; position:absolute; left:6px; top:3px;  /* palomita centrada */
+  content:''; position:absolute; left:6px; top:3px;
   width:7px; height:12px;
   border:solid #fff; border-width:0 3px 3px 0; transform:rotate(45deg);
 }
@@ -138,7 +151,14 @@
 .RN__btn:active{ transform:translateY(1px); }
 .RN__btn[disabled]{ opacity:.7; cursor:default; }
 
-.RN__legal{ margin-top:10px; font-size:11px; color:#a0acc2; } /* un poco más claro para match */
+.RN__legal{ margin-top:10px; font-size:11px; color:#a0acc2; }
+
+/* ====== Logo ====== */
+.RN__logo{
+  height:40px;
+  width:auto;
+  margin-left:20px;
+}
 
 /* ====== Responsive ====== */
 @media (max-width: 1100px){
@@ -152,9 +172,3 @@
 @media (min-width: 1200px){
   .RN__left h1{ font-size:64px; line-height:1.06; letter-spacing:.1px; }
 }
-
-/* ====== Logo ====== */
-RN__logo{
-width: 100px;
-}
-

@@ -9,10 +9,10 @@
 .RN__bar{ background:var(--blue); height:56px; }
 .RN__container{ max-width:1280px; margin:0 auto; padding:40px 24px; }
 
-/* 1 columna de texto + 1 columna fija para el card (como referencia) */
+/* 1 columna de texto + 1 columna fija para el card */
 .RN__grid{
   display:grid;
-  grid-template-columns: 1fr 640px;  /* <-- ancho del card como en el diseño */
+  grid-template-columns: 1fr 640px;
   gap:40px;
   align-items:flex-start;
 }
@@ -26,18 +26,23 @@
 .RN__right{
   display:flex;
   flex-direction:column;
-  align-items:flex-end;   /* alinea título y card al borde derecho */
+  align-items:flex-end;
   gap:16px;
-  width:640px;           /* mantiene el conjunto título+card igual que la derecha */
+  width:640px;
 }
 
 /* Título "pill" del mismo ancho que el card y centrado */
 .RN__titleOutside{
   width:100%;
   text-align:center;
-  color: #fff;
-  padding:14px 18px; border-radius:16px;
-  font-size:22px; font-weight:700; line-height:1.2;
+  background:#fff;            /* pill blanco */
+  color:var(--ink);
+  padding:14px 18px;
+  border-radius:16px;
+  font-size:22px;
+  font-weight:700;
+  line-height:1.2;
+  box-shadow:0 8px 20px rgba(3,10,36,.16);
 }
 
 /* ====== Card ====== */
@@ -85,8 +90,9 @@
 .RN__select{ position:relative; }
 .RN__select select{ appearance:none; -webkit-appearance:none; padding-right:44px; }
 .RN__select::after{
-  content:''; position:absolute; right:16px; top:50%; transform:translateY(-50%);
-  width:16px; height:16px; pointer-events:none; background-size:16px 16px; background-repeat:no-repeat;
+  content:''; position:absolute; right:18px; top:50%; transform:translateY(-50%); /* centrado fino */
+  width:18px; height:18px;
+  pointer-events:none; background-size:18px 18px; background-repeat:no-repeat;
   background-image:url("data:image/svg+xml;utf8,\
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317232f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
 }
@@ -96,13 +102,12 @@
 
 .RN__check{
   display:flex;
-  align-items:center;    /* centra verticalmente */
-  gap:10px;
+  align-items:center;           /* centra verticalmente checkbox y texto */
+  gap:12px;
   color:#334155;
   font-size:13px;
   cursor:pointer;
-  line-height:1.4;
-  margin-right: 20px;
+  line-height:1.38;
 }
 .RN__check input[type="checkbox"]{
   appearance:none; -webkit-appearance:none; margin:0;
@@ -133,11 +138,17 @@
 .RN__btn:active{ transform:translateY(1px); }
 .RN__btn[disabled]{ opacity:.7; cursor:default; }
 
-.RN__legal{ margin-top:10px; font-size:11px; color:var(--muted); }
+.RN__legal{ margin-top:10px; font-size:11px; color:#a0acc2; } /* un poco más claro para match */
 
 /* ====== Responsive ====== */
 @media (max-width: 1100px){
   .RN__grid{ grid-template-columns:1fr; gap:28px; }
   .RN__right{ width:100%; align-items:flex-start; }
   .RN__titleOutside{ width:100%; }
+  .RN__card{ width:100%; }
+}
+
+/* Ajuste de h1 para pantallas grandes (match visual) */
+@media (min-width: 1200px){
+  .RN__left h1{ font-size:64px; line-height:1.06; letter-spacing:.1px; }
 }

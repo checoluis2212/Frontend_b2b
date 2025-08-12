@@ -88,7 +88,7 @@
 /* el label envuelve todo: mayor hitbox y alineación */
 .RN__check{
   display:flex; align-items:center; gap:10px;
-  color:#334155; font-size:13px; cursor:pointer;
+  color:#334155; font-size:13px; cursor:pointer; margin-left: 20px;
 }
 
 /* control checkbox custom */

@@ -57,7 +57,7 @@ export default function ReclutamientoNative() {
           </section>
 
           <section className="RN__card">
-            <h2 className="RN__title">¡Cotiza tu paquete de vacantes!</h2>
+            <h2 className="RN__title">¡Cotiza tu paquete de vacantes!</h2></section>
 
             {ok && <div className="RN__alert-ok">¡Enviado! Pronto nos pondremos en contacto.</div>}
             {err && <div className="RN__alert-err">{err}</div>}
@@ -155,7 +155,6 @@ export default function ReclutamientoNative() {
                 así como el Aviso de Privacidad.
               </p>
             </form>
-          </section>
         </div>
       </main>
     </div>

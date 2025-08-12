@@ -89,3 +89,19 @@
   .RN__grid{ grid-template-columns:1fr; }
   .RN__left h1{ font-size:36px; }
 }
+
+/* Título fuera del card, en la columna derecha */
+.RN__right{ display:flex; flex-direction:column; gap:12px; }
+.RN__titleOutside{
+  margin: 4px 0 6px;
+  color:#fff;              /* va sobre el fondo azul */
+  font-size:28px;
+  line-height:1.2;
+  font-weight:700;
+}
+
+/* Mejora de checkbox: separación, alineación y área clickeable */
+.RN__field + .RN__check{ margin-top:16px; }
+.RN__check{ display:flex; align-items:center; gap:10px; color:#334155; font-size:13px; }
+.RN__check input[type="checkbox"]{ margin:0; }
+.RN__check span{ line-height:1.25; cursor:pointer; } /* todo el texto clickeable */

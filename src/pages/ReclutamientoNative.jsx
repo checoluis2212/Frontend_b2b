@@ -1,6 +1,6 @@
 // src/pages/ReclutamientoNative.jsx
 import { useState, useEffect, useRef } from 'react';
-import "./ReclutamientoNative.css";
+import './ReclutamientoNative.css';
 
 function getCookie(n){
   return decodeURIComponent((document.cookie.split('; ').find(r => r.startsWith(n+'='))||'').split('=')[1]||'');
@@ -13,7 +13,6 @@ export default function ReclutamientoNative() {
   const [err, setErr] = useState('');
   const formRef = useRef(null);
 
-  // 👉 helper para llenar los hidden (lo usamos al montar y tras reset)
   function fillHidden() {
     const f = formRef.current; if (!f) return;
     const vid = getCookie('vid') || getLS('visitorId') || '';
@@ -25,79 +24,47 @@ export default function ReclutamientoNative() {
     if (um)  f.utm_medium.value = um;
     if (uc)  f.utm_campaign.value = uc;
   }
-
   useEffect(() => { fillHidden(); }, []);
 
   async function handleSubmit(e){
     e.preventDefault();
     setPending(true); setOk(false); setErr('');
-
-    const fd = new FormData(e.currentTarget);
-    const fields = Object.fromEntries(fd.entries());
-
-    const payload = {
-      fields,
-      context: {
-        pageUri: location.href,
-        pageName: document.title,
-        hutk: getCookie('hubspotutk') // si cargas el tracking de HS
-      }
-    };
+    const fields = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const payload = { fields, context: { pageUri: location.href, pageName: document.title, hutk: getCookie('hubspotutk') } };
 
     try {
-      const res = await fetch('/api/lead', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      const res = await fetch('/api/lead', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
       if (!res.ok) throw new Error('HTTP '+res.status);
-
       setOk(true);
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'hubspot_lead',
-        event_id: Date.now()+':'+Math.random().toString(36).slice(2,8),
-        form_id: 'native_reclutamiento',
-        visitor_id: fields.visitorid || '',
-        page_location: location.href,
-        page_title: document.title,
-        page_referrer: document.referrer || '',
-        utm_source: fields.utm_source || '',
-        utm_medium: fields.utm_medium || '',
-        utm_campaign: fields.utm_campaign || ''
-      });
-
+      window.dataLayer.push({ event:'hubspot_lead', form_id:'native_reclutamiento' });
       e.currentTarget.reset();
-      fillHidden(); // 👈 repone visitorid/UTMs tras el reset
-    } catch (e) {
-      setErr('No se pudo enviar. Intenta de nuevo.');
-      console.error(e);
-    } finally {
-      setPending(false);
-    }
+      fillHidden();
+    } catch (err) {
+      console.error(err); setErr('No se pudo enviar. Intenta de nuevo.');
+    } finally { setPending(false); }
   }
 
   return (
-    <div style={{background:'#0b1b46', minHeight:'100vh'}}>
-      <header style={{background:'#0f4ec7', height:56}}/>
-      <main className="container" style={{maxWidth:1180, margin:'0 auto', padding:'32px 16px'}}>
-        <div style={{display:'grid', gridTemplateColumns:'1.1fr 1fr', gap:28, alignItems:'center'}}>
-          <section style={{color:'#fff', padding:'8px 8px'}}>
-            <h1 style={{fontSize:48, lineHeight:1.05, margin:'0 0 16px'}}>Publicar tus vacantes nunca fue tan fácil…</h1>
-            <p style={{fontSize:18, opacity:.9, margin:0}}>
-              Conoce la forma más eficiente de encontrar al candidato ideal con OCC,
-              la bolsa de empleo <strong>#1 en México</strong>
-            </p>
+    <div className="RN__wrap">
+      <header className="RN__bar" />
+      <main className="RN__container">
+        <div className="RN__grid">
+          <section className="RN__left">
+            <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
+            <p>Conoce la forma más eficiente de encontrar al candidato ideal con OCC,
+              la bolsa de empleo <strong>#1 en México</strong></p>
           </section>
 
-          <section style={{background:'#fff', borderRadius:24, padding:28, boxShadow:'0 10px 30px rgba(0,0,0,.18)'}}>
-            <h2 style={{fontSize:22, margin:'0 0 18px', color:'#0b1b46'}}>¡Cotiza tu paquete de vacantes!</h2>
+          <section className="RN__card">
+            <h2 className="RN__title">¡Cotiza tu paquete de vacantes!</h2>
 
-            {ok && <div style={{background:'#e7f6ee', color:'#1b6b3a', padding:'10px 12px', borderRadius:10, marginBottom:12}}>¡Enviado! Pronto nos pondremos en contacto.</div>}
-            {err && <div style={{background:'#fdecea', color:'#b3261e', padding:'10px 12px', borderRadius:10, marginBottom:12}}>{err}</div>}
+            {ok && <div className="RN__alert-ok">¡Enviado! Pronto nos pondremos en contacto.</div>}
+            {err && <div className="RN__alert-err">{err}</div>}
 
             <form ref={formRef} onSubmit={handleSubmit} className="hs-lookalike">
-              <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12}}>
+              {/* Fila 1 */}
+              <div className="RN__row RN__field">
                 <div>
                   <label>Nombre*</label>
                   <input name="firstname" required placeholder="Nombre" />
@@ -108,15 +75,17 @@ export default function ReclutamientoNative() {
                 </div>
               </div>
 
-              <div style={{marginTop:12}}>
+              {/* Email */}
+              <div className="RN__field">
                 <label>Email empresarial*</label>
                 <input name="email" type="email" required placeholder="tucorreo@empresa.com" />
               </div>
 
-              <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12, marginTop:12}}>
+              {/* Teléfono/Empresa */}
+              <div className="RN__row RN__field">
                 <div>
                   <label>Número de teléfono*</label>
-                  <input name="phone" type="tel" required placeholder="+52 ..." /> {/* 👈 tel */}
+                  <input name="phone" type="tel" required placeholder="+52 ..." />
                 </div>
                 <div>
                   <label>Nombre de la empresa*</label>
@@ -124,57 +93,65 @@ export default function ReclutamientoNative() {
                 </div>
               </div>
 
-              <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12, marginTop:12}}>
+              {/* Puesto/Vacantes */}
+              <div className="RN__row RN__field">
                 <div>
                   <label>Puesto*</label>
-                  <select name="puesto" required defaultValue="">
-                    <option value="" disabled>Selecciona</option>
-                    <option>Director General</option>
-                    <option>Recursos Humanos</option>
-                    <option>Reclutador</option>
-                    <option>Compras</option>
-                    <option>Otro</option>
-                  </select>
+                  <div className="RN__select">
+                    <select name="puesto" required defaultValue="">
+                      <option value="" disabled>Selecciona</option>
+                      <option>Director General</option>
+                      <option>Recursos Humanos</option>
+                      <option>Reclutador</option>
+                      <option>Compras</option>
+                      <option>Otro</option>
+                    </select>
+                  </div>
                 </div>
                 <div>
                   <label>Número de vacantes anuales*</label>
-                  <select name="vacantes_anuales" required defaultValue="">
-                    <option value="" disabled>Selecciona</option>
-                    <option>1</option>
-                    <option>2 a 4</option>
-                    <option>5 a 10</option>
-                    <option>11 a 50</option>
-                    <option>50+</option>
-                  </select>
+                  <div className="RN__select">
+                    <select name="vacantes_anuales" required defaultValue="">
+                      <option value="" disabled>Selecciona</option>
+                      <option>1</option>
+                      <option>2 a 4</option>
+                      <option>5 a 10</option>
+                      <option>11 a 50</option>
+                      <option>50+</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
-              <div style={{marginTop:12}}>
+              {/* RFC */}
+              <div className="RN__field">
                 <label>RFC*</label>
-                <input name="rfc" required placeholder="RFC de la empresa"
-                       pattern="[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}" title="Formato RFC válido" />
+                <input
+                  name="rfc"
+                  required
+                  placeholder="RFC de la empresa"
+                  pattern="[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}"
+                  title="Formato RFC válido"
+                />
               </div>
 
-              <div style={{marginTop:14, display:'flex', gap:8, alignItems:'flex-start', color:'#334155', fontSize:13}}>
-                <input type="checkbox" id="consent" name="consent_marketing" value="1" />
-                <label htmlFor="consent">Acepto recibir otras comunicaciones de OCC.</label>
-              </div>
+              {/* Consent */}
+              <label className="RN__check">
+                <input type="checkbox" name="consent_marketing" value="1" />
+                <span>Acepto recibir otras comunicaciones de OCC.</span>
+              </label>
 
+              {/* Hidden tracking */}
               <input type="hidden" name="visitorid" />
               <input type="hidden" name="utm_source" />
               <input type="hidden" name="utm_medium" />
               <input type="hidden" name="utm_campaign" />
 
-              <button disabled={pending}
-                style={{
-                  marginTop:18, width:'100%', height:52, borderRadius:999,
-                  background:'#0f4ec7', color:'#fff', fontSize:18, border:'none', cursor:'pointer',
-                  opacity: pending ? .7 : 1
-                }}>
+              <button className="RN__btn" disabled={pending}>
                 {pending ? 'Enviando…' : 'Enviar'}
               </button>
 
-              <p style={{marginTop:10, fontSize:11, color:'#6b7280'}}>
+              <p className="RN__legal">
                 Al dar clic en “Enviar” declaro haber leído y aceptado los Términos y Condiciones,
                 así como el Aviso de Privacidad.
               </p>

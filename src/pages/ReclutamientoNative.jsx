@@ -49,10 +49,7 @@ export default function ReclutamientoNative() {
 
       setOk(true);
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'hubspot_lead',
-        form_id: 'native_reclutamiento'
-      });
+      window.dataLayer.push({ event: 'hubspot_lead', form_id: 'native_reclutamiento' });
 
       e.currentTarget.reset();
       fillHidden();
@@ -65,24 +62,10 @@ export default function ReclutamientoNative() {
   }
 
   return (
-    <div
-      className="RN__wrap"
-      style={{
-        backgroundImage: "url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        minHeight: "100vh"
-      }}
-    >
+    <div className="RN__wrap">
       {/* Header con logo */}
-      <header className="RN__bar" style={{ padding: "20px" }}>
-        <img
-          src="/occ1.png"
-          alt="OCC"
-          className="RN__logo"
-          style={{ height: "40px", width: "auto" }}
-        />
+      <header className="RN__bar">
+        <img src="/occ1.png" alt="OCC" className="RN__logo" />
       </header>
 
       <main className="RN__container">
@@ -109,29 +92,29 @@ export default function ReclutamientoNative() {
                 <div className="RN__row RN__field">
                   <div>
                     <label>Nombre*</label>
-                    <input name="firstname" required />
+                    <input name="firstname" required placeholder="Nombre" />
                   </div>
                   <div>
                     <label>Apellidos*</label>
-                    <input name="lastname" required />
+                    <input name="lastname" required placeholder="Apellidos" />
                   </div>
                 </div>
 
                 {/* Email */}
                 <div className="RN__field">
                   <label>Email empresarial*</label>
-                  <input name="email" type="email" required />
+                  <input name="email" type="email" required placeholder="tucorreo@empresa.com" />
                 </div>
 
                 {/* Teléfono / Empresa */}
                 <div className="RN__row RN__field">
                   <div>
                     <label>Número de teléfono*</label>
-                    <input name="phone" type="tel" required />
+                    <input name="phone" type="tel" required placeholder="+52 ..." />
                   </div>
                   <div>
                     <label>Nombre de la empresa*</label>
-                    <input name="company" required />
+                    <input name="company" required placeholder="Empresa" />
                   </div>
                 </div>
 
@@ -171,6 +154,7 @@ export default function ReclutamientoNative() {
                   <input
                     name="rfc"
                     required
+                    placeholder="RFC de la empresa"
                     pattern="[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}"
                     title="Formato RFC válido"
                   />

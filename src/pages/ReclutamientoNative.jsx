@@ -67,6 +67,12 @@ export default function ReclutamientoNative() {
   return (
     <div className="RN__wrap">
       <header className="RN__bar" />
+      <img
+        src="/images/logo_occ.png"  // cambia a la ruta real de tu logo
+        alt="OCC"
+        className="RN__logo"
+      />
+      </header>
       <main className="RN__container">
         <div className="RN__grid">
           {/* Columna izquierda */}

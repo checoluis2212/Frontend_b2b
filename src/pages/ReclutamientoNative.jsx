@@ -185,20 +185,6 @@ export default function ReclutamientoNative() {
           </section>
         </div>
       </main>
-
-      {/* estilos básicos de inputs para que luzcan como HS */}
-      <style>{`
-        .hs-lookalike label { display:block; font-size:14px; color:#0b1b46; margin:0 0 6px; }
-        .hs-lookalike input, .hs-lookalike select, .hs-lookalike textarea {
-          width:100%; height:44px; padding:10px 14px; border-radius:999px;
-          border:1px solid #d1d5db; background:#f1f5f9; outline:none;
-        }
-        .hs-lookalike textarea { height:88px; border-radius:16px; resize:vertical; }
-        .hs-lookalike input:focus, .hs-lookalike select:focus, .hs-lookalike textarea:focus {
-          border-color:#0f4ec7; box-shadow:0 0 0 3px rgba(15,78,199,.15);
-          background:#fff;
-        }
-      `}</style>
     </div>
   );
 }

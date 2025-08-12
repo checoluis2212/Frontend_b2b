@@ -78,7 +78,7 @@ export default function ReclutamientoNative() {
       {/* Header con logo */}
       <header className="RN__bar" style={{ padding: "20px" }}>
         <img
-          src="/assets/logo-CBcn51CF.png"
+          src="/assets/occ1.png"
           alt="OCC"
           className="RN__logo"
           style={{ height: "40px", width: "auto" }}

@@ -1,60 +1,100 @@
 import { useState, useEffect, useRef } from 'react';
 import './ReclutamientoNative.css';
 
-function getCookie(n){
-  return decodeURIComponent((document.cookie.split('; ').find(r => r.startsWith(n+'='))||'').split('=')[1]||'');
-}
-function getLS(k){ try { return localStorage.getItem(k)||''; } catch { return ''; } }
+/* ==================== CONFIG ==================== */
+const LEAD_API = 'https://backend-b2b-a3up.onrender.com/api/lead'; // ← tu backend (Render)
+const LEAD_API_KEY = ''; // si /api/lead requiere API key, colócala aquí. Si no, déjalo vacío ''.
 
+/* ==================== UTILS ==================== */
+function getCookie(n) {
+  try {
+    return decodeURIComponent(
+      (document.cookie.split('; ').find(r => r.startsWith(n + '=')) || '')
+        .split('=')[1] || ''
+    );
+  } catch { return ''; }
+}
+function getLS(k) { try { return localStorage.getItem(k) || ''; } catch { return ''; } }
+
+/* ==================== COMPONENTE ==================== */
 export default function ReclutamientoNative() {
   const [pending, setPending] = useState(false);
   const [ok, setOk] = useState(false);
   const [err, setErr] = useState('');
   const formRef = useRef(null);
 
+  // Prefill de hidden fields (visitor/UTM desde cookies/LS)
   function fillHidden() {
     const f = formRef.current; if (!f) return;
     const vid = getCookie('vid') || getLS('visitorId') || '';
     const us  = getCookie('utm_source')   || getLS('utm_source')   || '';
     const um  = getCookie('utm_medium')   || getLS('utm_medium')   || '';
     const uc  = getCookie('utm_campaign') || getLS('utm_campaign') || '';
-    if (vid) f.visitorid.value = vid;
-    if (us)  f.utm_source.value = us;
-    if (um)  f.utm_medium.value = um;
-    if (uc)  f.utm_campaign.value = uc;
+    if (f.visitorid)    f.visitorid.value    = vid;
+    if (f.utm_source)   f.utm_source.value   = us;
+    if (f.utm_medium)   f.utm_medium.value   = um;
+    if (f.utm_campaign) f.utm_campaign.value = uc;
   }
   useEffect(() => { fillHidden(); }, []);
 
-  async function handleSubmit(e){
+  async function handleSubmit(e) {
     e.preventDefault();
     setPending(true); setOk(false); setErr('');
 
-    const fields = Object.fromEntries(new FormData(e.currentTarget).entries());
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+
+    // --- top-level visitorId (desde hidden) ---
+    const visitorId = (fd.get('visitorid') || '').toString();
+
+    // --- construir fields sin los hidden de tracking ---
+    const rawFields = Object.fromEntries(fd.entries());
+    delete rawFields.visitorid;
+    delete rawFields.utm_source;
+    delete rawFields.utm_medium;
+    delete rawFields.utm_campaign;
+
+    // Normalizaciones opcionales (por compatibilidad)
+    // Si el backend espera 'vacantesAnuales', mapea desde 'vacantes_anuales'
+    if (!rawFields.vacantesAnuales && rawFields.vacantes_anuales) {
+      rawFields.vacantesAnuales = rawFields.vacantes_anuales;
+    }
+
     const payload = {
-      fields,
+      visitorId,
+      fields: rawFields,
       context: {
-        pageUri: location.href,
-        pageName: document.title,
-        hutk: getCookie('hubspotutk') || ''
+        utm_source:   form.utm_source?.value || '',
+        utm_medium:   form.utm_medium?.value || '',
+        utm_campaign: form.utm_campaign?.value || '',
+        pageUri:      location.href,
+        pageName:     document.title,
+        hutk:         getCookie('hubspotutk') || ''
       }
     };
 
     try {
-      const res = await fetch('/api/lead', {
+      const res = await fetch(LEAD_API, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(LEAD_API_KEY ? { 'x-api-key': LEAD_API_KEY } : {})
+        },
         body: JSON.stringify(payload)
       });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) throw new Error(`Lead API ${res.status}`);
 
       setOk(true);
+
+      // GA4/DTM
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'hubspot_lead', form_id: 'native_reclutamiento' });
 
-      e.currentTarget.reset();
-      fillHidden();
-    } catch (err) {
-      console.error(err);
+      form.reset();
+      fillHidden(); // repone hidden después del reset
+    } catch (error) {
+      console.error('[lead] submit error:', error);
       setErr('No se pudo enviar. Intenta de nuevo.');
     } finally {
       setPending(false);

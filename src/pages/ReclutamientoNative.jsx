@@ -68,7 +68,7 @@ export default function ReclutamientoNative() {
     <div
       className="RN__wrap"
       style={{
-        backgroundImage: "url('/assets/background.jpg')",
+        backgroundImage: "url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center"
       }}
@@ -76,7 +76,7 @@ export default function ReclutamientoNative() {
       {/* Header con logo */}
       <header className="RN__bar">
         <img
-          src="/assets/logo.png"
+          src="/assets/logo-CBcn51CF.png"
           alt="OCC"
           className="RN__logo"
         />

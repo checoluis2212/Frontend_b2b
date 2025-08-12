@@ -65,30 +65,33 @@ export default function ReclutamientoNative() {
   }
 
   return (
-    <div className="RN__wrap">
-  {/* Header con logo */}
-  <header className="RN__bar">
-    <img
-      src="/assets/logo.png" 
-      alt="OCC"
-      className="RN__logo"
-    />
-  </header>
+    <div
+      className="RN__wrap"
+      style={{
+        backgroundImage: "url('/assets/background.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
+      }}
+    >
+      {/* Header con logo */}
+      <header className="RN__bar">
+        <img
+          src="/assets/logo.png"
+          alt="OCC"
+          className="RN__logo"
+        />
+      </header>
 
-  <main className="RN__container">
-    <div className="RN__grid">
-      {/* Columna izquierda */}
-      <section className="RN__left">
-        <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
-        <p>
-          Conoce la forma más eficiente de encontrar al candidato ideal con OCC,
-          la bolsa de empleo <strong>#1 en México</strong>
-        </p>
-      </section>
-    </div>
-  </main>
-</div>
-
+      <main className="RN__container">
+        <div className="RN__grid">
+          {/* Columna izquierda */}
+          <section className="RN__left">
+            <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
+            <p>
+              Conoce la forma más eficiente de encontrar al candidato ideal con OCC,
+              la bolsa de empleo <strong>#1 en México</strong>
+            </p>
+          </section>
 
           {/* Columna derecha */}
           <div className="RN__right">

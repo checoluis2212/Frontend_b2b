@@ -68,7 +68,7 @@ export default function ReclutamientoNative() {
     <div
       className="RN__wrap"
       style={{
-        backgroundImage: "url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg')",
+        backgroundImage: "url('https://b2b.occ.com.mx/assets/occ1.png')",
         backgroundSize: "cover",
         backgroundPosition: "center"
       }}

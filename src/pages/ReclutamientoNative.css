@@ -35,8 +35,7 @@
 .RN__titleOutside{
   width:100%;
   text-align:center;
-  background:#fff;            /* pill blanco */
-  color:var(--ink);
+  color:#fff;
   padding:14px 18px;
   border-radius:16px;
   font-size:22px;

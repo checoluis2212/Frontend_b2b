@@ -1,0 +1,53 @@
+:root {
+  --blue: #0f4ec7;
+  --ink: #0b1b46;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --ring: rgba(15, 78, 199, 0.15);
+}
+
+.RN__wrap {
+  background: var(--ink);
+  min-height: 100vh;
+}
+
+.RN__bar {
+  background: var(--blue);
+  height: 56px;
+}
+
+.RN__container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.RN__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.RN__left {
+  color: #fff;
+  padding: 8px;
+}
+
+.RN__left h1 {
+  font-size: 48px;
+  line-height: 1.05;
+  margin: 0 0 16px;
+}
+
+.RN__left p {
+  font-size: 18px;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.RN__card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0

@@ -152,3 +152,9 @@
 @media (min-width: 1200px){
   .RN__left h1{ font-size:64px; line-height:1.06; letter-spacing:.1px; }
 }
+
+/* ====== Logo ====== */
+RN__wrap{
+width: 100px;
+}
+

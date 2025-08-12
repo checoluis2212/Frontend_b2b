@@ -1,106 +1,85 @@
 :root{
-  --blue:#0f4ec7;        /* botón y foco */
-  --ink:#0b1b46;         /* textos oscuros */
-  --card:#ffffff;
-  --muted:#6b7280;
-  --ring:rgba(15,78,199,.15);
-  --pill-bg:#eaf1ff;     /* azul muy claro de inputs */
-  --pill-bd:#c9d8ff;     /* borde de inputs */
-  --placeholder:#8a96b3; /* placeholder */
+  --blue:#0f4ec7; --ink:#0b1b46; --card:#fff; --muted:#64748b;
+  --ring:rgba(15,78,199,.16);
+  --pill-bg:#eaf1ff; --pill-bd:#c9d8ff; --placeholder:#8a96b3;
 }
 
-/* layout (igual que antes) */
+/* layout */
 .RN__wrap{ background:#0b1b46; min-height:100vh; }
 .RN__bar{ background:var(--blue); height:56px; }
-.RN__container{ max-width:1180px; margin:0 auto; padding:32px 16px; }
-.RN__grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:28px; align-items:center; }
+.RN__container{ max-width:1180px; margin:0 auto; padding:40px 16px; }
+.RN__grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:32px; align-items:center; }
 .RN__left{ color:#fff; padding:8px; }
-.RN__left h1{ font-size:48px; line-height:1.05; margin:0 0 16px; }
-.RN__left p{ font-size:18px; opacity:.9; margin:0; }
+.RN__left h1{ font-size:48px; line-height:1.08; margin:0 0 14px; }
+.RN__left p{ font-size:18px; opacity:.92; margin:0; }
 
-.RN__card{ background:var(--card); border-radius:24px; padding:28px;
-  box-shadow:0 10px 30px rgba(0,0,0,.18); }
-.RN__title{ font-size:22px; margin:0 0 18px; color:var(--ink); }
+/* card */
+.RN__card{
+  background:var(--card); border-radius:22px; padding:28px 28px 24px;
+  box-shadow:0 14px 32px rgba(3,10,36,.18);
+  border:1px solid rgba(15,78,199,.06);
+}
+.RN__title{ font-size:24px; margin:0 0 18px; color:var(--ink); }
 
+/* alerts */
 .RN__alert-ok{ background:#e7f6ee; color:#1b6b3a; padding:10px 12px; border-radius:10px; margin-bottom:12px; }
 .RN__alert-err{ background:#fdecea; color:#b3261e; padding:10px 12px; border-radius:10px; margin-bottom:12px; }
 
-/* --------  ESTILO DEL FORM IGUAL A LA CAPTURA  -------- */
+/* form base */
 .hs-lookalike label{ display:block; font-size:14px; color:var(--ink); margin:0 0 6px; }
 
 .hs-lookalike input,
 .hs-lookalike select,
 .hs-lookalike textarea{
-  width:100%;
-  height:46px;
-  padding:10px 16px;
-  border-radius:999px;
-  border:1px solid var(--pill-bd);
-  background:var(--pill-bg);
-  outline:none;
-  font:inherit;
-  color:#1f2a44;
+  width:100%; height:48px; padding:12px 16px;
+  border-radius:24px;
+  border:1px solid var(--pill-bd); background:var(--pill-bg);
+  outline:none; font:inherit; color:#1f2a44;
 }
-.hs-lookalike textarea{ height:96px; border-radius:18px; resize:vertical; }
+.hs-lookalike textarea{ height:96px; border-radius:16px; resize:vertical; }
 
-.hs-lookalike input::placeholder,
-.hs-lookalike textarea::placeholder{ color:var(--placeholder); opacity:1; }
+.hs-lookalike ::placeholder{ color:var(--placeholder); }
 
 .hs-lookalike input:focus,
 .hs-lookalike select:focus,
 .hs-lookalike textarea:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px var(--ring);
-  background:#fff;
+  border-color:var(--blue); background:#fff; box-shadow:0 0 0 3px var(--ring);
 }
 
-/* filas/espaciado */
+/* filas y separación */
 .RN__row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .RN__field{ margin-top:14px; }
 
-/* Select con flecha */
+/* select con flecha centrada */
 .RN__select{ position:relative; }
-.RN__select select{
-  appearance:none;
-  -webkit-appearance:none;
-  padding-right:48px; /* espacio para la flecha */
-}
+.RN__select select{ appearance:none; -webkit-appearance:none; padding-right:44px; }
 .RN__select::after{
-  content:'';
-  position:absolute;
-  right:16px; top:50%; transform:translateY(-50%);
-  width:18px; height:18px;
-  pointer-events:none;
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:18px 18px;
-  /* chevron negro como en la captura */
+  content:''; position:absolute; right:16px; top:50%; transform:translateY(-50%);
+  width:16px; height:16px; pointer-events:none; background-size:16px 16px; background-repeat:no-repeat;
   background-image:url("data:image/svg+xml;utf8,\
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2318222F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317232f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
 }
 
-/* Checkbox cuadrado */
-.RN__check{ margin-top:14px; display:flex; gap:10px; align-items:flex-start; color:#334155; font-size:13px; }
+/* checkbox cuadrado alineado */
+.RN__check{ margin-top:14px; display:flex; align-items:center; gap:10px; color:#334155; font-size:13px; }
 .RN__check input[type="checkbox"]{
-  appearance:none; -webkit-appearance:none; outline:none;
-  width:28px; height:28px; border-radius:8px;
-  border:1.5px solid #d1dae8; background:#fff; position:relative; cursor:pointer;
+  appearance:none; -webkit-appearance:none; width:24px; height:24px;
+  border-radius:6px; border:1.5px solid #d1dae8; background:#fff; position:relative; margin:0;
 }
-.RN__check input[type="checkbox"]:checked{
-  background:var(--blue); border-color:var(--blue);
-}
+.RN__check input[type="checkbox"]:checked{ background:var(--blue); border-color:var(--blue); }
 .RN__check input[type="checkbox"]:checked::after{
-  content:''; position:absolute; left:9px; top:4px; width:8px; height:14px;
+  content:''; position:absolute; left:7px; top:3px; width:7px; height:12px;
   border:solid #fff; border-width:0 3px 3px 0; transform:rotate(45deg);
 }
 
-/* Botón redondo azul */
+/* botón */
 .RN__btn{
   margin-top:20px; width:100%; height:56px; border-radius:999px;
   background:var(--blue); color:#fff; font-size:18px; font-weight:600;
-  border:none; cursor:pointer; transition:filter .15s ease;
+  border:none; cursor:pointer; transition:filter .15s ease, transform .02s;
 }
-.RN__btn:hover{ filter:brightness(.95); }
+.RN__btn:hover{ filter:brightness(.96); }
+.RN__btn:active{ transform:translateY(1px); }
 .RN__btn[disabled]{ opacity:.7; cursor:default; }
 
 .RN__legal{ margin-top:10px; font-size:11px; color:var(--muted); }

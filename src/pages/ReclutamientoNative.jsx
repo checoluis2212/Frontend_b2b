@@ -91,29 +91,29 @@ export default function ReclutamientoNative() {
                 <div className="RN__row RN__field">
                   <div>
                     <label>Nombre*</label>
-                    <input name="firstname" required placeholder="Nombre" />
+                    <input name="firstname" required />
                   </div>
                   <div>
                     <label>Apellidos*</label>
-                    <input name="lastname" required placeholder="Apellidos" />
+                    <input name="lastname" required />
                   </div>
                 </div>
 
                 {/* Email */}
                 <div className="RN__field">
                   <label>Email empresarial*</label>
-                  <input name="email" type="email" required placeholder="tucorreo@empresa.com" />
+                  <input name="email" type="email" required />
                 </div>
 
                 {/* Teléfono / Empresa */}
                 <div className="RN__row RN__field">
                   <div>
                     <label>Número de teléfono*</label>
-                    <input name="phone" type="tel" required placeholder="+52 ..." />
+                    <input name="phone" type="tel" required />
                   </div>
                   <div>
                     <label>Nombre de la empresa*</label>
-                    <input name="company" required placeholder="Empresa" />
+                    <input name="company" required />
                   </div>
                 </div>
 
@@ -153,7 +153,6 @@ export default function ReclutamientoNative() {
                   <input
                     name="rfc"
                     required
-                    placeholder="RFC de la empresa"
                     pattern="[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}"
                     title="Formato RFC válido"
                   />

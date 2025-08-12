@@ -1,5 +1,6 @@
 // src/pages/ReclutamientoNative.jsx
 import { useState, useEffect, useRef } from 'react';
+import "./ReclutamientoNative.css";
 
 function getCookie(n){
   return decodeURIComponent((document.cookie.split('; ').find(r => r.startsWith(n+'='))||'').split('=')[1]||'');

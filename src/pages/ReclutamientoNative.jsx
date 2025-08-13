@@ -69,7 +69,6 @@ export default function ReclutamientoNative() {
         utm_campaign: form.utm_campaign?.value || '',
         pageUri:      location.href,
         pageName:     document.title,
-        hutk:         getCookie('hubspotutk') || ''
       }
     };
 

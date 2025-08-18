@@ -1,4 +1,4 @@
-/* ================= WRAPPER ================= */
+/* === WRAPPER === */
 .RN__wrap {
   font-family: 'Arial', sans-serif;
   background: #0b0b2b;
@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 
-/* ================= HEADER ================= */
+/* === HEADER sticky === */
 .RN__bar {
   position: sticky;
   top: 0;
@@ -23,7 +23,7 @@
   height: 40px;
 }
 
-/* ================= GRID ================= */
+/* === GRID === */
 .RN__container {
   max-width: 1200px;
   margin: 0 auto;
@@ -45,7 +45,11 @@
   flex: 1;
 }
 
-/* ================= BULLETS ================= */
+.RN__bullets {
+  flex: 1;
+}
+
+/* === BULLETS === */
 .RN__benefitsList {
   list-style: none;
   padding: 0;
@@ -71,7 +75,7 @@
   margin-bottom: 5px;
 }
 
-/* ================= FORM ================= */
+/* === FORM === */
 .RN__card {
   background: white;
   padding: 1.5rem;
@@ -93,7 +97,7 @@
   max-width: 90%;
 }
 
-/* ================= LOGOS ================= */
+/* === LOGOS === */
 .logos-section {
   text-align: center;
 }
@@ -127,24 +131,29 @@
   }
 }
 
-/* ================= FOOTER ================= */
+/* === FOOTER === */
 footer {
   margin-top: 3rem;
   color: #aaa;
 }
 
-/* ================= MOBILE ================= */
+/* === MOBILE reverse === */
 @media (max-width: 768px) {
   .RN__grid {
-    flex-direction: column-reverse; /* <-- el truco para mobile */
+    flex-direction: column;
   }
 
+  /* 🔥 Solo reordenamos en mobile */
   .RN__right {
-    order: 1;
+    order: 1; /* formulario primero */
   }
 
   .RN__left {
-    order: 2;
+    order: 2; /* título después */
+  }
+
+  .RN__bullets {
+    order: 3; /* bullets al final */
   }
 
   .RN__card {

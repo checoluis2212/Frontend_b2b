@@ -179,6 +179,10 @@ html, body {
     order: -1;
   }
 
+  .RN__left {
+    order: 2;
+  }
+
   .RN__right p{
     width: 70%;
     margin-top: 0;

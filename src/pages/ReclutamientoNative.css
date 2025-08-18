@@ -1,219 +1,168 @@
-:root{
-  --blue:#0f4ec7; 
-  --ink:#0b1b46; 
-  --card:#fff; 
-  --muted:#64748b;
-  --ring:rgba(15,78,199,.16);
-  --pill-bg:#eaf1ff; 
-  --pill-bd:#c9d8ff; 
-  --placeholder:#8a96b3;
+/* === WRAPPER === */
+.RN__wrap {
+  font-family: 'Arial', sans-serif;
+  background: #0b0b2b;
+  color: white;
+  min-height: 100vh;
 }
 
-/* ====== Layout ====== */
-.RN__wrap{
-  position: relative;
-  min-height:100vh;
-  background: 
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), 
-    url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg');
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-}
-
-/* Barra azul fija */
-.RN__bar { 
-  position: fixed;     
-  top: 0;               
+/* === HEADER sticky === */
+.RN__bar {
+  position: sticky;
+  top: 0;
   left: 0;
-  width: 100%; 
-  z-index: 1000;        
-  background: var(--blue); 
-  height: 60px; 
-  display: flex; 
-  align-items: center; 
-  padding: 0 20px; 
-  justify-content: space-between; 
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+  width: 100%;
+  background: #0056d2;
+  padding: 10px 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
 }
 
-.RN__logo{
-  height: 30px; 
-  width: auto;
-  margin-left: 35px
+.RN__logo {
+  height: 40px;
 }
 
-/* ====== Container ====== */
-.RN__container{ 
-  max-width:1280px; 
-  margin:0 auto; 
-  padding:170px 24px 50px; /* aumentado 60px por el menú fijo */
-  margin-top:30px; 
+/* === GRID === */
+.RN__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-.RN__grid{
-  display:grid;
-  grid-template-columns: 1fr 640px;
-  gap:60px; 
-  align-items:flex-start;
-  grid-template-areas: "left right";
+.RN__grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-/* ====== Izquierda ====== */
-.RN__left{ 
-  color:#fff; 
-  padding:8px; 
-  grid-area: left;
-}
-.RN__left h1{ 
-  font-size:56px; 
-  line-height:1.1; 
-  margin:0 0 28px; 
-  letter-spacing:.3px; 
-}
-.RN__left p{ 
-  font-size:15px; 
-  opacity:.92; 
-  margin:0 0 24px; 
-  max-width: 580px;
+.RN__left {
+  flex: 1;
 }
 
-/* Bullets UX mejorado */
+.RN__right {
+  flex: 1;
+}
+
+.RN__bullets {
+  flex: 1;
+}
+
+/* === BULLETS === */
 .RN__benefitsList {
-  margin-top: 40px;
-  padding: 0;
   list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
 }
 
 .RN__benefitsList li {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 24px; 
-  font-size: 18px;
-  line-height: 1.5;
-  color: #fff;
-  max-width: 580px;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.RN__icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
 }
 
 .RN__benefitsList strong {
   display: block;
-  margin-bottom: 6px;
-  font-size: 19px;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
 }
 
-.RN__benefitsList svg {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  stroke: #aaaeff;
-  margin-top: 4px;
+/* === FORM === */
+.RN__card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: black;
+  margin-top: 1rem;
 }
 
-/* ====== Derecha ====== */
-.RN__right{
-  display:flex;
-  align-items:center;
-  flex-direction:column;
-  gap:20px;
-  width:640px;
-  grid-area: right;
+.RN__titleOutside {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
 }
 
-.RN__titleOutside{
-  width:100%;
-  text-align:center;
-  color:#fff;
-  padding:16px 20px;
-  border-radius:16px;
-  font-size:24px;
-  font-weight:700;
-  line-height:1.3;
-  box-shadow:0 8px 20px rgba(3,10,36,.16);
+.RN__right p {
+  color: white;
+  margin-bottom: 1rem;
+  max-width: 90%;
 }
 
-/* ====== Párrafo debajo del título Cotiza ====== */
-.RN__titleOutside + p {
-  width: 75%;              
-  margin: 0 auto 20px;     
-  text-align: center;      
-  font-size: 14px; 
-  line-height: 1.5;
-  color: #fff;             
-}
-
-/* ====== Card ====== */
-.RN__card{
-  width:75%; 
-  background-color:azure;
-  border-radius:24px;
-  padding:32px;
-  box-shadow:0 16px 36px rgba(3,10,36,.20);
-  border:1px solid rgba(15,78,199,.06);
-}
-
+/* === LOGOS === */
 .logos-section {
-  max-width: 900px;   
-  margin: 0 auto;     
+  text-align: center;
 }
 
-.mb-3 {
-  text-align: center; 
-  color: #ffff;
+.logo-carousel {
+  overflow: hidden;
+  width: 100%;
 }
 
-.mt-5 {
-  color: #ffff;
+.logo-track {
+  display: flex;
+  gap: 40px;
+  animation: scroll 20s linear infinite;
 }
 
-/* ====== Mobile Fix ====== */
+.logo-item {
+  height: 50px;
+  object-fit: contain;
+}
+
+.uniform-logo {
+  max-height: 50px;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* === FOOTER === */
+footer {
+  margin-top: 3rem;
+  color: #aaa;
+}
+
+/* === MOBILE reverse === */
 @media (max-width: 768px) {
-
   .RN__grid {
-    grid-template-columns: 1fr; 
-    gap: 40px;
-    grid-template-areas: 
-      "left"   /* primero el título + bullets */
-      "right"; /* después Cotiza + form */
+    flex-direction: column;
   }
 
-  .RN__left { 
-    grid-area: left; 
-    order: 1;
+  /* 🔥 Solo reordenamos en mobile */
+  .RN__right {
+    order: 1; /* formulario primero */
   }
 
-  .RN__right { 
-    grid-area: right; 
-    order: 2; 
-    width: 100% !important; 
-    margin-top: 0 !important; 
+  .RN__left {
+    order: 2; /* título después */
   }
 
-  /* En mobile mandamos los bullets debajo del form */
-  .RN__benefitsList { 
-    margin-top: 20px; 
-    order: 3;
+  .RN__bullets {
+    order: 3; /* bullets al final */
   }
 
   .RN__card {
-    width: 100% !important;
-    padding: 24px;
-    margin: 0 auto;
+    margin-top: 1.5rem;
   }
 
-  .RN__titleOutside + p {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto 16px;
+  .RN__titleOutside,
+  .RN__right p {
+    max-width: 100%;
     text-align: center;
-    font-size: 15px;
-    line-height: 1.4;
-    color: #fff; 
-  }
-
-  .hs-form iframe {
-    width: 100% !important; 
-    min-height: 600px !important; 
-    display: block !important;
   }
 }

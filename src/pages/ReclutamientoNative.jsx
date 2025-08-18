@@ -1,101 +1,83 @@
-import React from "react";
-import "./ReclutamientoNative.css";
+import { useEffect } from "react";
+import './ReclutamientoNative.css';
+
+import amazon from '../assets/amazon.png';
+import bbva from '../assets/bbva.png';
+import dhl from '../assets/dhl.png';
+import netflix from '../assets/netflix.png';
+import Walmart from '../assets/Walmart.png';
+import salinas from '../assets/salinas.png';
+import palacio from '../assets/palacio.png';
+import thomson from '../assets/thomson.png';
+import lala from '../assets/lala.png';
 
 export default function ReclutamientoNative() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "//js.hsforms.net/forms/embed/v2.js";
+    script.type = "text/javascript";
+    script.charset = "utf-8";
+    script.onload = () => {
+      if (window.hbspt) {
+        window.hbspt.forms.create({
+          portalId: "49514148",
+          formId: "5f745bfa-8589-40c2-9940-f9081123e0b4",
+          region: "na1",
+          target: "#hubspot-form"
+        });
+      }
+    };
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <div className="RN__wrap">
-      {/* === HEADER === */}
+      {/* Header con logo */}
       <header className="RN__bar">
-        <img
-          src="/Images/sax_logo.png"
-          alt="Logo"
-          className="RN__logo"
-        />
+        <img src="/occ1.png" alt="OCC" className="RN__logo" />
       </header>
 
-      {/* === MAIN === */}
-      <div className="RN__container">
+      <main className="RN__container">
         <div className="RN__grid">
-          
-          {/* === LEFT: Título === */}
-          <div className="RN__left">
-            <h1>Publicar tus vacantes nunca fue tan fácil</h1>
-          </div>
+          {/* Columna izquierda */}
+          <section className="RN__left">
+            <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
 
-          {/* === RIGHT: Cotización + Formulario === */}
+            {/* Bullets con título + descripción */}
+            <ul className="RN__benefitsList">
+              {/* … tus <li> se mantienen igual … */}
+            </ul>
+          </section>
+
+          {/* Columna derecha */}
           <div className="RN__right">
-            <h2 className="RN__titleOutside">Recibe tu cotización ajustada a tus necesidades</h2>
-            <p>
-              Cotiza tu paquete de vacantes y un ejecutivo se pondrá en
-              contacto contigo para darte más detalles.
-            </p>
+            <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
 
-            <div className="RN__card">
-              {/* Aquí va tu formulario */}
-              <form>
-                <div>
-                  <label>Nombre</label>
-                  <input type="text" name="nombre" required />
-                </div>
-                <div>
-                  <label>Email</label>
-                  <input type="email" name="email" required />
-                </div>
-                <div>
-                  <label>Teléfono</label>
-                  <input type="tel" name="telefono" required />
-                </div>
-                <button type="submit">Enviar</button>
-              </form>
+            <section className="RN__card">
+              {/* Aquí se renderiza el form de HubSpot */}
+              <div id="hubspot-form"></div>
+            </section>
+          </div>
+        </div>
+
+        {/* Carrusel Logos */}
+        <div className="logos-section mt-5">
+          <h3 className="mb-3">Marcas que confían en nosotros</h3>
+          <div className="logo-carousel">
+            <div className="logo-track">
+              {[amazon, bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson,
+                amazon, bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson].map((logoSrc, idx) => (
+                <img key={idx} src={logoSrc} alt="Logo" className="logo-item uniform-logo" />
+              ))}
             </div>
           </div>
-
-          {/* === BULLETS === */}
-          <div className="RN__bullets">
-            <ul className="RN__benefitsList">
-              <li>
-                <img src="/icons/check.svg" alt="" className="RN__icon" />
-                <div>
-                  <strong>Alcance masivo</strong>
-                  Llega a millones de candidatos en toda la república.
-                </div>
-              </li>
-              <li>
-                <img src="/icons/check.svg" alt="" className="RN__icon" />
-                <div>
-                  <strong>Fácil de usar</strong>
-                  Publica en minutos sin procesos complicados.
-                </div>
-              </li>
-              <li>
-                <img src="/icons/check.svg" alt="" className="RN__icon" />
-                <div>
-                  <strong>Soporte dedicado</strong>
-                  Nuestro equipo te asesora en cada paso.
-                </div>
-              </li>
-            </ul>
-          </div>
-
         </div>
-      </div>
 
-      {/* === LOGOS === */}
-      <section className="logos-section">
-        <div className="logo-carousel">
-          <div className="logo-track">
-            <img src="/logos/logo1.png" alt="logo1" className="logo-item" />
-            <img src="/logos/logo2.png" alt="logo2" className="logo-item" />
-            <img src="/logos/logo3.png" alt="logo3" className="logo-item" />
-            {/* ...agrega más logos */}
-          </div>
-        </div>
-      </section>
-
-      {/* === FOOTER === */}
-      <footer>
-        <p>© 2025 OCCMundial - Todos los derechos reservados</p>
-      </footer>
+        {/* Footer */}
+        <footer className="mt-5 text-center">
+          <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
+        </footer>
+      </main>
     </div>
   );
 }

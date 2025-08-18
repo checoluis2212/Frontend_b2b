@@ -96,6 +96,7 @@ export default function ReclutamientoNative() {
           {/* Columna derecha */}
           <div className="RN__right">
             <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
+            <p>Recibe una cotización ajustada a tus necesidades. Un ejecutivo te guiará en el proceso.</p>
 
             <section className="RN__card">
               {/* Aquí se renderiza el form de HubSpot */}

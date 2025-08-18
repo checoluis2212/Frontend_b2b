@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import './ReclutamientoNative.css';
 import '../index.css';
+import './ReclutamientoNative.css';
 
 import amazon from '../assets/amazon.png';
 import bbva from '../assets/bbva.png';

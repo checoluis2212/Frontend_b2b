@@ -21,10 +21,12 @@
   background-repeat:no-repeat;
 }
 
-/* Barra azul sticky */
+/* Barra azul fija */
 .RN__bar { 
-  position: sticky;     
+  position: fixed;     /* ahora siempre fijo */
   top: 0;               
+  left: 0;
+  width: 100%; 
   z-index: 1000;        
   background: var(--blue); 
   height: 60px; 
@@ -45,7 +47,7 @@
 .RN__container{ 
   max-width:1280px; 
   margin:0 auto; 
-  padding:110px 24px 50px; 
+  padding:170px 24px 50px; /* aumentado 60px por el menú fijo */
   margin-top:30px; 
 }
 
@@ -132,10 +134,10 @@
 
 /* ====== Párrafo debajo del título Cotiza ====== */
 .RN__titleOutside + p {
-  width: 90%;              
+  width: 75%;              
   margin: 0 auto 20px;     
   text-align: center;      
-  font-size: 16px; 
+  font-size: 14px; 
   line-height: 1.5;
   color: #fff;             
 }

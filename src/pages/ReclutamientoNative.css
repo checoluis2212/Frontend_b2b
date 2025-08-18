@@ -169,26 +169,34 @@ html, body {
   .RN__grid {
     grid-template-columns: 1fr;
     gap: 40px;
-    grid-template-areas: 
-      "right"   /* primero form */
-      "left";   /* después bullets */
+    grid-template-areas: none; /* evita sobreescribir */
+    display: flex;
+    flex-direction: column;
   }
 
+  /* 1. Título primero */
+  .RN__left h1 {
+    order: 1;
+  }
+
+  /* 2. Formulario después */
   .RN__right {
     width: 100% !important;
-    order: -1;
-  }
-
-  .RN__left {
     order: 2;
   }
 
-  .RN__right p{
+  /* 3. Bullets al final */
+  .RN__benefitsList {
+    order: 3;
+  }
+
+  .RN__right p {
     width: 70%;
     margin-top: 0;
     margin-bottom: 1rem;
     color: aliceblue;
     font-size: 13px;
+    text-align: center;
   }
 
   .RN__card {

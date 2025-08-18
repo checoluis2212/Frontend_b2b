@@ -171,3 +171,71 @@
 @media (min-width: 1200px){
   .RN__left h1{ font-size:64px; line-height:1.06; letter-spacing:.1px; }
 }
+
+/* ==================== BENEFICIOS ==================== */
+.RN__benefits {
+  margin: 4rem auto;
+  padding: 2rem 1rem;
+  max-width: 1100px;
+  text-align: center;
+}
+
+.RN__benefitsTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #222;
+}
+
+.RN__benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.RN__benefit {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.RN__benefit:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.RN__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1rem;
+  display: block;
+  color: #0073e6; /* azul corporativo */
+}
+
+.RN__benefit h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #111;
+}
+
+.RN__benefit p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .RN__benefitsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .RN__benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+}

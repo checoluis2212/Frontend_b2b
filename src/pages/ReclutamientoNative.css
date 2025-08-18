@@ -136,3 +136,8 @@
   max-width: 900px;   /* igual que Home */
   margin: 0 auto;     /* centrado */
 }
+
+.mb-3 {
+  text-align: ceneter; 
+  color: #ffff;
+}

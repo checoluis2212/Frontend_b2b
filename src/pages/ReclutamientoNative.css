@@ -172,13 +172,14 @@
     font-size: 20px;
   }
 
-  .RN__right p {
-    width: 90%;
-    margin: 0 auto 1rem;
-    color: aliceblue;
-    font-size: 14px;
-    text-align: center;
-  }
+.RN__titleOutside + p {
+  width: 90%;                          
+  color: #ffff;           
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;      
+}
+
 
   .RN__card {
     width: 100% !important;

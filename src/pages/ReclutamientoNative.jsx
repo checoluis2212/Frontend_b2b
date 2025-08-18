@@ -36,6 +36,38 @@ export default function ReclutamientoNative() {
               Conoce la forma más eficiente de encontrar al candidato ideal con OCC,
               la bolsa de empleo <strong>#1 en México</strong>
             </p>
+
+            {/* Beneficios como bullets */}
+            <ul className="RN__benefitsList">
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="9" cy="20" r="1.5"/>
+                  <circle cx="18" cy="20" r="1.5"/>
+                </svg>
+                <span>Compra de vacantes</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span>Compra especializada</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M3 12l2-2 4 4 10-10 2 2-12 12z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span>Seguimiento</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 14v7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M5 19h14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span>Capacitación personalizada</span>
+              </li>
+            </ul>
           </section>
 
           {/* Columna derecha */}
@@ -48,54 +80,6 @@ export default function ReclutamientoNative() {
             </section>
           </div>
         </div>
-
-        {/* Nueva sección de beneficios */}
-        <section className="RN__benefits">
-          <h2 className="RN__benefitsTitle">Beneficios exclusivos para tu empresa</h2>
-          <div className="RN__benefitsGrid">
-            
-            <div className="RN__benefit">
-              {/* Compra de vacantes */}
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="9" cy="20" r="1.5"/>
-                <circle cx="18" cy="20" r="1.5"/>
-              </svg>
-              <h3>Compra de vacantes</h3>
-              <p>Adquiere fácilmente paquetes de vacantes adaptados a las necesidades de tu empresa.</p>
-            </div>
-
-            <div className="RN__benefit">
-              {/* Compra especializada */}
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <h3>Compra especializada</h3>
-              <p>Soluciones hechas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
-            </div>
-
-            <div className="RN__benefit">
-              {/* Seguimiento */}
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M3 12l2-2 4 4 10-10 2 2-12 12z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <h3>Seguimiento</h3>
-              <p>Monitoreo constante para asegurar la efectividad de tus publicaciones y contrataciones.</p>
-            </div>
-
-            <div className="RN__benefit">
-              {/* Capacitación personalizada */}
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 14v7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M5 19h14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <h3>Capacitación personalizada</h3>
-              <p>Asesoría y entrenamientos especializados para optimizar tu proceso de reclutamiento.</p>
-            </div>
-
-          </div>
-        </section>
       </main>
     </div>
   );

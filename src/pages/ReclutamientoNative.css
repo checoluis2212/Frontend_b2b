@@ -146,3 +146,28 @@
 .mt-5 {
 color: #ffff;
 }
+
+/* ====== Mobile Fix ====== */
+@media (max-width: 768px) {
+
+  .RN__grid {
+    grid-template-columns: 1fr; /* una sola columna */
+    gap: 40px;
+  }
+
+  .RN__right {
+    width: 100% !important; /* ocupar ancho completo */
+  }
+
+  .RN__card {
+    width: 100% !important; /* form ocupa todo */
+    padding: 24px;
+  }
+
+  .hs-form iframe {
+    width: 100% !important; 
+    min-height: 600px !important; 
+    display: block !important;
+  }
+}
+

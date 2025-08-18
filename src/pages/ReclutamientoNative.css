@@ -1,13 +1,17 @@
-:root {
-  --blue:#0f4ec7;
-  --ink:#0b1b46;
-  --card:#fff;
+:root{
+  --blue:#0f4ec7; 
+  --ink:#0b1b46; 
+  --card:#fff; 
   --muted:#64748b;
   --ring:rgba(15,78,199,.16);
+  --pill-bg:#eaf1ff; 
+  --pill-bd:#c9d8ff; 
+  --placeholder:#8a96b3;
 }
 
 /* ====== Layout ====== */
-.RN__wrap {
+.RN__wrap{
+  position: relative;
   min-height:100vh;
   background: 
     linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), 
@@ -17,100 +21,193 @@
   background-repeat:no-repeat;
 }
 
+/* Barra azul fija */
 .RN__bar { 
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  background: var(--blue);
-  height: 60px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  z-index: 1000;
-}
-.RN__logo { height: 30px; margin-left: 20px; }
-
-.RN__container {
-  max-width:1280px;
-  margin:0 auto;
-  padding:100px 24px 50px; /* margen ajustado */
+  position: fixed;     
+  top: 0;               
+  left: 0;
+  width: 100%; 
+  z-index: 1000;        
+  background: var(--blue); 
+  height: 60px; 
+  display: flex; 
+  align-items: center; 
+  padding: 0 20px; 
+  justify-content: space-between; 
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
 }
 
-.RN__grid {
+.RN__logo{
+  height: 30px; 
+  width: auto;
+  margin-left: 35px
+}
+
+/* ====== Container ====== */
+.RN__container{ 
+  max-width:1280px; 
+  margin:0 auto; 
+  padding:170px 24px 50px; /* compensar el sticky bar */
+  margin-top:20px; 
+}
+
+.RN__grid{
   display:grid;
   grid-template-columns: 1fr 640px;
-  gap:40px;
-  grid-template-areas:
-    "left right"
-    "bullets bullets";
+  gap:60px; 
+  align-items:flex-start;
+  grid-template-areas: "left right";
 }
 
-.RN__left { color:#fff; grid-area:left; }
-.RN__left h1 {
-  font-size:56px;
-  margin:0 0 20px;
-  line-height:1.1;
+/* ====== Izquierda ====== */
+.RN__left{ 
+  color:#fff; 
+  padding:8px; 
+  grid-area: left;
+}
+.RN__left h1{ 
+  font-size:56px; 
+  line-height:1.1; 
+  margin:0 0 28px; 
+  letter-spacing:.3px; 
+}
+.RN__left p{ 
+  font-size:15px; 
+  opacity:.92; 
+  margin:0 0 24px; 
+  max-width: 580px;
 }
 
-.RN__right {
-  grid-area:right;
+/* Bullets UX */
+.RN__benefitsList {
+  margin-top: 40px;
+  padding: 0;
+  list-style: none;
+}
+
+.RN__benefitsList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px; 
+  font-size: 18px;
+  line-height: 1.5;
+  color: #fff;
+  max-width: 580px;
+}
+
+.RN__benefitsList strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 19px;
+}
+
+.RN__benefitsList svg {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  stroke: #aaaeff;
+  margin-top: 4px;
+}
+
+/* ====== Derecha ====== */
+.RN__right{
   display:flex;
-  flex-direction:column;
   align-items:center;
+  flex-direction:column;
   gap:20px;
+  width:640px;
+  grid-area: right;
 }
 
-.RN__titleOutside {
+.RN__titleOutside{
+  width:100%;
+  text-align:center;
   color:#fff;
+  padding:16px 20px;
+  border-radius:16px;
   font-size:24px;
   font-weight:700;
-  text-align:center;
+  line-height:1.3;
+  box-shadow:0 8px 20px rgba(3,10,36,.16);
 }
 
 .RN__titleOutside + p {
-  width:90%;
-  margin:0 auto 20px;
-  text-align:center;
-  font-size:15px;
-  color:#fff;
+  width: 75%;              
+  margin: 0 auto 20px;     
+  text-align: center;      
+  font-size: 14px; 
+  line-height: 1.5;
+  color: #fff;             
 }
 
-.RN__card {
-  width:90%;
-  background:#fff;
-  border-radius:20px;
-  padding:24px;
+/* ====== Card ====== */
+.RN__card{
+  width:75%; 
+  background-color:azure;
+  border-radius:24px;
+  padding:32px;
+  box-shadow:0 16px 36px rgba(3,10,36,.20);
+  border:1px solid rgba(15,78,199,.06);
 }
 
-/* Bullets */
-.RN__bullets { grid-area:bullets; margin-top:30px; }
-.RN__benefitsList {
-  list-style:none;
-  padding:0;
-  margin:0;
+.logos-section {
+  max-width: 900px;   
+  margin: 0 auto;     
 }
-.RN__benefitsList li {
-  display:flex;
-  gap:12px;
-  margin-bottom:20px;
-  color:#fff;
+
+.mb-3 {
+  text-align: center; 
+  color: #ffff;
 }
-.RN__benefitsList strong { display:block; font-size:18px; margin-bottom:5px; }
-.RN__icon { width:24px; height:24px; stroke:#aaaeff; }
 
-/* Logos */
-.logos-section { max-width:900px; margin:0 auto; text-align:center; }
-.mb-3 { color:#fff; }
+.mt-5 {
+  color: #ffff;
+}
 
-/* ====== Mobile ====== */
-@media (max-width:768px) {
+/* ====== Mobile Fix ====== */
+@media (max-width: 768px) {
   .RN__grid {
-    grid-template-columns:1fr;
-    grid-template-areas:
-      "left"
-      "right"
-      "bullets";
+    grid-template-columns: 1fr; 
+    gap: 40px;
+    grid-template-areas: 
+      "left"     /* 1. Publicar vacantes + h1 */
+      "right"    /* 2. Cotiza + formulario */
+      "left-bullets"; /* 3. Bullets van hasta abajo */
   }
-  .RN__right, .RN__card { width:100% !important; }
-  .RN__titleOutside + p { width:100%; font-size:14px; }
+
+  .RN__left { grid-area: left; }
+  .RN__right { 
+    grid-area: right; 
+    width: 100% !important; 
+    margin-top: 0 !important; 
+  }
+
+  /* solo los bullets cambian de orden */
+  .RN__benefitsList {
+    grid-area: left-bullets;
+    margin-top: 20px;
+  }
+
+  .RN__card {
+    width: 100% !important;
+    padding: 24px;
+    margin: 0 auto;
+  }
+
+  .RN__titleOutside + p {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 16px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #fff; 
+  }
+
+  .hs-form iframe {
+    width: 100% !important; 
+    min-height: 600px !important; 
+    display: block !important;
+  }
 }

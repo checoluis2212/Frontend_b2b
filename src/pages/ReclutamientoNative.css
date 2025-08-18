@@ -132,9 +132,3 @@
   border:1px solid rgba(15,78,199,.06);
 }
 
-/* Homologar tamaño de logos en carrusel */
-.uniform-logo {
-  height: 40px;
-  max-height: 40px;
-  object-fit: contain;
-}

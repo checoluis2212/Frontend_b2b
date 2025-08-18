@@ -1,17 +1,13 @@
-:root{
-  --blue:#0f4ec7; 
-  --ink:#0b1b46; 
-  --card:#fff; 
+:root {
+  --blue:#0f4ec7;
+  --ink:#0b1b46;
+  --card:#fff;
   --muted:#64748b;
   --ring:rgba(15,78,199,.16);
-  --pill-bg:#eaf1ff; 
-  --pill-bd:#c9d8ff; 
-  --placeholder:#8a96b3;
 }
 
 /* ====== Layout ====== */
-.RN__wrap{
-  position: relative;
+.RN__wrap {
   min-height:100vh;
   background: 
     linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), 
@@ -21,193 +17,100 @@
   background-repeat:no-repeat;
 }
 
-/* Barra azul fija */
 .RN__bar { 
-  position: fixed;     /* ahora siempre fijo */
-  top: 0;               
-  left: 0;
-  width: 100%; 
-  z-index: 1000;        
-  background: var(--blue); 
-  height: 60px; 
-  display: flex; 
-  align-items: center; 
-  padding: 0 20px; 
-  justify-content: space-between; 
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1); 
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background: var(--blue);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+}
+.RN__logo { height: 30px; margin-left: 20px; }
+
+.RN__container {
+  max-width:1280px;
+  margin:0 auto;
+  padding:100px 24px 50px; /* margen ajustado */
 }
 
-.RN__logo{
-  height: 30px; 
-  width: auto;
-  margin-left: 35px
-}
-
-/* ====== Container ====== */
-.RN__container{ 
-  max-width:1280px; 
-  margin:0 auto; 
-  padding:170px 24px 50px; /* aumentado 60px por el menú fijo */
-  margin-top:30px; 
-}
-
-.RN__grid{
+.RN__grid {
   display:grid;
   grid-template-columns: 1fr 640px;
-  gap:60px; 
-  align-items:flex-start;
-  grid-template-areas: "left right";
+  gap:40px;
+  grid-template-areas:
+    "left right"
+    "bullets bullets";
 }
 
-/* ====== Izquierda ====== */
-.RN__left{ 
-  color:#fff; 
-  padding:8px; 
-  grid-area: left;
-}
-.RN__left h1{ 
-  font-size:56px; 
-  line-height:1.1; 
-  margin:0 0 28px; 
-  letter-spacing:.3px; 
-}
-.RN__left p{ 
-  font-size:15px; 
-  opacity:.92; 
-  margin:0 0 24px; 
-  max-width: 580px;
+.RN__left { color:#fff; grid-area:left; }
+.RN__left h1 {
+  font-size:56px;
+  margin:0 0 20px;
+  line-height:1.1;
 }
 
-/* Bullets UX mejorado */
-.RN__benefitsList {
-  margin-top: 40px;
-  padding: 0;
-  list-style: none;
-}
-
-.RN__benefitsList li {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 24px; 
-  font-size: 18px;
-  line-height: 1.5;
-  color: #fff;
-  max-width: 580px;
-}
-
-.RN__benefitsList strong {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 19px;
-}
-
-.RN__benefitsList svg {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  stroke: #aaaeff;
-  margin-top: 4px;
-}
-
-/* ====== Derecha ====== */
-.RN__right{
+.RN__right {
+  grid-area:right;
   display:flex;
-  align-items:center;
   flex-direction:column;
+  align-items:center;
   gap:20px;
-  width:640px;
-  grid-area: right;
 }
 
-.RN__titleOutside{
-  width:100%;
-  text-align:center;
+.RN__titleOutside {
   color:#fff;
-  padding:16px 20px;
-  border-radius:16px;
   font-size:24px;
   font-weight:700;
-  line-height:1.3;
-  box-shadow:0 8px 20px rgba(3,10,36,.16);
+  text-align:center;
 }
 
-/* ====== Párrafo debajo del título Cotiza ====== */
 .RN__titleOutside + p {
-  width: 75%;              
-  margin: 0 auto 20px;     
-  text-align: center;      
-  font-size: 14px; 
-  line-height: 1.5;
-  color: #fff;             
+  width:90%;
+  margin:0 auto 20px;
+  text-align:center;
+  font-size:15px;
+  color:#fff;
 }
 
-/* ====== Card ====== */
-.RN__card{
-  width:75%; 
-  background-color:azure;
-  border-radius:24px;
-  padding:32px;
-  box-shadow:0 16px 36px rgba(3,10,36,.20);
-  border:1px solid rgba(15,78,199,.06);
+.RN__card {
+  width:90%;
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
 }
 
-.logos-section {
-  max-width: 900px;   
-  margin: 0 auto;     
+/* Bullets */
+.RN__bullets { grid-area:bullets; margin-top:30px; }
+.RN__benefitsList {
+  list-style:none;
+  padding:0;
+  margin:0;
 }
-
-.mb-3 {
-  text-align: center; 
-  color: #ffff;
+.RN__benefitsList li {
+  display:flex;
+  gap:12px;
+  margin-bottom:20px;
+  color:#fff;
 }
+.RN__benefitsList strong { display:block; font-size:18px; margin-bottom:5px; }
+.RN__icon { width:24px; height:24px; stroke:#aaaeff; }
 
-.mt-5 {
-  color: #ffff;
-}
+/* Logos */
+.logos-section { max-width:900px; margin:0 auto; text-align:center; }
+.mb-3 { color:#fff; }
 
-/* ====== Mobile Fix ====== */
-@media (max-width: 768px) {
-
+/* ====== Mobile ====== */
+@media (max-width:768px) {
   .RN__grid {
-    grid-template-columns: 1fr; 
-    gap: 40px;
-    grid-template-areas: 
-      "left"     /* primero publicar */
-      "right"    /* después Cotiza + form */
-      "bullets"; /* luego bullets */
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "left"
+      "right"
+      "bullets";
   }
-
-  .RN__left { grid-area: left; }
-  .RN__right { 
-    grid-area: right; 
-    width: 100% !important; 
-    margin-top: 0 !important; 
-  }
-  .RN__benefitsList { 
-    grid-area: bullets; 
-    margin-top: 20px; 
-  }
-
-  .RN__card {
-    width: 100% !important;
-    padding: 24px;
-    margin: 0 auto;
-  }
-
-  .RN__titleOutside + p {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto 16px;
-    text-align: center;
-    font-size: 15px;
-    line-height: 1.4;
-    color: #fff; 
-  }
-
-  .hs-form iframe {
-    width: 100% !important; 
-    min-height: 600px !important; 
-    display: block !important;
-  }
+  .RN__right, .RN__card { width:100% !important; }
+  .RN__titleOutside + p { width:100%; font-size:14px; }
 }

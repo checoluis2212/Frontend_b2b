@@ -32,10 +32,6 @@ export default function ReclutamientoNative() {
           {/* Columna izquierda */}
           <section className="RN__left">
             <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
-            <p>
-              Conoce la forma más eficiente de encontrar al candidato ideal con OCC,
-              la bolsa de empleo <strong>#1 en México</strong>
-            </p>
 
             {/* Bullets con título + descripción */}
             <ul className="RN__benefitsList">

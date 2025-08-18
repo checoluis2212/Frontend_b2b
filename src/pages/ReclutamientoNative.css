@@ -172,10 +172,10 @@
   .RN__left h1{ font-size:64px; line-height:1.06; letter-spacing:.1px; }
 }
 
-/* Lista de beneficios en la columna izquierda */
+/* Lista de beneficios */
 .RN__benefitsList {
   margin-top: 2rem;
-  padding-left: 0;
+  padding: 0;
   list-style: none;
 }
 
@@ -183,15 +183,20 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  color: #333;
-  font-weight: 500;
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff; /* texto blanco para contraste */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6); /* mejora visibilidad sobre el fondo */
 }
 
 .RN__benefitsList li .RN__icon {
   width: 28px;
   height: 28px;
   flex-shrink: 0;
-  color: #0073e6; /* azul corporativo */
+  color: #fff;
+  background: #0073e6; /* azul OCC */
+  padding: 6px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }

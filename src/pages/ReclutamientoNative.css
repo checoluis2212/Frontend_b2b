@@ -28,6 +28,9 @@
   display: flex; 
   align-items: center; 
   padding: 0 20px; 
+  position: fixed;    
+  top: 0;             
+  z-index: 1000;      
 }
 
 .RN__logo{
@@ -39,7 +42,7 @@
 .RN__container{ 
   max-width:1280px; 
   margin:0 auto; 
-  padding:50px 24px; 
+  padding:110 px 24px 50px; 
   margin-top:30px; 
 }
 
@@ -48,12 +51,14 @@
   grid-template-columns: 1fr 640px;
   gap:60px; /* más aire entre columnas */
   align-items:flex-start;
+  grid-template-areas: "left right";
 }
 
 /* ====== Izquierda ====== */
 .RN__left{ 
   color:#fff; 
   padding:8px; 
+  grid-area: left;
 }
 .RN__left h1{ 
   font-size:56px; 
@@ -109,6 +114,7 @@
   flex-direction:column;
   gap:20px;
   width:640px;
+  grid-area: right;
 }
 
 .RN__titleOutside{
@@ -153,15 +159,20 @@ color: #ffff;
   .RN__grid {
     grid-template-columns: 1fr; /* una sola columna */
     gap: 40px;
+    grid-template-areas: 
+      "right"   /* primero el form */
+      "left";   /* después los bullets */
   }
 
   .RN__right {
     width: 100% !important; /* ocupar ancho completo */
+    order: -1;
   }
 
   .RN__card {
     width: 100% !important; /* form ocupa todo */
     padding: 24px;
+    margin: 0 auto;
   }
 
   .hs-form iframe {

@@ -9,50 +9,59 @@
   --placeholder:#8a96b3;
 }
 
+/* ====== Global Fix fondo blanco ====== */
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #0b1b46; /* fallback oscuro */
+}
+
 /* ====== Layout ====== */
 .RN__wrap{
-  position: relative;
-  min-height:100vh;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   background: 
     linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), 
     url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg');
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Barra azul sticky */
 .RN__bar { 
-  position: sticky;     /* se mantiene visible al hacer scroll */
-  top: 0;               /* se pega arriba */
-  z-index: 1000;        /* queda por encima del contenido */
+  position: sticky;     /* visible al hacer scroll */
+  top: 0;               
+  z-index: 1000;        
   background: var(--blue); 
   height: 60px; 
   display: flex; 
   align-items: center; 
   padding: 0 20px; 
-  justify-content: space-between; /* separa logo y botones */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* da separación */
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .RN__logo{
-  height: 30px; /* tamaño perfecto dentro de la barra */
+  height: 30px; 
   width: auto;
-  margin-left: 35px
+  margin-left: 35px;
 }
 
 /* ====== Container ====== */
 .RN__container{ 
   max-width:1280px; 
   margin:0 auto; 
-  padding:110 px 24px 50px; 
+  padding:110px 24px 50px; 
   margin-top:30px; 
+  flex: 1; /* ocupa espacio para empujar footer */
 }
 
 .RN__grid{
   display:grid;
   grid-template-columns: 1fr 640px;
-  gap:60px; /* más aire entre columnas */
+  gap:60px;
   align-items:flex-start;
   grid-template-areas: "left right";
 }
@@ -74,22 +83,20 @@
   opacity:.92; 
   margin:0 0 24px; 
   max-width: 580px;
-  
 }
 
-/* Bullets UX mejorado */
+/* Bullets */
 .RN__benefitsList {
-  margin-top: 40px;
+  margin-top: 100px;
   padding: 0;
   list-style: none;
-  margin-top: 100px;
 }
 
 .RN__benefitsList li {
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  margin-bottom: 24px; /* más aire entre bullets */
+  margin-bottom: 24px;
   font-size: 18px;
   line-height: 1.5;
   color: #fff;
@@ -134,7 +141,7 @@
 
 /* ====== Card ====== */
 .RN__card{
-  width:75%; /* un poco más grande para balance visual */
+  width:75%; 
   background-color:azure;
   border-radius:24px;
   padding:32px;
@@ -143,8 +150,8 @@
 }
 
 .logos-section {
-  max-width: 900px;   /* igual que Home */
-  margin: 0 auto;     /* centrado */
+  max-width: 900px; 
+  margin: 0 auto;
 }
 
 .mb-3 {
@@ -153,35 +160,35 @@
 }
 
 .mt-5 {
-color: #ffff;
+  color: #ffff;
 }
 
-/* ====== Mobile Fix ====== */
+/* ====== Mobile ====== */
 @media (max-width: 768px) {
 
   .RN__grid {
-    grid-template-columns: 1fr; /* una sola columna */
+    grid-template-columns: 1fr;
     gap: 40px;
     grid-template-areas: 
-      "right"   /* primero el form */
-      "left";   /* después los bullets */
+      "right"   /* primero form */
+      "left";   /* después bullets */
   }
 
   .RN__right {
-    width: 100% !important; /* ocupar ancho completo */
+    width: 100% !important;
     order: -1;
   }
 
   .RN__right p{
-  width: 70%;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: aliceblue;
-  font-size: 13px;
+    width: 70%;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: aliceblue;
+    font-size: 13px;
   }
 
   .RN__card {
-    width: 100% !important; /* form ocupa todo */
+    width: 100% !important;
     padding: 24px;
     margin: 0 auto;
   }
@@ -192,4 +199,3 @@ color: #ffff;
     display: block !important;
   }
 }
-

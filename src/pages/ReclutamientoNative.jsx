@@ -1,123 +1,159 @@
-import { useEffect } from "react";
-import './ReclutamientoNative.css';
-import '../index.css';
+/* ================= WRAPPER ================= */
+.RN__wrap {
+  font-family: 'Arial', sans-serif;
+  background: #0b0b2b;
+  color: white;
+  min-height: 100vh;
+}
 
-import amazon from '../assets/amazon.png';
-import bbva from '../assets/bbva.png';
-import dhl from '../assets/dhl.png';
-import netflix from '../assets/netflix.png';
-import Walmart from '../assets/Walmart.png';
-import salinas from '../assets/salinas.png';
-import palacio from '../assets/palacio.png';
-import thomson from '../assets/thomson.png';
-import lala from '../assets/lala.png';
+/* ================= HEADER ================= */
+.RN__bar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #0056d2;
+  padding: 10px 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
 
-export default function ReclutamientoNative() {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "//js.hsforms.net/forms/embed/v2.js";
-    script.type = "text/javascript";
-    script.charset = "utf-8";
-    script.onload = () => {
-      if (window.hbspt) {
-        window.hbspt.forms.create({
-          portalId: "49514148",
-          formId: "5f745bfa-8589-40c2-9940-f9081123e0b4",
-          region: "na1",
-          target: "#hubspot-form"
-        });
-      }
-    };
-    document.body.appendChild(script);
-  }, []);
+.RN__logo {
+  height: 40px;
+}
 
-  return (
-    <div className="RN__wrap">
-      {/* Header con logo sticky */}
-      <header className="RN__bar">
-        <img src="/occ1.png" alt="OCC" className="RN__logo" />
-      </header>
+/* ================= GRID ================= */
+.RN__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
 
-      <main className="RN__container">
-        <div className="RN__grid">
-          {/* Columna izquierda */}
-          <section className="RN__left">
-            <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
+.RN__grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
 
-            {/* Bullets (se quedan aquí, no en otra sección) */}
-            <ul className="RN__benefitsList">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="9" cy="20" r="1.5"/>
-                  <circle cx="18" cy="20" r="1.5"/>
-                </svg>
-                <div>
-                  <strong>Compra de vacantes</strong>
-                  <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
-                </div>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div>
-                  <strong>Compra especializada</strong>
-                  <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
-                </div>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M3 12l2-2 4 4 10-10 2 2-12 12z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div>
-                  <strong>Seguimiento</strong>
-                  <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
-                </div>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M12 14v7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M5 19h14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div>
-                  <strong>Capacitación personalizada</strong>
-                  <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
-                </div>
-              </li>
-            </ul>
-          </section>
+.RN__left {
+  flex: 1;
+}
 
-          {/* Columna derecha */}
-          <div className="RN__right">
-            <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
-            <p>Recibe una cotización ajustada a tus necesidades. Un ejecutivo te guiará en el proceso.</p>
+.RN__right {
+  flex: 1;
+}
 
-            <section className="RN__card">
-              <div id="hubspot-form"></div>
-            </section>
-          </div>
-        </div>
+/* ================= BULLETS ================= */
+.RN__benefitsList {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+}
 
-        {/* Carrusel Logos */}
-        <div className="logos-section mt-5">
-          <h3 className="mb-3">Marcas que confían en nosotros</h3>
-          <div className="logo-carousel">
-            <div className="logo-track">
-              {[bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson, amazon,
-                bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson, amazon].map((logoSrc, idx) => (
-                <img key={idx} src={logoSrc} alt="Logo" className="logo-item uniform-logo" />
-              ))}
-            </div>
-          </div>
-        </div>
+.RN__benefitsList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
 
-        {/* Footer */}
-        <footer className="mt-5 text-center">
-          <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
-        </footer>
-      </main>
-    </div>
-  );
+.RN__icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.RN__benefitsList strong {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+/* ================= FORM ================= */
+.RN__card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: black;
+  margin-top: 1rem;
+}
+
+.RN__titleOutside {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.RN__right p {
+  color: white;
+  margin-bottom: 1rem;
+  max-width: 90%;
+}
+
+/* ================= LOGOS ================= */
+.logos-section {
+  text-align: center;
+}
+
+.logo-carousel {
+  overflow: hidden;
+  width: 100%;
+}
+
+.logo-track {
+  display: flex;
+  gap: 40px;
+  animation: scroll 20s linear infinite;
+}
+
+.logo-item {
+  height: 50px;
+  object-fit: contain;
+}
+
+.uniform-logo {
+  max-height: 50px;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ================= FOOTER ================= */
+footer {
+  margin-top: 3rem;
+  color: #aaa;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+  .RN__grid {
+    flex-direction: column-reverse; /* <-- el truco para mobile */
+  }
+
+  .RN__right {
+    order: 1;
+  }
+
+  .RN__left {
+    order: 2;
+  }
+
+  .RN__card {
+    margin-top: 1.5rem;
+  }
+
+  .RN__titleOutside,
+  .RN__right p {
+    max-width: 100%;
+    text-align: center;
+  }
 }

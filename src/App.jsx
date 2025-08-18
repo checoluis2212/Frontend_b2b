@@ -1,5 +1,3 @@
-‎src/App.jsx
-
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -13,3 +11,5 @@ export default function App() {
       <Route path="/respuestas" element={<ResponsesList />} />
       <Route path="/reclutamiento-native" element={<ReclutamientoNative />} /> {/* <-- NUEVO */}
     </Routes>
+    );
+}

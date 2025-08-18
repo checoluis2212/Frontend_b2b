@@ -1,104 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect } from "react";
 import './ReclutamientoNative.css';
 
-/* ==================== CONFIG ==================== */
-const LEAD_API = 'https://backend-b2b-a3up.onrender.com/api/lead'; // ← tu backend (Render)
-const LEAD_API_KEY = ''; // si /api/lead requiere API key, colócala aquí. Si no, déjalo vacío ''.
-
-/* ==================== UTILS ==================== */
-function getCookie(n) {
-  try {
-    return decodeURIComponent(
-      (document.cookie.split('; ').find(r => r.startsWith(n + '=')) || '')
-        .split('=')[1] || ''
-    );
-  } catch { return ''; }
-}
-function getLS(k) { try { return localStorage.getItem(k) || ''; } catch { return ''; } }
-
-/* ==================== COMPONENTE ==================== */
 export default function ReclutamientoNative() {
-  const [pending, setPending] = useState(false);
-  const [ok, setOk] = useState(false);
-  const [err, setErr] = useState('');
-  const formRef = useRef(null);
-
-  // Prefill de hidden fields (visitor/UTM desde cookies/LS)
-  function fillHidden() {
-    const f = formRef.current; if (!f) return;
-    const vid = getCookie('vid') || getLS('visitorId') || '';
-    const us  = getCookie('utm_source')   || getLS('utm_source')   || '';
-    const um  = getCookie('utm_medium')   || getLS('utm_medium')   || '';
-    const uc  = getCookie('utm_campaign') || getLS('utm_campaign') || '';
-    if (f.visitorid)    f.visitorid.value    = vid;
-    if (f.utm_source)   f.utm_source.value   = us;
-    if (f.utm_medium)   f.utm_medium.value   = um;
-    if (f.utm_campaign) f.utm_campaign.value = uc;
-  }
-  useEffect(() => { fillHidden(); }, []);
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setPending(true); setOk(false); setErr('');
-
-    const form = e.currentTarget;
-    const fd = new FormData(form);
-
-    // --- top-level visitorId (desde hidden) ---
-    const visitorId = (fd.get('visitorid') || '').toString();
-
-    // --- construir fields sin los hidden de tracking ---
-    const rawFields = Object.fromEntries(fd.entries());
-    delete rawFields.visitorid;
-    delete rawFields.utm_source;
-    delete rawFields.utm_medium;
-    delete rawFields.utm_campaign;
-
-    // Normalizaciones opcionales (por compatibilidad)
-    // Si el backend espera 'vacantesAnuales', mapea desde 'vacantes_anuales'
-    if (!rawFields.vacantesAnuales && rawFields.vacantes_anuales) {
-      rawFields.vacantesAnuales = rawFields.vacantes_anuales;
-    }
-
-    const payload = {
-      visitorId,
-      fields: rawFields,
-      context: {
-        utm_source:   form.utm_source?.value || '',
-        utm_medium:   form.utm_medium?.value || '',
-        utm_campaign: form.utm_campaign?.value || '',
-        pageUri:      location.href,
-        pageName:     document.title,
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "//js.hsforms.net/forms/embed/v2.js";
+    script.type = "text/javascript";
+    script.charset = "utf-8";
+    script.onload = () => {
+      if (window.hbspt) {
+        window.hbspt.forms.create({
+          portalId: "49514148",
+          formId: "5f745bfa-8589-40c2-9940-f9081123e0b4",
+          region: "na1",
+          target: "#hubspot-form"
+        });
       }
     };
-
-    try {
-      const res = await fetch(LEAD_API, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(LEAD_API_KEY ? { 'x-api-key': LEAD_API_KEY } : {})
-        },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.ok) throw new Error(`Lead API ${res.status}`);
-
-      setOk(true);
-
-      // GA4/DTM
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'hubspot_lead', form_id: 'native_reclutamiento' });
-
-      form.reset();
-      fillHidden(); // repone hidden después del reset
-    } catch (error) {
-      console.error('[lead] submit error:', error);
-      setErr('No se pudo enviar. Intenta de nuevo.');
-    } finally {
-      setPending(false);
-    }
-  }
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <div className="RN__wrap">
@@ -123,105 +43,59 @@ export default function ReclutamientoNative() {
             <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
 
             <section className="RN__card">
-              {ok && <div className="RN__alert-ok">¡Enviado! Pronto nos pondremos en contacto.</div>}
-              {err && <div className="RN__alert-err">{err}</div>}
-
-              <form ref={formRef} onSubmit={handleSubmit} className="hs-lookalike">
-                {/* Fila 1 */}
-                <div className="RN__row RN__field">
-                  <div>
-                    <label>Nombre*</label>
-                    <input name="firstname" required />
-                  </div>
-                  <div>
-                    <label>Apellidos*</label>
-                    <input name="lastname" required />
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="RN__field">
-                  <label>Email empresarial*</label>
-                  <input name="email" type="email" required />
-                </div>
-
-                {/* Teléfono / Empresa */}
-                <div className="RN__row RN__field">
-                  <div>
-                    <label>Número de teléfono*</label>
-                    <input name="phone" type="tel" required />
-                  </div>
-                  <div>
-                    <label>Nombre de la empresa*</label>
-                    <input name="company" required />
-                  </div>
-                </div>
-
-                {/* Puesto / Vacantes */}
-                <div className="RN__row RN__field">
-                  <div>
-                    <label>Puesto*</label>
-                    <div className="RN__select">
-                      <select name="puesto" required defaultValue="">
-                        <option value="" disabled>Selecciona</option>
-                        <option>Director General</option>
-                        <option>Recursos Humanos</option>
-                        <option>Reclutador</option>
-                        <option>Compras</option>
-                        <option>Otro</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div>
-                    <label>Número de vacantes anuales*</label>
-                    <div className="RN__select">
-                      <select name="vacantes_anuales" required defaultValue="">
-                        <option value="" disabled>Selecciona</option>
-                        <option>1</option>
-                        <option>2 a 4</option>
-                        <option>5 a 10</option>
-                        <option>11 a 50</option>
-                        <option>50+</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                {/* RFC */}
-                <div className="RN__field">
-                  <label>RFC*</label>
-                  <input
-                    name="rfc"
-                    required
-                    pattern="[A-ZÑ&]{3,4}[0-9]{6}[A-Z0-9]{3}"
-                    title="Formato RFC válido"
-                  />
-                </div>
-
-                {/* Checkbox */}
-                <label className="RN__check">
-                  <input type="checkbox" name="consent_marketing" value="1" />
-                  <span>Acepto recibir otras comunicaciones de OCC.</span>
-                </label>
-
-                {/* Hidden tracking */}
-                <input type="hidden" name="visitorid" />
-                <input type="hidden" name="utm_source" />
-                <input type="hidden" name="utm_medium" />
-                <input type="hidden" name="utm_campaign" />
-
-                <button className="RN__btn" disabled={pending}>
-                  {pending ? 'Enviando…' : 'Enviar'}
-                </button>
-
-                <p className="RN__legal">
-                  Al dar clic en “Enviar” declaro haber leído y aceptado los Términos y Condiciones,
-                  así como el Aviso de Privacidad.
-                </p>
-              </form>
+              {/* Aquí se renderiza el form de HubSpot */}
+              <div id="hubspot-form"></div>
             </section>
           </div>
         </div>
+
+        {/* Nueva sección de beneficios */}
+        <section className="RN__benefits">
+          <h2 className="RN__benefitsTitle">Beneficios exclusivos para tu empresa</h2>
+          <div className="RN__benefitsGrid">
+            
+            <div className="RN__benefit">
+              {/* Compra de vacantes */}
+              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="9" cy="20" r="1.5"/>
+                <circle cx="18" cy="20" r="1.5"/>
+              </svg>
+              <h3>Compra de vacantes</h3>
+              <p>Adquiere fácilmente paquetes de vacantes adaptados a las necesidades de tu empresa.</p>
+            </div>
+
+            <div className="RN__benefit">
+              {/* Compra especializada */}
+              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <h3>Compra especializada</h3>
+              <p>Soluciones hechas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
+            </div>
+
+            <div className="RN__benefit">
+              {/* Seguimiento */}
+              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M3 12l2-2 4 4 10-10 2 2-12 12z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <h3>Seguimiento</h3>
+              <p>Monitoreo constante para asegurar la efectividad de tus publicaciones y contrataciones.</p>
+            </div>
+
+            <div className="RN__benefit">
+              {/* Capacitación personalizada */}
+              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 14v7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M5 19h14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <h3>Capacitación personalizada</h3>
+              <p>Asesoría y entrenamientos especializados para optimizar tu proceso de reclutamiento.</p>
+            </div>
+
+          </div>
+        </section>
       </main>
     </div>
   );

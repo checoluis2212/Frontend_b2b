@@ -234,15 +234,21 @@ html, body {
     text-align: center;
   }
 
-  .RN__card {
+   .RN__card {
     width: 100% !important;
-    padding: 24px;
-    margin: 0 auto;
+    max-width: 100% !important;
+    overflow: hidden;
   }
 
-  .hs-form iframe {
-    width: 100% !important; 
-    min-height: 600px !important; 
-    display: block !important;
+  /* HubSpot: inputs que se cortan */
+  .RN__card form,
+  .RN__card .hbspt-form,
+  .RN__card .hs-form-field,
+  .RN__card input,
+  .RN__card select,
+  .RN__card textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
   }
 }

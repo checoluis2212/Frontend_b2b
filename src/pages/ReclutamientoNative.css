@@ -140,29 +140,19 @@ footer {
 /* === MOBILE reverse === */
 @media (max-width: 768px) {
   .RN__grid {
+    display: flex;
     flex-direction: column;
   }
 
-  /* 🔥 Solo reordenamos en mobile */
-  .RN__right {
-    order: 1; /* formulario primero */
+  .RN__left {
+    order: 1; /* título */
   }
 
-  .RN__left {
-    order: 2; /* título después */
+  .RN__right {
+    order: 2; /* formulario */
   }
 
   .RN__bullets {
-    order: 3; /* bullets al final */
-  }
-
-  .RN__card {
-    margin-top: 1.5rem;
-  }
-
-  .RN__titleOutside,
-  .RN__right p {
-    max-width: 100%;
-    text-align: center;
+    order: 3; /* bullets */
   }
 }

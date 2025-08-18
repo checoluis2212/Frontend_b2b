@@ -167,33 +167,29 @@ html, body {
 @media (max-width: 768px) {
 
   .RN__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    grid-template-areas: none; /* evita sobreescribir */
     display: flex;
     flex-direction: column;
+    gap: 40px;
   }
 
-  /* 1. Título primero */
+  /* Orden correcto */
   .RN__left h1 {
     order: 1;
   }
 
-  /* 2. Formulario después */
   .RN__right {
     width: 100% !important;
     order: 2;
   }
 
-  /* 3. Bullets al final */
   .RN__benefitsList {
     order: 3;
+    margin-top: 20px; /* menos espacio en mobile */
   }
 
   .RN__right p {
-    width: 70%;
-    margin-top: 0;
-    margin-bottom: 1rem;
+    width: 80%;
+    margin: 0 auto 1rem;
     color: aliceblue;
     font-size: 13px;
     text-align: center;

@@ -35,7 +35,6 @@
   margin-top:75px; 
 }
 
-/* 1 columna de texto + 1 columna fija para el card */
 .RN__grid{
   display:grid;
   grid-template-columns: 1fr 640px;
@@ -43,7 +42,7 @@
   align-items:flex-start;
 }
 
-/* Izquierda */
+/* ====== Izquierda ====== */
 .RN__left{ 
   color:#fff; 
   padding:8px; 
@@ -61,7 +60,7 @@
   margin-top:100px; 
 }
 
-/* ===== Bullets ===== */
+/* Bullets (se quedan como estaban, sin forzar blanco) */
 .RN__benefitsList {
   margin-top: 40px;
   padding: 0;
@@ -74,16 +73,16 @@
   gap: 12px;
   margin-bottom: 18px;
   font-size: 18px;
-  color: #fff; /* texto en blanco */
+  color: inherit; /* antes */
 }
 
 .RN__benefitsList svg {
   width: 28px;
   height: 28px;
-  stroke: #fff; /* iconos en blanco */
+  stroke: currentColor; /* antes */
 }
 
-/* Derecha */
+/* ====== Derecha ====== */
 .RN__right{
   display:flex;
   align-items:center;
@@ -92,7 +91,6 @@
   width:640px;
 }
 
-/* Título "pill" del mismo ancho que el card y centrado */
 .RN__titleOutside{
   width:100%;
   text-align:center;
@@ -115,6 +113,7 @@
   border:1px solid rgba(15,78,199,.06);
 }
 
+/* alerts */
 .RN__alert-ok{ 
   background:#e7f6ee; 
   color:#1b6b3a; 
@@ -130,15 +129,13 @@
   margin-bottom:12px; 
 }
 
-/* ====== Form (inputs "pill") ====== */
+/* ====== Form (pill inputs) ====== */
 .hs-lookalike label{ 
   display:block; 
   font-size:14px; 
   color:var(--ink); 
   margin:0 0 6px; 
 }
-
-/* NO aplicar a checkbox */
 .hs-lookalike input:not([type="checkbox"]),
 .hs-lookalike select,
 .hs-lookalike textarea{
@@ -157,12 +154,10 @@
   border-radius:16px; 
   resize:vertical; 
 }
-
 .hs-lookalike input:not([type="checkbox"])::placeholder,
 .hs-lookalike textarea::placeholder{ 
   color:var(--placeholder); 
 }
-
 .hs-lookalike input:not([type="checkbox"]):focus,
 .hs-lookalike select:focus,
 .hs-lookalike textarea:focus{
@@ -170,8 +165,6 @@
   background:#fff; 
   box-shadow:0 0 0 3px var(--ring);
 }
-
-/* Fila de dos columnas y espaciado vertical */
 .RN__row{ 
   display:grid; 
   grid-template-columns:1fr 1fr; 
@@ -179,7 +172,7 @@
 }
 .RN__field{ margin-top:16px; }
 
-/* Select con chevron */
+/* select con chevron */
 .RN__select{ position:relative; }
 .RN__select select{ appearance:none; -webkit-appearance:none; padding-right:44px; }
 .RN__select::after{
@@ -197,18 +190,9 @@
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317232f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
 }
 
-/* ====== Checkbox cuadrado y centrado con el texto ====== */
+/* checkbox */
 .RN__field + .RN__check{ margin-top:18px; }
-
-.RN__check{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  color:#334155;
-  font-size:13px;
-  cursor:pointer;
-  line-height:1.38;
-}
+.RN__check{ display:flex; align-items:center; gap:12px; color:#334155; font-size:13px; cursor:pointer; line-height:1.38; }
 .RN__check input[type="checkbox"]{
   appearance:none; -webkit-appearance:none; margin:0;
   width:15px; height:15px;
@@ -255,7 +239,7 @@
 
 /* ====== Logo ====== */
 .RN__logo{
-    width: 30px;   /* tamaño reducido */
-    height: auto;
+    width: auto;   /* dejamos como estaba */
+    height: 100%;
     margin-left: 30px;
 }

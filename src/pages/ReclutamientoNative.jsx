@@ -40,66 +40,65 @@ export default function ReclutamientoNative() {
 
       <main className="RN__container"> 
         <div className="RN__grid"> 
-          {/* Columna izquierda */} 
-          <section className="RN__left"> 
+          
+          {/* Columna izquierda: título + bullets */}
+          <div className="RN__left"> 
             <h1>Publicar tus vacantes nunca fue tan fácil…</h1> 
-            </section>
 
-            {/* Bullets con título + descripción */} 
             <section className="RN__benefits">
-            <ul className="RN__benefitsList"> 
-              <li> 
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
-                  <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
-                  <circle cx="9" cy="20" r="1.5"/> 
-                  <circle cx="18" cy="20" r="1.5"/> 
-                </svg> 
-                <div> 
-                  <strong>Compra de vacantes</strong> 
-                  <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p> 
-                </div> 
-              </li> 
+              <ul className="RN__benefitsList"> 
+                <li> 
+                  <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                    <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
+                    <circle cx="9" cy="20" r="1.5"/> 
+                    <circle cx="18" cy="20" r="1.5"/> 
+                  </svg> 
+                  <div> 
+                    <strong>Compra de vacantes</strong> 
+                    <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p> 
+                  </div> 
+                </li> 
 
-              <li> 
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
-                  <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
-                </svg> 
-                <div> 
-                  <strong>Compra especializada</strong> 
-                  <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p> 
-                </div> 
-              </li> 
+                <li> 
+                  <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                    <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
+                  </svg> 
+                  <div> 
+                    <strong>Compra especializada</strong> 
+                    <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p> 
+                  </div> 
+                </li> 
 
-              <li> 
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
-                  <path d="M3 12l2-2 4 4 10-10 2 2-12 12z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
-                </svg> 
-                <div> 
-                  <strong>Seguimiento</strong> 
-                  <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p> 
-                </div> 
-              </li> 
+                <li> 
+                  <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                    <path d="M3 12l2-2 4 4 10-10 2 2-12 12z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
+                  </svg> 
+                  <div> 
+                    <strong>Seguimiento</strong> 
+                    <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p> 
+                  </div> 
+                </li> 
 
-              <li> 
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
-                  <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
-                  <path d="M12 14v7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
-                  <path d="M5 19h14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
-                </svg> 
-                <div> 
-                  <strong>Capacitación personalizada</strong> 
-                  <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p> 
-                </div> 
-              </li> 
-            </ul> 
-          </section> 
+                <li> 
+                  <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                    <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
+                    <path d="M12 14v7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
+                    <path d="M5 19h14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/> 
+                  </svg> 
+                  <div> 
+                    <strong>Capacitación personalizada</strong> 
+                    <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p> 
+                  </div> 
+                </li> 
+              </ul> 
+            </section> 
+          </div> 
 
-          {/* Columna derecha */} 
+          {/* Columna derecha */}
           <div className="RN__right"> 
             <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2> 
             <p>Recibe una cotización ajustada a tus necesidades. Un ejecutivo te guiará en el proceso.</p> 
             <section className="RN__card"> 
-              {/* Aquí se renderiza el form de HubSpot */} 
               <div id="hubspot-form"></div> 
             </section> 
           </div> 

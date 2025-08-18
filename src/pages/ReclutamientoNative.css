@@ -173,124 +173,38 @@
 }
 
 /* Lista de beneficios */
-/* Layout general */
-.RN__wrap {
-  min-height: 100vh;
+.RN__benefitsList {
+  margin-top: 2rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.RN__benefitsList li {
   display: flex;
-  flex-direction: column;
-  background: #f5f7fa;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
-.RN__bar {
-  background: #fff;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.RN__logo {
-  height: 30px;
-}
-
-.RN__container {
-  flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
-}
-
-.RN__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
-}
-
-.RN__left h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #003366;
-}
-
-.RN__left p {
-  font-size: 1.1rem;
-  color: #444;
-  margin-bottom: 2rem;
-}
-
-/* Cards de beneficios */
-.RN__benefitsGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-.RN__benefit {
-  background: #fff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.RN__benefit:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-}
-
-.RN__iconBox {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #0073e6; /* azul corporativo */
-  border-radius: 12px;
-}
-
-.RN__iconBox svg {
+.RN__benefitsList .RN__icon {
   width: 28px;
   height: 28px;
-  stroke: #fff;
+  color: #0073e6;
+  flex-shrink: 0;
 }
 
-.RN__benefit h3 {
-  font-size: 1.1rem;
+.RN__benefitsList strong {
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  display: block;
+  margin-bottom: 0.25rem;
   color: #003366;
 }
 
-.RN__benefit p {
+.RN__benefitsList p {
   font-size: 0.9rem;
+  margin: 0;
   line-height: 1.4;
-  color: #444;
-}
-
-/* Form HubSpot */
-.RN__card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-  .RN__grid {
-    grid-template-columns: 1fr;
-  }
-  .RN__benefitsGrid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 576px) {
-  .RN__benefitsGrid {
-    grid-template-columns: 1fr;
-  }
+  color: #555;
 }

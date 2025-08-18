@@ -47,8 +47,8 @@
 .RN__container{ 
   max-width:1280px; 
   margin:0 auto; 
-  padding:170px 24px 50px; /* compensar el sticky bar */
-  margin-top:20px; 
+  padding:170px 24px 50px; /* aumentado 60px por el menú fijo */
+  margin-top:30px; 
 }
 
 .RN__grid{
@@ -78,7 +78,7 @@
   max-width: 580px;
 }
 
-/* Bullets UX */
+/* Bullets UX mejorado */
 .RN__benefitsList {
   margin-top: 40px;
   padding: 0;
@@ -132,6 +132,7 @@
   box-shadow:0 8px 20px rgba(3,10,36,.16);
 }
 
+/* ====== Párrafo debajo del título Cotiza ====== */
 .RN__titleOutside + p {
   width: 75%;              
   margin: 0 auto 20px;     
@@ -167,26 +168,31 @@
 
 /* ====== Mobile Fix ====== */
 @media (max-width: 768px) {
+
   .RN__grid {
     grid-template-columns: 1fr; 
     gap: 40px;
     grid-template-areas: 
-      "left"     /* 1. Publicar vacantes + h1 */
-      "right"    /* 2. Cotiza + formulario */
-      "left-bullets"; /* 3. Bullets van hasta abajo */
+      "left"   /* primero el título + bullets */
+      "right"; /* después Cotiza + form */
   }
 
-  .RN__left { grid-area: left; }
+  .RN__left { 
+    grid-area: left; 
+    order: 1;
+  }
+
   .RN__right { 
     grid-area: right; 
+    order: 2; 
     width: 100% !important; 
     margin-top: 0 !important; 
   }
 
-  /* solo los bullets cambian de orden */
-  .RN__benefitsList {
-    grid-area: left-bullets;
-    margin-top: 20px;
+  /* En mobile mandamos los bullets debajo del form */
+  .RN__benefitsList { 
+    margin-top: 20px; 
+    order: 3;
   }
 
   .RN__card {

@@ -34,8 +34,9 @@
 }
 
 .RN__logo{
-  height: 36px; /* tamaño perfecto dentro de la barra */
+  height: 30px; /* tamaño perfecto dentro de la barra */
   width: auto;
+  margin-left: 35px
 }
 
 /* ====== Container ====== */

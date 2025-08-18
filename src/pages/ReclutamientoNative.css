@@ -21,22 +21,32 @@
   background-repeat:no-repeat;
 }
 
-/* quitamos la barra azul */
+/* Barra azul restaurada */
 .RN__bar{ 
-  display: none; 
+  background: var(--blue); 
+  height: 60px; 
+  display: flex; 
+  align-items: center; 
+  padding: 0 20px; 
 }
 
+.RN__logo{
+  height: 36px; /* tamaño perfecto dentro de la barra */
+  width: auto;
+}
+
+/* ====== Container ====== */
 .RN__container{ 
   max-width:1280px; 
   margin:0 auto; 
-  padding:40px 24px; 
-  margin-top:40px; 
+  padding:50px 24px; 
+  margin-top:30px; 
 }
 
 .RN__grid{
   display:grid;
   grid-template-columns: 1fr 640px;
-  gap:40px;
+  gap:60px; /* más aire entre columnas */
   align-items:flex-start;
 }
 
@@ -47,20 +57,20 @@
 }
 .RN__left h1{ 
   font-size:56px; 
-  line-height:1.05; 
-  margin:0 0 18px; 
-  letter-spacing:.2px; 
+  line-height:1.1; 
+  margin:0 0 28px; 
+  letter-spacing:.3px; 
 }
 .RN__left p{ 
-  font-size:18px; 
+  font-size:19px; 
   opacity:.92; 
-  margin:0; 
-  margin-top:20px; 
+  margin:0 0 24px; 
+  max-width: 580px;
 }
 
-/* Bullets corregidos */
+/* Bullets UX mejorado */
 .RN__benefitsList {
-  margin-top: 30px;
+  margin-top: 40px;
   padding: 0;
   list-style: none;
 }
@@ -68,18 +78,26 @@
 .RN__benefitsList li {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  margin-bottom: 14px;
-  font-size: 17px;
+  gap: 14px;
+  margin-bottom: 24px; /* más aire entre bullets */
+  font-size: 18px;
+  line-height: 1.5;
   color: #fff;
+  max-width: 580px;
+}
+
+.RN__benefitsList strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 19px;
 }
 
 .RN__benefitsList svg {
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   stroke: #fff;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 /* ====== Derecha ====== */
@@ -87,7 +105,7 @@
   display:flex;
   align-items:center;
   flex-direction:column;
-  gap:16px;
+  gap:20px;
   width:640px;
 }
 
@@ -95,27 +113,20 @@
   width:100%;
   text-align:center;
   color:#fff;
-  padding:14px 18px;
+  padding:16px 20px;
   border-radius:16px;
-  font-size:22px;
+  font-size:24px;
   font-weight:700;
-  line-height:1.2;
+  line-height:1.3;
   box-shadow:0 8px 20px rgba(3,10,36,.16);
 }
 
 /* ====== Card ====== */
 .RN__card{
-  width:70%;
+  width:75%; /* un poco más grande para balance visual */
   background-color:azure;
   border-radius:24px;
-  padding:28px;
+  padding:32px;
   box-shadow:0 16px 36px rgba(3,10,36,.20);
   border:1px solid rgba(15,78,199,.06);
-}
-
-/* ====== Logo más chico ====== */
-.RN__logo{
-  width: 100px;   /* reducido */
-  height: auto;
-  margin-left: 20px;
 }

@@ -40,23 +40,11 @@ export default function ReclutamientoNative() {
 
       <main className="RN__container">
         <div className="RN__grid">
-          {/* Sección izquierda */}
+          {/* Columna izquierda */}
           <section className="RN__left">
             <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
-          </section>
 
-          {/* Sección derecha */}
-          <div className="RN__right">
-            <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
-            <p>Recibe una cotización ajustada a tus necesidades. Un ejecutivo te guiará en el proceso.</p>
-
-            <section className="RN__card">
-              <div id="hubspot-form"></div>
-            </section>
-          </div>
-
-          {/* Bullets */}
-          <section className="RN__bullets">
+            {/* Bullets (se quedan aquí, no en otra sección) */}
             <ul className="RN__benefitsList">
               <li>
                 <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -100,6 +88,16 @@ export default function ReclutamientoNative() {
               </li>
             </ul>
           </section>
+
+          {/* Columna derecha */}
+          <div className="RN__right">
+            <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
+            <p>Recibe una cotización ajustada a tus necesidades. Un ejecutivo te guiará en el proceso.</p>
+
+            <section className="RN__card">
+              <div id="hubspot-form"></div>
+            </section>
+          </div>
         </div>
 
         {/* Carrusel Logos */}
@@ -115,6 +113,7 @@ export default function ReclutamientoNative() {
           </div>
         </div>
 
+        {/* Footer */}
         <footer className="mt-5 text-center">
           <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
         </footer>

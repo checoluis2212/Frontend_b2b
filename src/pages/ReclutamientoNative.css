@@ -172,6 +172,14 @@ color: #ffff;
     order: -1;
   }
 
+  .RN__right p{
+  width: 70%;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: aliceblue;
+  font-size: 13px;
+  }
+
   .RN__card {
     width: 100% !important; /* form ocupa todo */
     padding: 24px;

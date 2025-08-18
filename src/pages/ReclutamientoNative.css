@@ -31,7 +31,7 @@ html, body {
 
 /* Barra azul sticky */
 .RN__bar { 
-  position: sticky;     /* visible al hacer scroll */
+  position: sticky;
   top: 0;               
   z-index: 1000;        
   background: var(--blue); 
@@ -85,7 +85,7 @@ html, body {
   max-width: 580px;
 }
 
-/* Bullets */
+/* Bullets Desktop */
 .RN__benefitsList {
   margin-top: 100px;
   padding: 0;
@@ -163,18 +163,53 @@ html, body {
   color: #ffff;
 }
 
+/* ====== Nueva versión solo para mobile ====== */
+.RN__benefitsList--mobile {
+  display: none;
+  padding: 0;
+  list-style: none;
+  margin-top: 20px;
+}
+
+.RN__benefitsList--mobile li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.RN__benefitsList--mobile strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 17px;
+}
+
+.RN__benefitsList--mobile svg {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  stroke: #aaaeff;
+  margin-top: 2px;
+}
+
 /* ====== Mobile ====== */
 @media (max-width: 768px) {
 
   .RN__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    grid-template-areas: none;
     display: flex;
     flex-direction: column;
-    gap: 40px;
   }
 
-  /* Orden correcto */
+  /* Orden Mobile */
   .RN__left h1 {
     order: 1;
+    text-align: center;
   }
 
   .RN__right {
@@ -183,8 +218,12 @@ html, body {
   }
 
   .RN__benefitsList {
+    display: none; /* oculta versión desktop */
+  }
+
+  .RN__benefitsList--mobile {
+    display: block; /* muestra versión mobile abajo */
     order: 3;
-    margin-top: 20px; /* menos espacio en mobile */
   }
 
   .RN__right p {

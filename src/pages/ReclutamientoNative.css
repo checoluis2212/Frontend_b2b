@@ -62,10 +62,11 @@
   letter-spacing:.3px; 
 }
 .RN__left p{ 
-  font-size:19px; 
+  font-size:15px; 
   opacity:.92; 
   margin:0 0 24px; 
   max-width: 580px;
+  
 }
 
 /* Bullets UX mejorado */

@@ -43,8 +43,10 @@ export default function ReclutamientoNative() {
           {/* Columna izquierda */} 
           <section className="RN__left"> 
             <h1>Publicar tus vacantes nunca fue tan fácil…</h1> 
+            </section>
 
             {/* Bullets con título + descripción */} 
+            <section className="RN__benefits">
             <ul className="RN__benefitsList"> 
               <li> 
                 <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 

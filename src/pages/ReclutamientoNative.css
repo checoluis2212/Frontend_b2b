@@ -17,9 +17,15 @@ body {
 }
 
 .RN__wrap {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  background: 
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .RN__bar {

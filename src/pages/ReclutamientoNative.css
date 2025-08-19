@@ -244,6 +244,14 @@ footer small {
     color: white;
   }
 
+  @media (max-width: 768px) {
+  .logos-section {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
 
   .logo-track {
     gap: 32px;

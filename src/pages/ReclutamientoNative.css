@@ -14,6 +14,7 @@ html, body {
   height: 100%;
   margin: 0;
   background: #0b1b46; /* fallback oscuro */
+  overflow-x: hidden; /* previene scroll horizontal */
 }
 
 /* ====== Layout ====== */
@@ -141,14 +142,15 @@ html, body {
 
 /* ====== Card ====== */
 .RN__card{
-  width: 100%;             /* FIX */
-  max-width: 640px;        /* límite en desktop */
+  width: 100%;             /* base */
+  max-width: 640px;        /* límite desktop */
   margin: 0 auto;          /* centrado */
   background-color:azure;
   border-radius:24px;
   padding:32px;
   box-shadow:0 16px 36px rgba(3,10,36,.20);
   border:1px solid rgba(15,78,199,.06);
+  overflow-x: hidden; /* extra seguridad */
 }
 
 /* Fix HubSpot inputs */
@@ -160,7 +162,8 @@ html, body {
 .RN__card .hs-form-field,
 .RN__card input,
 .RN__card select,
-.RN__card textarea {
+.RN__card textarea,
+.RN__card iframe {
   width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box;
@@ -223,6 +226,7 @@ html, body {
 
   .RN__left h1 {
     text-align: center;
+    font-size: 38px; /* un poco más chico en mobile */
   }
 
   .RN__right {
@@ -238,19 +242,26 @@ html, body {
   }
 
   .RN__right p {
-    width: 80%;
+    width: 90%;
     margin: 0 auto 1rem;
     color: aliceblue;
-    font-size: 13px;
+    font-size: 14px;
     text-align: center;
   }
-}
 
-/* Forzar que el form de HubSpot no se corte en mobile */
-@media (max-width: 768px) {
-  .RN__card,
-  #hubspot-form,
-  #hubspot-form form {
+  /* Corrige el card en mobile */
+  .RN__card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 20px;
+    margin: 0 auto;
+  }
+
+  /* Forzar que el form de HubSpot no meta scroll */
+  .RN__card form,
+  .RN__card iframe,
+  .hbspt-form,
+  #hubspot-form {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: hidden;

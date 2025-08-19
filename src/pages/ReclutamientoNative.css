@@ -23,7 +23,7 @@ body {
 }
 
 .RN__bar {
-  background: blue;
+  background: var(--blue);
   padding: 12px 20px;
   display: flex;
   align-items: center;

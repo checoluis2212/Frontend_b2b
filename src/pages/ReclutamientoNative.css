@@ -174,11 +174,13 @@ body {
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
+  overflow-x: auto; /* ← agregado */
 }
 
 .logo-carousel {
-  overflow: hidden;
+  overflow-x: auto;  /* ← agregado */
   position: relative;
+  width: 100%;       /* ← agregado */
 }
 
 .logo-track {
@@ -187,6 +189,7 @@ body {
   animation: scroll 30s linear infinite;
   gap: 48px;
   align-items: center;
+  min-width: 100%;   /* ← agregado */
 }
 
 .logo-item {
@@ -194,6 +197,7 @@ body {
   object-fit: contain;
   filter: grayscale(1) brightness(1.4);
   opacity: 0.8;
+  flex-shrink: 0;     /* ← agregado */
 }
 
 .uniform-logo {
@@ -221,6 +225,7 @@ footer small {
     display: none;
   }
 }
+
 @media (min-width: 768px) {
   .RN__benefitsList--mobile {
     display: none;
@@ -241,7 +246,6 @@ footer small {
 
 @media (max-width: 768px) {
   .logos-section {
-    overflow: hidden;
     padding: 0 16px;
   }
 
@@ -255,5 +259,3 @@ footer small {
     height: auto;
   }
 }
-
-

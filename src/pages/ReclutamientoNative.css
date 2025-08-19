@@ -1,36 +1,41 @@
 :root {
-  --blue:#0f4ec7;
-  --ink:#0b1b46;
-  --card:#fff;
-  --muted:#64748b;
-  --ring:rgba(15,78,199,.16);
-  --pill-bg:#eaf1ff;
-  --pill-bd:#c9d8ff;
-  --placeholder:#8a96b3;
+  --blue: #0f4ec7;
+  --ink: #0b1b46;
+  --card: #fff;
+  --muted: #64748b;
+  --ring: rgba(15, 78, 199, 0.16);
+  --pill-bg: #eaf1ff;
+  --pill-bd: #c9d8ff;
+  --placeholder: #8a96b3;
 }
 
-/* ====== RESET GLOBAL ====== */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
-  background: #0b1b46;
+  background: var(--ink);
   overflow-x: hidden;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* ====== WRAP ====== */
+svg {
+  stroke: currentColor;
+}
+
+/* ========== WRAP ========== */
 .RN__wrap {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background: 
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
     url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* ====== STICKY BAR ====== */
+/* ========== HEADER BAR ========== */
 .RN__bar {
   position: sticky;
   top: 0;
@@ -39,15 +44,14 @@ html, body {
   height: 60px;
   display: flex;
   align-items: center;
-  justify-content: center; /* centramos dentro del max-width */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .RN__bar-inner {
   width: 100%;
   max-width: 1280px;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   padding: 0 20px;
 }
@@ -57,14 +61,15 @@ html, body {
   width: auto;
 }
 
-/* ====== CONTAINER ====== */
+/* ========== CONTAINER ========== */
 .RN__container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 110px 24px 50px;
+  padding: 80px 24px 50px;
   flex: 1;
 }
 
+/* ========== GRID LAYOUT ========== */
 .RN__grid {
   display: grid;
   grid-template-columns: 1fr 640px;
@@ -73,7 +78,6 @@ html, body {
   grid-template-areas: "left right";
 }
 
-/* ====== LEFT ====== */
 .RN__left {
   color: #fff;
   grid-area: left;
@@ -83,12 +87,12 @@ html, body {
   font-size: 56px;
   line-height: 1.1;
   margin: 0 0 28px;
-  letter-spacing: .3px;
+  letter-spacing: 0.3px;
 }
 
 .RN__left p {
   font-size: 15px;
-  opacity: .92;
+  opacity: 0.92;
   margin: 0 0 24px;
   max-width: 580px;
 }
@@ -124,13 +128,11 @@ html, body {
   margin-top: 4px;
 }
 
-/* ====== RIGHT ====== */
+/* ========== FORM ========== */
 .RN__right {
   display: flex;
-  align-items: center;
   flex-direction: column;
   gap: 20px;
-  width: 640px;
   grid-area: right;
 }
 
@@ -143,22 +145,21 @@ html, body {
   font-size: 24px;
   font-weight: 700;
   line-height: 1.3;
-  box-shadow: 0 8px 20px rgba(3,10,36,.16);
+  box-shadow: 0 8px 20px rgba(3, 10, 36, 0.16);
 }
 
-/* ====== CARD FORM ====== */
 .RN__card {
-  width: 70%; /* desktop */
+  width: 100%;
   max-width: 640px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 24px;
   padding: 32px;
-  box-shadow: 0 16px 36px rgba(3,10,36,.20);
-  border: 1px solid rgba(15,78,199,.06);
+  box-shadow: 0 16px 36px rgba(3, 10, 36, 0.2);
+  border: 1px solid rgba(15, 78, 199, 0.06);
 }
 
-/* Fix HubSpot */
+/* HubSpot form fix */
 .RN__card input,
 .RN__card select,
 .RN__card textarea {
@@ -167,30 +168,65 @@ html, body {
   box-sizing: border-box;
 }
 
-/* ====== MOBILE ====== */
+/* ========== BULLETS MOBILE ========== */
+.RN__benefitsList--mobile {
+  display: none;
+  padding: 0 20px;
+}
+
+.RN__benefitsList--mobile ul {
+  list-style: none;
+  padding: 0;
+}
+
+.RN__benefitsList--mobile li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.RN__benefitsList--mobile svg {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  stroke: #aaaeff;
+  margin-top: 4px;
+}
+
+.RN__benefitsList--mobile strong {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   .RN__grid {
-    grid-template-columns: 1fr; /* una columna */
+    grid-template-columns: 1fr;
     gap: 40px;
   }
 
+  .RN__left {
+    display: none;
+  }
+
   .RN__right {
-    width: 100% !important;
+    width: 100%;
   }
 
   .RN__card {
-    width: 100%; /* full en mobile */
-    max-width: 100%;
     padding: 20px;
     border-radius: 16px;
   }
 
-  .RN__left h1 {
-    font-size: 36px;
-    text-align: center;
+  .RN__container {
+    padding-top: 60px;
   }
 
-  .RN__benefitsList {
-    margin-top: 40px;
+  .RN__benefitsList--mobile {
+    display: block;
   }
 }

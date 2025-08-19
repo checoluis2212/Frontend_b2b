@@ -55,7 +55,7 @@ html, body {
   margin:0 auto; 
   padding:110px 24px 50px; 
   margin-top:30px; 
-  flex: 1; /* ocupa espacio para empujar footer */
+  flex: 1;
 }
 
 .RN__grid{
@@ -141,12 +141,30 @@ html, body {
 
 /* ====== Card ====== */
 .RN__card{
-  width:75%; 
+  width: 100%;             /* FIX */
+  max-width: 640px;        /* límite en desktop */
+  margin: 0 auto;          /* centrado */
   background-color:azure;
   border-radius:24px;
   padding:32px;
   box-shadow:0 16px 36px rgba(3,10,36,.20);
   border:1px solid rgba(15,78,199,.06);
+}
+
+/* Fix HubSpot inputs */
+.hbspt-form fieldset,
+.hbspt-form .form-columns-2,
+.hbspt-form .form-columns-1,
+.RN__card form,
+.RN__card .hbspt-form,
+.RN__card .hs-form-field,
+.RN__card input,
+.RN__card select,
+.RN__card textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  display: block !important;
 }
 
 .logos-section {
@@ -197,33 +215,26 @@ html, body {
 
 /* ====== Mobile ====== */
 @media (max-width: 768px) {
-
   .RN__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    grid-template-areas: none;
     display: flex;
     flex-direction: column;
+    gap: 40px;
   }
 
-  /* Orden Mobile */
   .RN__left h1 {
-    order: 1;
     text-align: center;
   }
 
   .RN__right {
     width: 100% !important;
-    order: 2;
   }
 
   .RN__benefitsList {
-    display: none; /* oculta versión desktop */
+    display: none;
   }
 
   .RN__benefitsList--mobile {
-    display: block; /* muestra versión mobile abajo */
-    order: 3;
+    display: block;
   }
 
   .RN__right p {
@@ -232,23 +243,5 @@ html, body {
     color: aliceblue;
     font-size: 13px;
     text-align: center;
-  }
-
-   .RN__card {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden;
-  }
-
-  /* HubSpot: inputs que se cortan */
-  .RN__card form,
-  .RN__card .hbspt-form,
-  .RN__card .hs-form-field,
-  .RN__card input,
-  .RN__card select,
-  .RN__card textarea {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box;
   }
 }

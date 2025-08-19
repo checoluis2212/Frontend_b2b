@@ -35,8 +35,10 @@ export default function ReclutamientoNative() {
     <div className="RN__wrap">
       {/* Header con logo */}
       <header className="RN__bar">
-        <img src="/occ1.png" alt="OCC" className="RN__logo" />
-      </header>
+  <div className="RN__barContainer">
+    <img src="/occ1.png" alt="OCC" className="RN__logo" />
+  </div>
+</header>
 
       <main className="RN__container">
         <div className="RN__grid">

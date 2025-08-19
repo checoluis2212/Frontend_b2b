@@ -217,11 +217,13 @@ html, body {
 }
 
 /* ====== Mobile ====== */
+/* ====== Mobile ====== */
 @media (max-width: 768px) {
   .RN__grid {
     display: flex;
     flex-direction: column;
     gap: 40px;
+    align-items: center; /* centra todo */
   }
 
   .RN__left h1 {
@@ -231,6 +233,9 @@ html, body {
 
   .RN__right {
     width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centrado */
   }
 
   .RN__benefitsList {
@@ -239,26 +244,28 @@ html, body {
 
   .RN__benefitsList--mobile {
     display: block;
+    width: 70%; /* 70% en mobile */
+    margin: 0 auto;
   }
 
   .RN__right p {
-    width: 90%;
+    width: 70%; /* centrado con 70% */
     margin: 0 auto 1rem;
     color: aliceblue;
     font-size: 14px;
     text-align: center;
   }
 
-  /* Corrige el card en mobile */
+  /* Card al 70% en mobile */
   .RN__card {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 70% !important;
+    max-width: 70% !important;
     padding: 20px;
     margin: 0 auto;
     border-radius: 16px;
   }
 
-  /* Forzar formulario en mobile */
+  /* Forzar inputs del form */
   .hbspt-form .form-columns-2 .hs-form-field,
   .hbspt-form .form-columns-1 .hs-form-field {
     width: 100% !important;

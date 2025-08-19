@@ -1,232 +1,143 @@
-:root {
-  --blue: #0f4ec7;
-  --ink: #0b1b46;
-  --card: #fff;
-  --muted: #64748b;
-  --ring: rgba(15, 78, 199, 0.16);
-  --pill-bg: #eaf1ff;
-  --pill-bd: #c9d8ff;
-  --placeholder: #8a96b3;
+import { useEffect } from "react";
+import './ReclutamientoNative.css';
+
+import amazon from '../assets/amazon.png';
+import bbva from '../assets/bbva.png';
+import dhl from '../assets/dhl.png';
+import netflix from '../assets/netflix.png';
+import Walmart from '../assets/Walmart.png';
+import salinas from '../assets/salinas.png';
+import palacio from '../assets/palacio.png';
+import thomson from '../assets/thomson.png';
+import lala from '../assets/lala.png';
+
+export default function ReclutamientoNative() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "//js.hsforms.net/forms/embed/v2.js";
+    script.type = "text/javascript";
+    script.charset = "utf-8";
+    script.onload = () => {
+      if (window.hbspt) {
+        window.hbspt.forms.create({
+          portalId: "49514148",
+          formId: "5f745bfa-8589-40c2-9940-f9081123e0b4",
+          region: "na1",
+          target: "#hubspot-form"
+        });
+      }
+    };
+    document.body.appendChild(script);
+  }, []);
+
+  return (
+    <div className="RN__wrap">
+      <header className="RN__bar">
+        <img src="/occ1.png" alt="OCC" className="RN__logo" />
+      </header>
+
+      <main className="RN__container">
+        <div className="RN__grid">
+          {/* Izquierda: título + bullets desktop */}
+          <div className="RN__left">
+            <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
+            <ul className="RN__benefitsList">
+              {bullets.map((item, idx) => (
+                <li key={idx}>
+                  {item.icon}
+                  <div>
+                    <strong>{item.title}</strong>
+                    <p>{item.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Derecha: formulario */}
+          <div className="RN__right">
+            <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
+            <p>Recibe una cotización ajustada a tus necesidades. Un ejecutivo te guiará en el proceso.</p>
+            <section className="RN__card">
+              <div id="hubspot-form"></div>
+            </section>
+          </div>
+        </div>
+
+        {/* Bullets mobile */}
+        <section className="RN__benefitsList--mobile">
+          <ul>
+            {bullets.map((item, idx) => (
+              <li key={idx}>
+                {item.icon}
+                <div>
+                  <strong>{item.title}</strong>
+                  <p>{item.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Carrusel */}
+        <div className="logos-section mt-5">
+          <h3 className="mb-3">Marcas que confían en nosotros</h3>
+          <div className="logo-carousel">
+            <div className="logo-track">
+              {[bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson, amazon].map((logo, i) => (
+                <img key={i} src={logo} alt="Logo" className="logo-item uniform-logo" />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <footer className="mt-5 text-center">
+          <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
+        </footer>
+      </main>
+    </div>
+  );
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  background: var(--ink);
-  overflow-x: hidden;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-svg {
-  stroke: currentColor;
-}
-
-/* ========== WRAP ========== */
-.RN__wrap {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* ========== HEADER BAR ========== */
-.RN__bar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: var(--blue);
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.RN__bar-inner {
-  width: 100%;
-  max-width: 1280px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.RN__logo {
-  height: 30px;
-  width: auto;
-}
-
-/* ========== CONTAINER ========== */
-.RN__container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 80px 24px 50px;
-  flex: 1;
-}
-
-/* ========== GRID LAYOUT ========== */
-.RN__grid {
-  display: grid;
-  grid-template-columns: 1fr 640px;
-  gap: 60px;
-  align-items: flex-start;
-  grid-template-areas: "left right";
-}
-
-.RN__left {
-  color: #fff;
-  grid-area: left;
-}
-
-.RN__left h1 {
-  font-size: 56px;
-  line-height: 1.1;
-  margin: 0 0 28px;
-  letter-spacing: 0.3px;
-}
-
-.RN__left p {
-  font-size: 15px;
-  opacity: 0.92;
-  margin: 0 0 24px;
-  max-width: 580px;
-}
-
-.RN__benefitsList {
-  margin-top: 100px;
-  padding: 0;
-  list-style: none;
-}
-
-.RN__benefitsList li {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 24px;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #fff;
-  max-width: 580px;
-}
-
-.RN__benefitsList strong {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 19px;
-}
-
-.RN__benefitsList svg {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  stroke: #aaaeff;
-  margin-top: 4px;
-}
-
-/* ========== FORM ========== */
-.RN__right {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  grid-area: right;
-}
-
-.RN__titleOutside {
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  padding: 16px 20px;
-  border-radius: 16px;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.3;
-  box-shadow: 0 8px 20px rgba(3, 10, 36, 0.16);
-}
-
-.RN__card {
-  width: 100%;
-  max-width: 640px;
-  margin: 0 auto;
-  background-color: #fff;
-  border-radius: 24px;
-  padding: 32px;
-  box-shadow: 0 16px 36px rgba(3, 10, 36, 0.2);
-  border: 1px solid rgba(15, 78, 199, 0.06);
-}
-
-/* HubSpot form fix */
-.RN__card input,
-.RN__card select,
-.RN__card textarea {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-}
-
-/* ========== BULLETS MOBILE ========== */
-.RN__benefitsList--mobile {
-  display: none;
-  padding: 0 20px;
-}
-
-.RN__benefitsList--mobile ul {
-  list-style: none;
-  padding: 0;
-}
-
-.RN__benefitsList--mobile li {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 24px;
-  font-size: 16px;
-  color: #fff;
-}
-
-.RN__benefitsList--mobile svg {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  stroke: #aaaeff;
-  margin-top: 4px;
-}
-
-.RN__benefitsList--mobile strong {
-  display: block;
-  font-size: 17px;
-  margin-bottom: 4px;
-}
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
-  .RN__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+const bullets = [
+  {
+    title: "Compra de vacantes",
+    text: "Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2" />
+        <circle cx="9" cy="20" r="1.5" />
+        <circle cx="18" cy="20" r="1.5" />
+      </svg>
+    )
+  },
+  {
+    title: "Compra especializada",
+    text: "Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2" />
+      </svg>
+    )
+  },
+  {
+    title: "Seguimiento",
+    text: "Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path d="M3 12l2-2 4 4 10-10 2 2-12 12z" strokeWidth="2" />
+      </svg>
+    )
+  },
+  {
+    title: "Capacitación personalizada",
+    text: "Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.",
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2" />
+        <path d="M12 14v7" strokeWidth="2" />
+        <path d="M5 19h14" strokeWidth="2" />
+      </svg>
+    )
   }
-
-  .RN__left {
-    display: none;
-  }
-
-  .RN__right {
-    width: 100%;
-  }
-
-  .RN__card {
-    padding: 20px;
-    border-radius: 16px;
-  }
-
-  .RN__container {
-    padding-top: 60px;
-  }
-
-  .RN__benefitsList--mobile {
-    display: block;
-  }
-}
+];

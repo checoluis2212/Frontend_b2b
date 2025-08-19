@@ -48,9 +48,9 @@ export default function ReclutamientoNative() {
             <ul className="RN__benefitsList">
               <li>
                 <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="9" cy="20" r="1.5"/>
-                  <circle cx="18" cy="20" r="1.5"/>
+                  <circle cx="9" cy="21" r="1" />
+                  <circle cx="20" cy="21" r="1" />
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 <div>
                   <strong>Compra de vacantes</strong>
@@ -59,7 +59,7 @@ export default function ReclutamientoNative() {
               </li>
               <li>
                 <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 <div>
                   <strong>Compra especializada</strong>
@@ -68,11 +68,13 @@ export default function ReclutamientoNative() {
               </li>
               <li>
                 <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  <polyline points="17 8 12 3 7 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  <line x1="12" y1="3" x2="12" y2="15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-</svg>
-
+                  <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="6" cy="14" r="1" fill="currentColor"/>
+                  <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                  <circle cx="14" cy="13" r="1" fill="currentColor"/>
+                  <circle cx="18" cy="8" r="1" fill="currentColor"/>
+                </svg>
                 <div>
                   <strong>Seguimiento</strong>
                   <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
@@ -80,15 +82,9 @@ export default function ReclutamientoNative() {
               </li>
               <li>
                 <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-  <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  <circle cx="6" cy="14" r="1" fill="currentColor"/>
-  <circle cx="10" cy="10" r="1" fill="currentColor"/>
-  <circle cx="14" cy="13" r="1" fill="currentColor"/>
-  <circle cx="18" cy="8" r="1" fill="currentColor"/>
-</svg>
-
-
+                  <circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
                 <div>
                   <strong>Capacitación personalizada</strong>
                   <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
@@ -112,9 +108,9 @@ export default function ReclutamientoNative() {
           <ul>
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="9" cy="20" r="1.5"/>
-                <circle cx="18" cy="20" r="1.5"/>
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <div>
                 <strong>Compra de vacantes</strong>
@@ -123,7 +119,7 @@ export default function ReclutamientoNative() {
             </li>
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <div>
                 <strong>Compra especializada</strong>
@@ -132,11 +128,13 @@ export default function ReclutamientoNative() {
             </li>
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  <polyline points="17 8 12 3 7 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  <line x1="12" y1="3" x2="12" y2="15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-</svg>
-
+                <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="6" cy="14" r="1" fill="currentColor"/>
+                <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                <circle cx="14" cy="13" r="1" fill="currentColor"/>
+                <circle cx="18" cy="8" r="1" fill="currentColor"/>
+              </svg>
               <div>
                 <strong>Seguimiento</strong>
                 <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
@@ -144,15 +142,9 @@ export default function ReclutamientoNative() {
             </li>
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-  <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  <circle cx="6" cy="14" r="1" fill="currentColor"/>
-  <circle cx="10" cy="10" r="1" fill="currentColor"/>
-  <circle cx="14" cy="13" r="1" fill="currentColor"/>
-  <circle cx="18" cy="8" r="1" fill="currentColor"/>
-</svg>
-
-
+                <circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
               <div>
                 <strong>Capacitación personalizada</strong>
                 <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>

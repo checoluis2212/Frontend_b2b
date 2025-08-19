@@ -217,58 +217,27 @@ html, body {
 }
 
 /* ====== Mobile ====== */
-/* ====== Mobile ====== */
 @media (max-width: 768px) {
-  .RN__grid {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    align-items: center; /* centra todo */
-  }
-
-  .RN__left h1 {
-    text-align: center;
-    font-size: 38px;
-  }
-
   .RN__right {
     width: 100% !important;
     display: flex;
     flex-direction: column;
-    align-items: center; /* centrado */
+    align-items: center; /* centra todo */
   }
 
-  .RN__benefitsList {
-    display: none;
-  }
-
-  .RN__benefitsList--mobile {
-    display: block;
-    width: 70%; /* 70% en mobile */
-    margin: 0 auto;
-  }
-
-  .RN__right p {
-    width: 70%; /* centrado con 70% */
-    margin: 0 auto 1rem;
-    color: aliceblue;
-    font-size: 14px;
-    text-align: center;
-  }
-
-  /* Card al 70% en mobile */
   .RN__card {
-    width: 70% !important;
-    max-width: 70% !important;
+    width: 50% !important;   /* bajado a 50% */
+    max-width: 50% !important;
+    margin: 0 auto;          /* centrado */
     padding: 20px;
-    margin: 0 auto;
     border-radius: 16px;
   }
 
-  /* Forzar inputs del form */
-  .hbspt-form .form-columns-2 .hs-form-field,
-  .hbspt-form .form-columns-1 .hs-form-field {
-    width: 100% !important;
-    display: block !important;
+  .RN__right p,
+  .RN__titleOutside,
+  .RN__benefitsList--mobile {
+    width: 50%;      /* también al 50% */
+    margin: 0 auto;  /* centrado */
+    text-align: center;
   }
 }

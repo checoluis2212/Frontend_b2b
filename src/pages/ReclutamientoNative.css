@@ -239,3 +239,21 @@ footer small {
   }
 }
 
+@media (max-width: 768px) {
+  .logos-section {
+    overflow: hidden;
+    padding: 0 16px;
+  }
+
+  .logo-track {
+    gap: 32px;
+    padding: 0 12px;
+  }
+
+  .logo-item {
+    max-width: 90px;
+    height: auto;
+  }
+}
+
+

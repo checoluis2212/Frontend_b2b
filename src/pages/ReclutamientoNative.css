@@ -31,18 +31,26 @@ body {
 .RN__bar {
   background: var(--blue);
   position: sticky;
-  padding: 12px 20px;
-  display: flex;
-  align-items: center;
-  position: sticky;
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid #eee;
 }
 
+.RN__barContainer {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
 .RN__logo {
   height: 32px;
   width: auto;
+  max-width: 120px;
+  margin-left: 0;
 }
 
 .RN__container {
@@ -103,7 +111,6 @@ body {
   font-size: 24px;
   color: white;
   text-align: center;
-  
 }
 
 .RN__card {
@@ -113,8 +120,7 @@ body {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
 }
 
-/* Mobile styles */
-/* Mobile styles */
+/* Mobile */
 @media (max-width: 768px) {
   .RN__grid {
     display: flex;
@@ -223,9 +229,7 @@ footer small {
   .RN__mobileTitle {
     display: none;
   }
-}
 
-@media (min-width: 768px) {
   .RN__benefitsList--mobile {
     display: none;
   }

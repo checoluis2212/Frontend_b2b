@@ -1,182 +1,13 @@
-:root {
-  --blue: #0f4ec7;
-  --ink: #0b1b46;
-  --card: #fff;
-  --muted: #64748b;
-  --ring: rgba(15, 78, 199, 0.16);
-  --pill-bg: #eaf1ff;
-  --pill-bd: #c9d8ff;
-  --placeholder: #8a96b3;
-}
-
-html,
-body {
-  height: 100%;
-  margin: 0;
-  background: var(--ink);
-  overflow-x: hidden;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-svg {
-  stroke: currentColor;
-}
-
-/* ========== WRAP ========== */
-.RN__wrap {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-    url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* ========== HEADER BAR ========== */
-.RN__bar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: var(--blue);
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.RN__bar-inner {
-  width: 100%;
-  max-width: 1280px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.RN__logo {
-  height: 30px;
-  width: auto;
-}
-
-/* ========== CONTAINER ========== */
-.RN__container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 80px 24px 50px;
-  flex: 1;
-}
-
-/* ========== GRID LAYOUT ========== */
-.RN__grid {
-  display: grid;
-  grid-template-columns: 1fr 640px;
-  gap: 60px;
-  align-items: flex-start;
-  grid-template-areas: "left right";
-}
-
-.RN__left {
-  color: #fff;
-  grid-area: left;
-}
-
-.RN__left h1 {
-  font-size: 56px;
-  line-height: 1.1;
-  margin: 0 0 28px;
-  letter-spacing: 0.3px;
-}
-
-.RN__left p {
-  font-size: 15px;
-  opacity: 0.92;
-  margin: 0 0 24px;
-  max-width: 580px;
-}
-
-.RN__benefitsList {
-  margin-top: 100px;
-  padding: 0;
-  list-style: none;
-}
-
-.RN__benefitsList li {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 24px;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #fff;
-  max-width: 580px;
-}
-
-.RN__benefitsList strong {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 19px;
-}
-
-.RN__benefitsList svg {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  stroke: #aaaeff;
-  margin-top: 4px;
-}
-
-/* ========== FORM ========== */
-.RN__right {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  grid-area: right;
-}
-
-.RN__titleOutside {
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  padding: 16px 20px;
-  border-radius: 16px;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.3;
-  box-shadow: 0 8px 20px rgba(3, 10, 36, 0.16);
-}
-
-.RN__card {
-  width: 100%;
-  max-width: 640px;
-  margin: 0 auto;
-  background-color: #fff;
-  border-radius: 24px;
-  padding: 32px;
-  box-shadow: 0 16px 36px rgba(3, 10, 36, 0.2);
-  border: 1px solid rgba(15, 78, 199, 0.06);
-}
-
-/* HubSpot form fix */
-.RN__card input,
-.RN__card select,
-.RN__card textarea {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-}
-
-/* ========== BULLETS MOBILE ========== */
+/* ====== Bullets Mobile ====== */
 .RN__benefitsList--mobile {
   display: none;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
 .RN__benefitsList--mobile ul {
   list-style: none;
   padding: 0;
+  margin: 40px 0;
 }
 
 .RN__benefitsList--mobile li {
@@ -188,6 +19,12 @@ svg {
   color: #fff;
 }
 
+.RN__benefitsList--mobile strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 17px;
+}
+
 .RN__benefitsList--mobile svg {
   flex-shrink: 0;
   width: 26px;
@@ -196,34 +33,9 @@ svg {
   margin-top: 4px;
 }
 
-.RN__benefitsList--mobile strong {
-  display: block;
-  font-size: 17px;
-  margin-bottom: 4px;
-}
-
-/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
-  .RN__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
   .RN__left {
     display: none;
-  }
-
-  .RN__right {
-    width: 100%;
-  }
-
-  .RN__card {
-    padding: 20px;
-    border-radius: 16px;
-  }
-
-  .RN__container {
-    padding-top: 60px;
   }
 
   .RN__benefitsList--mobile {

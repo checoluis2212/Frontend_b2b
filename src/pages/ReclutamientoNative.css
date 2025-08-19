@@ -113,6 +113,7 @@ body {
 }
 
 /* Mobile styles */
+/* Mobile styles */
 @media (max-width: 768px) {
   .RN__grid {
     display: flex;
@@ -174,13 +175,11 @@ body {
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
-  overflow-x: auto; /* ← agregado */
 }
 
 .logo-carousel {
-  overflow-x: auto;  /* ← agregado */
   position: relative;
-  width: 100%;       /* ← agregado */
+  width: 100%;
 }
 
 .logo-track {
@@ -189,7 +188,6 @@ body {
   animation: scroll 30s linear infinite;
   gap: 48px;
   align-items: center;
-  min-width: 100%;   /* ← agregado */
 }
 
 .logo-item {
@@ -197,7 +195,7 @@ body {
   object-fit: contain;
   filter: grayscale(1) brightness(1.4);
   opacity: 0.8;
-  flex-shrink: 0;     /* ← agregado */
+  flex-shrink: 0;
 }
 
 .uniform-logo {
@@ -242,9 +240,7 @@ footer small {
     text-align: center;
     color: white;
   }
-}
 
-@media (max-width: 768px) {
   .logos-section {
     padding: 0 16px;
   }

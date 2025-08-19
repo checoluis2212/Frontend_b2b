@@ -245,3 +245,14 @@ html, body {
     text-align: center;
   }
 }
+
+/* Forzar que el form de HubSpot no se corte en mobile */
+@media (max-width: 768px) {
+  .RN__card,
+  #hubspot-form,
+  #hubspot-form form {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden;
+  }
+}

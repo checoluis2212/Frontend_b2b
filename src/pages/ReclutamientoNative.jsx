@@ -91,8 +91,8 @@ export default function ReclutamientoNative() {
 
           {/* Columna derecha */}
           <div className="RN__right">
+            <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
             <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
-
             <section className="RN__card">
               <div id="hubspot-form"></div>
             </section>
@@ -101,7 +101,6 @@ export default function ReclutamientoNative() {
 
         {/* Bullets versión mobile */}
         <section className="RN__benefitsList--mobile">
-          <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
           <ul>
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">

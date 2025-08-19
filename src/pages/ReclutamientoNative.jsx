@@ -77,10 +77,14 @@ export default function ReclutamientoNative() {
               </li>
               <li>
                 <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M12 14v7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M5 19h14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="6" cy="14" r="1" fill="currentColor"/>
+                <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                <circle cx="14" cy="13" r="1" fill="currentColor"/>
+                <circle cx="18" cy="8" r="1" fill="currentColor"/>
                 </svg>
+
                 <div>
                   <strong>Capacitación personalizada</strong>
                   <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
@@ -133,10 +137,14 @@ export default function ReclutamientoNative() {
             </li>
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 14v7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M5 19h14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+               <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="6" cy="14" r="1" fill="currentColor"/>
+                <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                <circle cx="14" cy="13" r="1" fill="currentColor"/>
+                <circle cx="18" cy="8" r="1" fill="currentColor"/>
+                </svg>
+
               <div>
                 <strong>Capacitación personalizada</strong>
                 <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>

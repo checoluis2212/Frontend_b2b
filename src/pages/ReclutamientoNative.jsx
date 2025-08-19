@@ -44,11 +44,10 @@ export default function ReclutamientoNative() {
           {/* Columna izquierda: título + bullets (solo desktop) */}
           <div className="RN__left"> 
             <h1>Publicar tus vacantes nunca fue tan fácil…</h1> 
-
-            <section className="RN__benefits RN__benefits--desktop">
+            <section className="RN__benefits">
               <ul className="RN__benefitsList"> 
                 <li>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
                     <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2"/> 
                     <circle cx="9" cy="20" r="1.5"/> 
                     <circle cx="18" cy="20" r="1.5"/> 
@@ -59,7 +58,7 @@ export default function ReclutamientoNative() {
                   </div>
                 </li>
                 <li>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
                     <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2"/> 
                   </svg>
                   <div>
@@ -68,7 +67,7 @@ export default function ReclutamientoNative() {
                   </div>
                 </li>
                 <li>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
                     <path d="M3 12l2-2 4 4 10-10 2 2-12 12z" strokeWidth="2"/> 
                   </svg>
                   <div>
@@ -77,7 +76,7 @@ export default function ReclutamientoNative() {
                   </div>
                 </li>
                 <li>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
                     <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2"/> 
                     <path d="M12 14v7" strokeWidth="2"/> 
                     <path d="M5 19h14" strokeWidth="2"/> 
@@ -102,9 +101,48 @@ export default function ReclutamientoNative() {
         </div> 
 
         {/* Bullets versión mobile */}
-        <section className="RN__benefits RN__benefits--mobile">
-          <ul className="RN__benefitsList"> 
-            <li> ... (mismos bullets de arriba) ... </li>
+        <section className="RN__benefitsList--mobile">
+          <ul>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                <path d="M6 6h15l-1.5 9h-13z" strokeWidth="2"/> 
+                <circle cx="9" cy="20" r="1.5"/> 
+                <circle cx="18" cy="20" r="1.5"/> 
+              </svg>
+              <div>
+                <strong>Compra de vacantes</strong>
+                <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                <path d="M12 2l4 4-4 4-4-4zM2 12h20M12 22l-4-4 4-4 4 4z" strokeWidth="2"/> 
+              </svg>
+              <div>
+                <strong>Compra especializada</strong>
+                <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                <path d="M3 12l2-2 4 4 10-10 2 2-12 12z" strokeWidth="2"/> 
+              </svg>
+              <div>
+                <strong>Seguimiento</strong>
+                <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"> 
+                <path d="M12 14l9-5-9-5-9 5 9 5z" strokeWidth="2"/> 
+                <path d="M12 14v7" strokeWidth="2"/> 
+                <path d="M5 19h14" strokeWidth="2"/> 
+              </svg>
+              <div>
+                <strong>Capacitación personalizada</strong>
+                <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
+              </div>
+            </li>
           </ul>
         </section>
 

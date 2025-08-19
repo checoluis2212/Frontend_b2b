@@ -50,7 +50,7 @@
   align-items: flex-start;
 }
 
-/* ====== Izquierda (título + bullets) ====== */
+/* ====== Izquierda ====== */
 .RN__left {
   color: #fff;
   padding: 8px;
@@ -102,7 +102,7 @@
   margin-top: 4px;
 }
 
-/* ====== Derecha (formulario) ====== */
+/* ====== Derecha ====== */
 .RN__right {
   display: flex;
   align-items: center;
@@ -133,7 +133,7 @@
   border: 1px solid rgba(15, 78, 199, 0.06);
 }
 
-/* HubSpot fix */
+/* Fix HubSpot */
 .RN__card input,
 .RN__card select,
 .RN__card textarea {
@@ -192,7 +192,18 @@
   margin-top: 4px;
 }
 
-/* ====== Mobile Responsive ====== */
+/* ====== Mobile Title ====== */
+.RN__mobileTitle {
+  display: none;
+  font-size: 36px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 0 20px;
+  line-height: 1.2;
+}
+
+/* ====== Responsive Mobile ====== */
 @media (max-width: 768px) {
   .RN__grid {
     grid-template-columns: 1fr;
@@ -219,6 +230,10 @@
   }
 
   .RN__benefitsList--mobile {
+    display: block;
+  }
+
+  .RN__mobileTitle {
     display: block;
   }
 }

@@ -1,262 +1,154 @@
-:root{
-  --blue:#0f4ec7; 
-  --ink:#0b1b46; 
-  --card:#fff; 
-  --muted:#64748b;
-  --ring:rgba(15,78,199,.16);
-  --pill-bg:#eaf1ff; 
-  --pill-bd:#c9d8ff; 
-  --placeholder:#8a96b3;
+/* ====== LAYOUT GENERAL ====== */
+.RN__wrap {
+  font-family: Arial, sans-serif;
+  color: #fff;
+  background: linear-gradient(180deg, #0d1b2a, #1b263b);
+  min-height: 100vh;
 }
 
-/* ====== Global Fix fondo blanco ====== */
-html, body {
-  height: 100%;
-  margin: 0;
-  background: #0b1b46; /* fallback oscuro */
-  overflow-x: hidden; /* previene scroll horizontal */
-}
-
-/* ====== Layout ====== */
-.RN__wrap{
-  min-height: 100%;
+.RN__bar {
+  background: #0066ff;
+  padding: 10px 20px;
   display: flex;
-  flex-direction: column;
-  background: 
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), 
-    url('https://b2b.occ.com.mx/assets/background-DJI9DYek.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  align-items: center;
 }
 
-/* Barra azul sticky */
-.RN__bar { 
-  position: sticky;
-  top: 0;               
-  z-index: 1000;        
-  background: var(--blue); 
-  height: 60px; 
-  display: flex; 
-  align-items: center; 
-  padding: 0 20px; 
-  justify-content: space-between;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.RN__logo {
+  height: 40px;
 }
 
-.RN__logo{
-  height: 30px; 
-  width: auto;
-  margin-left: 35px;
+.RN__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-/* ====== Container ====== */
-.RN__container{ 
-  max-width:1280px; 
-  margin:0 auto; 
-  padding:110px 24px 50px; 
-  margin-top:30px; 
-  flex: 1;
+.RN__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: flex-start;
 }
 
-.RN__grid{
-  display:grid;
-  grid-template-columns: 1fr 640px;
-  gap:60px;
-  align-items:flex-start;
-  grid-template-areas: "left right";
+/* ====== COLUMNA IZQUIERDA ====== */
+.RN__left h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
 }
 
-/* ====== Izquierda ====== */
-.RN__left{ 
-  color:#fff; 
-  padding:8px; 
-  grid-area: left;
-}
-.RN__left h1{ 
-  font-size:56px; 
-  line-height:1.1; 
-  margin:0 0 28px; 
-  letter-spacing:.3px; 
-}
-.RN__left p{ 
-  font-size:15px; 
-  opacity:.92; 
-  margin:0 0 24px; 
-  max-width: 580px;
-}
-
-/* Bullets Desktop */
 .RN__benefitsList {
-  margin-top: 100px;
-  padding: 0;
   list-style: none;
+  padding: 0;
 }
 
 .RN__benefitsList li {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  margin-bottom: 24px;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #fff;
-  max-width: 580px;
+  gap: 10px;
+  margin-bottom: 1.2rem;
 }
 
-.RN__benefitsList strong {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 19px;
-}
-
-.RN__benefitsList svg {
+.RN__benefitsList li svg {
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  stroke: #aaaeff;
-  margin-top: 4px;
+  stroke: #00c2ff;
 }
 
-/* ====== Derecha ====== */
-.RN__right{
-  display:flex;
-  align-items:center;
-  flex-direction:column;
-  gap:20px;
-  width:640px;
-  grid-area: right;
+/* ====== COLUMNA DERECHA (FORM) ====== */
+.RN__right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.RN__titleOutside{
-  width:100%;
-  text-align:center;
-  color:#fff;
-  padding:16px 20px;
-  border-radius:16px;
-  font-size:24px;
-  font-weight:700;
-  line-height:1.3;
-  box-shadow:0 8px 20px rgba(3,10,36,.16);
+.RN__titleOutside {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-/* ====== Card ====== */
-.RN__card{
-  width: 70%;               /* 70% en desktop */
-  max-width: 640px;
+.RN__card {
+  background: #fff;
+  color: #000;
+  padding: 20px;
+  border-radius: 12px;
+  width: 70%;            /* ← en desktop 70% */
+  max-width: 500px;
   margin: 0 auto;
-  background-color: azure;
-  border-radius:24px;
-  padding:32px;
-  box-shadow:0 16px 36px rgba(3,10,36,.20);
-  border:1px solid rgba(15,78,199,.06);
-  overflow-x: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Fix HubSpot inputs */
-.hbspt-form fieldset,
-.hbspt-form .form-columns-2,
-.hbspt-form .form-columns-1,
-.RN__card form,
-.RN__card .hbspt-form,
-.RN__card .hs-form-field,
-.RN__card input,
-.RN__card select,
-.RN__card textarea,
-.RN__card iframe {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box;
-  display: block !important;
-}
-
-.logos-section {
-  max-width: 900px; 
-  margin: 0 auto;
-}
-
-.mb-3 {
-  text-align: center; 
-  color: #ffff;
-}
-
-.mt-5 {
-  color: #ffff;
-}
-
-/* ====== Nueva versión solo para mobile ====== */
+/* ====== BENEFICIOS MOBILE ====== */
 .RN__benefitsList--mobile {
   display: none;
-  padding: 0;
+  margin-top: 2rem;
+}
+
+.RN__benefitsList--mobile ul {
   list-style: none;
-  margin-top: 20px;
+  padding: 0;
 }
 
 .RN__benefitsList--mobile li {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 18px;
-  font-size: 16px;
-  line-height: 1.4;
-  color: #fff;
+  gap: 10px;
+  margin-bottom: 1rem;
 }
 
-.RN__benefitsList--mobile strong {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 17px;
+.RN__benefitsList--mobile li svg {
+  width: 26px;
+  height: 26px;
+  stroke: #00c2ff;
 }
 
-.RN__benefitsList--mobile svg {
-  flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  stroke: #aaaeff;
-  margin-top: 2px;
+/* ====== LOGOS ====== */
+.logos-section {
+  margin-top: 3rem;
+  text-align: center;
 }
 
-/* ====== Mobile ====== */
+.logo-carousel {
+  overflow: hidden;
+}
+
+.logo-track {
+  display: flex;
+  gap: 40px;
+  animation: scroll 25s linear infinite;
+}
+
+.uniform-logo {
+  height: 50px;
+  object-fit: contain;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ====== RESPONSIVE ====== */
 @media (max-width: 768px) {
-  /* Grid se convierte en 1 sola columna */
   .RN__grid {
-    grid-template-columns: 1fr !important;
-    grid-template-areas:
-      "left"
-      "right";
-    gap: 30px;
-  }
-
-  .RN__left,
-  .RN__right {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto;
-  }
-
-  .RN__right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;   /* 1 sola columna */
   }
 
   .RN__card {
-    width: 100% !important;    
-    max-width: 100% !important;
-    padding: 20px;
-    border-radius: 16px;
+    width: 100%;                  /* en mobile ocupa todo */
+    max-width: none;
   }
 
-  /* Inputs de 2 columnas forzados a 1 */
-  .hbspt-form .form-columns-2 .hs-form-field {
-    width: 100% !important;
-    display: block !important;
+  .RN__benefitsList {
+    display: none;                /* ocultar lista desktop */
   }
 
-  .RN__titleOutside,
   .RN__benefitsList--mobile {
-    width: 100%;
-    margin: 0 auto;
+    display: block;               /* mostrar lista mobile */
+  }
+
+  .RN__left h1 {
+    font-size: 1.8rem;
     text-align: center;
   }
 }

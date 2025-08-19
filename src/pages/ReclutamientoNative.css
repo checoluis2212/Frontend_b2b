@@ -150,7 +150,7 @@ html, body {
   padding:32px;
   box-shadow:0 16px 36px rgba(3,10,36,.20);
   border:1px solid rgba(15,78,199,.06);
-  overflow-x: hidden; /* extra seguridad */
+  overflow-x: hidden; /* seguridad */
 }
 
 /* Fix HubSpot inputs */
@@ -166,10 +166,21 @@ html, body {
 .RN__card iframe {
   width: 100% !important;
   max-width: 100% !important;
+  min-width: 100% !important;
   box-sizing: border-box;
+  display: block !important;
+  overflow-x: hidden !important;
+}
+
+iframe[src*="hubspot"] {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  border: none !important;
   display: block !important;
 }
 
+/* ====== Extras ====== */
 .logos-section {
   max-width: 900px; 
   margin: 0 auto;
@@ -177,11 +188,11 @@ html, body {
 
 .mb-3 {
   text-align: center; 
-  color: #ffff;
+  color: #fff;
 }
 
 .mt-5 {
-  color: #ffff;
+  color: #fff;
 }
 
 /* ====== Nueva versión solo para mobile ====== */
@@ -226,7 +237,7 @@ html, body {
 
   .RN__left h1 {
     text-align: center;
-    font-size: 38px; /* un poco más chico en mobile */
+    font-size: 38px;
   }
 
   .RN__right {
@@ -264,6 +275,7 @@ html, body {
   #hubspot-form {
     width: 100% !important;
     max-width: 100% !important;
-    overflow-x: hidden;
+    min-width: 100% !important;
+    overflow-x: hidden !important;
   }
 }

@@ -30,6 +30,7 @@ body {
 
 .RN__bar {
   background: var(--blue);
+  position: sticky;
   padding: 12px 20px;
   display: flex;
   align-items: center;

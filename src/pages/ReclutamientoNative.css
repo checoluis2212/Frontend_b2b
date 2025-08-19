@@ -247,7 +247,7 @@ footer small {
 
 @media (max-width: 768px) {
   .logos-section {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     padding: 0 20px;
     text-align: center;

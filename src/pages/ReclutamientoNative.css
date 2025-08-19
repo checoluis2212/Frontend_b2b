@@ -142,8 +142,8 @@ html, body {
 
 /* ====== Card ====== */
 .RN__card{
-  width: 100%;
-  max-width: 640px;        /* límite desktop */
+  width: 70%;              /* siempre 70% */
+  max-width: 70%;
   margin: 0 auto;
   background-color: azure;
   border-radius:24px;
@@ -218,17 +218,28 @@ html, body {
 
 /* ====== Mobile ====== */
 @media (max-width: 768px) {
+  .RN__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .RN__left h1 {
+    text-align: center;
+    font-size: 38px;
+  }
+
   .RN__right {
     width: 100% !important;
     display: flex;
     flex-direction: column;
-    align-items: center; /* centra todo */
+    align-items: center;
   }
 
   .RN__card {
-    width: 50% !important;   /* bajado a 50% */
-    max-width: 50% !important;
-    margin: 0 auto;          /* centrado */
+    width: 70% !important;   /* 70% también en mobile */
+    max-width: 70% !important;
+    margin: 0 auto;
     padding: 20px;
     border-radius: 16px;
   }
@@ -236,8 +247,8 @@ html, body {
   .RN__right p,
   .RN__titleOutside,
   .RN__benefitsList--mobile {
-    width: 50%;      /* también al 50% */
-    margin: 0 auto;  /* centrado */
+    width: 70%;
+    margin: 0 auto;
     text-align: center;
   }
 }

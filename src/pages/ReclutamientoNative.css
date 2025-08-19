@@ -51,6 +51,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
+  margin-top: 100px;
 }
 
 .RN__grid {
@@ -64,7 +65,7 @@ body {
 
 .RN__left h1 {
   font-size: 50px;
-  color: #98bbf9;
+  color: #fff;
   margin-bottom: 32px;
   margin-top: 50px;
 }
@@ -76,6 +77,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 28px;
+  margin-top: 100px;
 }
 
 .RN__benefitsList li {
@@ -88,7 +90,7 @@ body {
   flex-shrink: 0;
   width: 28px;
   height: 28px;
-  stroke: white;
+  stroke: #acbbff;
 }
 
 .RN__right {

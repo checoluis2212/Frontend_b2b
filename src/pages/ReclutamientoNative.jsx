@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import './ReclutamientoNative.css';
 import '../index.css';
-import { trackAndGo_PruebaGratis } from '../utils/ga4'; // ← agregado
+import { sendGA4Event } from '../utils/ga4.js';
 
 import amazon from '../assets/amazon.png';
 import bbva from '../assets/bbva.png';

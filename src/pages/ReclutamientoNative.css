@@ -35,7 +35,7 @@ body {
 
 .RN__bar {
   background: var(--blue);
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   border-bottom: 1px solid #eee;

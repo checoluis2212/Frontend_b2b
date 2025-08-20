@@ -314,7 +314,7 @@ footer small {
   border-radius: 9999px;
   font-weight: 700;
   cursor: pointer;
-  background: ##F13465;             /* color acorde al “Enviar” rosa */
+  background: #F13465;             /* color acorde al “Enviar” rosa */
   color: #fff;
   box-shadow: 0 6px 20px rgba(0,0,0,.15);
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease;

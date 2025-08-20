@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'OCCText';
+  src: url('/OCCText-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
   --blue: #0f4ec7;
   --ink: #0b1b46;
@@ -11,7 +18,7 @@
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'OCCText', sans-serif; /* 👈 cambiado a tu fuente */
   background-color: var(--ink);
   color: white;
 }

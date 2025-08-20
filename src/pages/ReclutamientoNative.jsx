@@ -172,7 +172,7 @@ export default function ReclutamientoNative() {
           <div className="RN__right">
             <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
             <section className="RN__promoHeader">
-              <h3>Prueba OCC Empresas 14 días gratis</h3>
+              <h3>Prueba OCC Empresas gratis</h3>
               <p>Sin compromiso, sin límites y sin necesidad de tarjeta de crédito.</p>
             <button
               type="button"

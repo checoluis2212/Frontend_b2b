@@ -322,3 +322,7 @@ footer small {
 .RN__promoBtn:active {
   transform: translateY(0);
 }
+
+.RN__promoHeader {
+      margin-top: 20px;
+}

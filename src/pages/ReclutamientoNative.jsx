@@ -222,47 +222,47 @@ export default function ReclutamientoNative() {
               <p>Sin compromiso y sin necesidad de tarjeta de crédito.</p>
 
               <button
-                type="button"
-                className="RN__promoBtn"
-                onClick={() => {
-                  // === NUEVO: disparo MP al endpoint de botón (fire-and-forget) ===
-                  try {
-                    const utms = getUTMs();
-                    const payload = {
-                      visitorId: localStorage.getItem('visitorId') || '',
-                      eventName: 'cta_button_clicked',
-                      buttonId: 'promo-header-cta',
-                      buttonText: 'Empieza gratis',
-                      section: 'promo_header',
-                      page: window.location.href,
-                      referrer: document.referrer || '',
-                      ...utms
-                    };
+  type="button"
+  className="RN__promoBtn"
+  onClick={() => {
+    const url = 'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp';
 
-                    // URL ABSOLUTA (igual que /api/lead) para evitar CORS
-                    const url = 'https://backend-b2b-a3up.onrender.com/api/ga4/button';
+    // payload "tal cual" el estilo del form (simple y directo)
+    const payload = {
+      visitorId:  localStorage.getItem('visitorId') || '',
+      page:       window.location.href,
+      referrer:   document.referrer || '',
+      placement:  'promo_header',
+      eventName:  'cta_prueba_gratis_click',
+      // Si tienes cookies UTM y quieres mandarlas igual que el form, puedes añadirlas:
+      // utm_source:   (document.cookie.match(/(?:^|;\s*)utm_source=([^;]+)/)?.[1]) || '',
+      // utm_medium:   (document.cookie.match(/(?:^|;\s*)utm_medium=([^;]+)/)?.[1]) || '',
+      // utm_campaign: (document.cookie.match(/(?:^|;\s*)utm_campaign=([^;]+)/)?.[1]) || '',
+      // utm_content:  (document.cookie.match(/(?:^|;\s*)utm_content=([^;]+)/)?.[1]) || undefined,
+      // utm_term:     (document.cookie.match(/(?:^|;\s*)utm_term=([^;]+)/)?.[1]) || undefined,
+    };
 
-                    const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-                    const sent = navigator.sendBeacon?.(url, blob);
-                    if (!sent) {
-                      fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                      }).catch(() => {});
-                    }
-                  } catch (_) {}
+    fetch('https://backend-b2b-a3up.onrender.com/api/click', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        // Si tu backend exige API key como el form, descomenta:
+        // 'x-api-key': 'TU_API_KEY_AQUI'
+      },
+      body: JSON.stringify(payload)
+    })
+      .catch(() => {}) // no bloquees la navegación si falla
+      .finally(() => {
+        // abrir después del POST (exactamente como haces con el form, simple)
+        window.open(url, '_blank'); // o window.location.href = url si prefieres misma pestaña
+      });
+  }}
+  aria-label="Empieza gratis"
+>
+  Empieza gratis
+</button>
 
-                  // === Tu flujo actual (no se modifica) ===
-                  trackAndGo_PruebaGratis(
-                    'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp',
-                    { placement: 'promo_header' }
-                  );
-                }}
-                aria-label="Empieza gratis"
-              >
-                Empieza gratis
-              </button>
             </section>
 
             <div className="RN__divider">

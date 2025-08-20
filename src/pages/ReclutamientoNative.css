@@ -264,29 +264,32 @@ footer small {
   }
 }
 
-.divider {
-  display: flex;
+/* --- Divider robusto (como Holded) --- */
+.divider,
+.RN__divider{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;  /* línea - "o" - línea */
   align-items: center;
-  text-align: center;
-  margin: 20px 0;
+  gap: 12px;
+  margin: 16px 0;
+  width: 100%;
 }
 
 .divider::before,
-.divider::after {
+.divider::after,
+.RN__divider::before,
+.RN__divider::after{
   content: "";
-  flex: 1;
-  border-bottom: 1px solid #ccc; /* línea gris como en Holded */
+  display: block;
+  height: 1px;                          /* grosor de la línea */
+  background: rgba(255,255,255,.45);     /* color de la línea */
 }
 
-.divider:not(:empty)::before {
-  margin-right: .75em;
+/* La “o” centrada */
+.divider span,
+.RN__divider span{
+  color: #fff;
+  font-weight: 600;
+  line-height: 1;
 }
 
-.divider:not(:empty)::after {
-  margin-left: .75em;
-}
-
-.divider span {
-  color: #fff; /* color de la "o" */
-  font-weight: 500;
-}

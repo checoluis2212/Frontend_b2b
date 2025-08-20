@@ -108,8 +108,6 @@ export default function ReclutamientoNative() {
               mode: 'cors',
               headers: {
                 'Content-Type': 'application/json',
-                // Descomenta si tu server requiere API key:
-                // 'x-api-key': 'TU_API_KEY_AQUI'
               },
               body: JSON.stringify(payload)
             })
@@ -255,7 +253,7 @@ export default function ReclutamientoNative() {
       .catch(() => {}) // no bloquees la navegación si falla
       .finally(() => {
         // abrir después del POST (exactamente como haces con el form, simple)
-        window.open(url, '_blank'); // o window.location.href = url si prefieres misma pestaña
+        window.location.href = url; 
       });
   }}
   aria-label="Empieza gratis"

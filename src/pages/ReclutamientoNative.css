@@ -268,15 +268,14 @@ footer small {
   display: flex;
   align-items: center;
   text-align: center;
-  color: #fff; /* color del texto "o", cámbialo si quieres */
   margin: 20px 0;
 }
 
 .divider::before,
 .divider::after {
-  content: '';
+  content: "";
   flex: 1;
-  border-bottom: 1px solid #ccc; /* color de la línea */
+  border-bottom: 1px solid #ccc; /* línea gris como en Holded */
 }
 
 .divider:not(:empty)::before {
@@ -287,3 +286,7 @@ footer small {
   margin-left: .75em;
 }
 
+.divider span {
+  color: #fff; /* color de la "o" */
+  font-weight: 500;
+}

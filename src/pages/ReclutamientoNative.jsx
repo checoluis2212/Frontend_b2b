@@ -177,10 +177,10 @@ export default function ReclutamientoNative() {
             <button
               type="button"
               className="RN__promoBtn"
-              onClick={() => window.open('https://www.occ.com.mx/empresas/registro', '_blank')}
+              onClick={() => window.open('https://www.occ.com.mx/empresas/inicia-sesion/crear-cuenta?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp')}
               aria-label="Empieza tu prueba de 14 días"
                 >
-              Empieza tu prueba de 14 días
+              Empieza gratis
               </button>
             </section> 
             <div className="RN__divider">

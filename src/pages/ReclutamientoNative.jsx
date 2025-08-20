@@ -13,6 +13,18 @@ import palacio from '../assets/palacio.png';
 import thomson from '../assets/thomson.png';
 import lala from '../assets/lala.png';
 
+// === NUEVO: helper para leer UTMs de la URL ===
+const getUTMs = () => {
+  const q = new URLSearchParams(window.location.search);
+  return {
+    utm_source:   q.get('utm_source')   || '',
+    utm_medium:   q.get('utm_medium')   || '',
+    utm_campaign: q.get('utm_campaign') || '',
+    utm_content:  q.get('utm_content')  || '',
+    utm_term:     q.get('utm_term')     || '',
+  };
+};
+
 export default function ReclutamientoNative() {
   useEffect(() => {
     const script = document.createElement("script");
@@ -212,12 +224,41 @@ export default function ReclutamientoNative() {
               <button
                 type="button"
                 className="RN__promoBtn"
-                onClick={() =>
+                onClick={() => {
+                  // === NUEVO: disparo MP al endpoint de botón (fire-and-forget) ===
+                  try {
+                    const utms = getUTMs();
+                    const payload = {
+                      visitorId: localStorage.getItem('visitorId') || '',
+                      eventName: 'cta_button_clicked',
+                      buttonId: 'promo-header-cta',
+                      buttonText: 'Empieza gratis',
+                      section: 'promo_header',
+                      page: window.location.href,
+                      referrer: document.referrer || '',
+                      ...utms
+                    };
+
+                    // URL ABSOLUTA (igual que /api/lead) para evitar CORS
+                    const url = 'https://backend-b2b-a3up.onrender.com/api/ga4/button';
+
+                    const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+                    const sent = navigator.sendBeacon?.(url, blob);
+                    if (!sent) {
+                      fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                      }).catch(() => {});
+                    }
+                  } catch (_) {}
+
+                  // === Tu flujo actual (no se modifica) ===
                   trackAndGo_PruebaGratis(
                     'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp',
                     { placement: 'promo_header' }
-                  )
-                }
+                  );
+                }}
                 aria-label="Empieza gratis"
               >
                 Empieza gratis

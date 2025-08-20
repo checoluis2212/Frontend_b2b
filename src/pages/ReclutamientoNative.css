@@ -264,3 +264,21 @@ footer small {
   }
 }
 
+.RN__divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.RN__line {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.RN__dividerText {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}

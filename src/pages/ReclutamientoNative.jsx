@@ -177,7 +177,10 @@ export default function ReclutamientoNative() {
             <button
               type="button"
               className="RN__promoBtn"
-              onClick={handlePromoClick}
+              onClick={() => trackAndGo_PruebaGratis('https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp',
+              { placement: 'promo_header' }
+             )
+           }
               aria-label="Empieza gratis"
                 >
               Empieza gratis

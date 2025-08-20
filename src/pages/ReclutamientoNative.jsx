@@ -175,6 +175,15 @@ export default function ReclutamientoNative() {
               <h3>Prueba OCC Empresas 14 días gratis</h3>
               <p>Sin compromiso, sin límites y sin necesidad de tarjeta de crédito.</p>
               </section>
+            <button
+              type="button"
+              className="RN__promoBtn"
+              onClick={() => window.open('https://www.occ.com.mx/empresas/registro', '_blank')}
+              aria-label="Empieza tu prueba de 14 días"
+                >
+              Empieza tu prueba de 14 días
+              </button>
+            </section> 
             <div className="RN__divider">
               <span>o</span>
             </div>

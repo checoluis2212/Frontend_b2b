@@ -174,7 +174,6 @@ export default function ReclutamientoNative() {
             <section className="RN__promoHeader">
               <h3>Prueba OCC Empresas 14 días gratis</h3>
               <p>Sin compromiso, sin límites y sin necesidad de tarjeta de crédito.</p>
-              </section>
             <button
               type="button"
               className="RN__promoBtn"

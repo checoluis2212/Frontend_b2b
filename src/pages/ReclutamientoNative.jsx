@@ -60,8 +60,8 @@ export default function ReclutamientoNative() {
         onFormReady: ($form) => fillHiddenFields($form),
         onBeforeSubmit: ($form) => fillHiddenFields($form),
 
-        // 👇 Espejo del submit hacia tu backend (evento correcto + URL absoluta)
-        onFormSubmitted: ($form) => {
+        // 👇 NUEVO: espejo del submit hacia tu backend
+        onFormSubmit: ($form) => {
           try {
             const root = $form?.get ? $form.get(0) : $form;
 
@@ -81,12 +81,20 @@ export default function ReclutamientoNative() {
             payload.referrer     = document.referrer || '';
             payload.form_id      = 'hubspot_embed';
 
-            // 3) Envía al backend (URL absoluta para que llegue a Render)
+            // 3) Envía al backend (URL ABSOLUTA a Render)
             fetch('https://backend-b2b-a3up.onrender.com/api/lead', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              mode: 'cors',
+              headers: {
+                'Content-Type': 'application/json',
+                // Descomenta si tu server requiere API key:
+                // 'x-api-key': 'TU_API_KEY_AQUI'
+              },
               body: JSON.stringify(payload)
-            }).catch(() => {});
+            })
+              .then(r => r.ok ? r.json() : Promise.reject(r.status))
+              .then(d => console.log('[mirror /api/lead OK]', d))
+              .catch(e => console.warn('[mirror /api/lead ERR]', e));
           } catch (e) {
             console.warn('mirror /api/lead failed:', e);
           }

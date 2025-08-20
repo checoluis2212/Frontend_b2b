@@ -333,3 +333,9 @@ footer small {
 .RN__promoHeader {
       margin-top: 20px;
 }
+
+.RN__promoHeader p {
+  font-size: 13px;  /* cámbialo al tamaño que quieras */
+  line-height: 1.5; /* opcional, mejora la legibilidad */
+}
+

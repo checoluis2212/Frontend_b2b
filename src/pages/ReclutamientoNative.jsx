@@ -28,8 +28,10 @@ export default function ReclutamientoNative() {
         );
 
       const fillHiddenFields = ($form) => {
+        const root = $form?.get ? $form.get(0) : $form; // <-- DOM node real del iframe
+
         const setVal = (name, val) => {
-          const input = $form.querySelector(`input[name="${name}"]`);
+          const input = root.querySelector(`input[name="${name}"]`);
           if (input && val && !input.value) {
             input.value = val;
             // notifica al iframe de HS
@@ -152,11 +154,16 @@ export default function ReclutamientoNative() {
             </li>
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="6" cy="14" r="1" fill="currentColor"/>
+                <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                <circle cx="14" cy="13" r="1" fill="currentColor"/>
+                <circle cx="18" cy="8" r="1" fill="currentColor"/>
               </svg>
               <div>
-                <strong>Compra especializada</strong>
-                <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
+                <strong>Seguimiento</strong>
+                <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
               </div>
             </li>
             <li>
@@ -169,8 +176,8 @@ export default function ReclutamientoNative() {
                 <circle cx="18" cy="8" r="1" fill="currentColor"/>
               </svg>
               <div>
-                <strong>Seguimiento</strong>
-                <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
+                <strong>Capacitación personalizada</strong>
+                <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
               </div>
             </li>
             <li>

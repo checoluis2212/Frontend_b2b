@@ -220,46 +220,36 @@ export default function ReclutamientoNative() {
               <p>Sin compromiso y sin necesidad de tarjeta de crédito.</p>
 
               <button
-  type="button"
-  className="RN__promoBtn"
-  onClick={() => {
-    const url = 'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp';
+                type="button"
+                className="RN__promoBtn"
+                onClick={() => {
+                  const url = 'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp';
 
-    // payload "tal cual" el estilo del form (simple y directo)
-    const payload = {
-      visitorId:  localStorage.getItem('visitorId') || '',
-      page:       window.location.href,
-      referrer:   document.referrer || '',
-      placement:  'promo_header',
-      eventName:  'cta_prueba_gratis_click',
-      // Si tienes cookies UTM y quieres mandarlas igual que el form, puedes añadirlas:
-      // utm_source:   (document.cookie.match(/(?:^|;\s*)utm_source=([^;]+)/)?.[1]) || '',
-      // utm_medium:   (document.cookie.match(/(?:^|;\s*)utm_medium=([^;]+)/)?.[1]) || '',
-      // utm_campaign: (document.cookie.match(/(?:^|;\s*)utm_campaign=([^;]+)/)?.[1]) || '',
-      // utm_content:  (document.cookie.match(/(?:^|;\s*)utm_content=([^;]+)/)?.[1]) || undefined,
-      // utm_term:     (document.cookie.match(/(?:^|;\s*)utm_term=([^;]+)/)?.[1]) || undefined,
-    };
+                  const payload = {
+                    visitorId:  localStorage.getItem('visitorId') || '',
+                    page:       window.location.href,
+                    referrer:   document.referrer || '',
+                    placement:  'promo_header',
+                    eventName:  'cta_prueba_gratis_click',
+                  };
 
-    fetch('https://backend-b2b-a3up.onrender.com/api/click', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        // Si tu backend exige API key como el form, descomenta:
-        // 'x-api-key': 'TU_API_KEY_AQUI'
-      },
-      body: JSON.stringify(payload)
-    })
-      .catch(() => {}) // no bloquees la navegación si falla
-      .finally(() => {
-        // abrir después del POST (exactamente como haces con el form, simple)
-        window.location.href = url; 
-      });
-  }}
-  aria-label="Empieza gratis"
->
-  Empieza gratis
-</button>
+                  fetch('https://backend-b2b-a3up.onrender.com/api/click', {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                  })
+                    .catch(() => {}) 
+                    .finally(() => {
+                      window.location.href = url; 
+                    });
+                }}
+                aria-label="Empieza gratis"
+              >
+                Empieza gratis
+              </button>
 
             </section>
 
@@ -275,104 +265,54 @@ export default function ReclutamientoNative() {
         </div>
 
         {/* Bullets versión mobile */}
-        {/* Desktop */}
-<ul className="RN__benefitsList">
-  <li>
-    <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-      <circle cx="9" cy="21" r="1" />
-      <circle cx="20" cy="21" r="1" />
-      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-    <div>
-      <strong>Compra de vacantes</strong>
-      <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
-    </div>
-  </li>
-  <li>
-    <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-      <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-    <div>
-      <strong>Compra especializada</strong>
-      <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
-    </div>
-  </li>
-  <li>
-    <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-      <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <circle cx="6" cy="14" r="1" fill="currentColor"/>
-      <circle cx="10" cy="10" r="1" fill="currentColor"/>
-      <circle cx="14" cy="13" r="1" fill="currentColor"/>
-      <circle cx="18" cy="8" r="1" fill="currentColor"/>
-    </svg>
-    <div>
-      <strong>Seguimiento</strong>
-      <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
-    </div>
-  </li>
-  <li>
-    <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-      <circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-    <div>
-      <strong>Capacitación personalizada</strong>
-      <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
-    </div>
-  </li>
-</ul>
-
-{/* Mobile */}
-<section className="RN__benefitsList--mobile">
-  <ul>
-    <li>
-      <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <circle cx="9" cy="21" r="1" />
-        <circle cx="20" cy="21" r="1" />
-        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-      <div>
-        <strong>Compra de vacantes</strong>
-        <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
-      </div>
-    </li>
-    <li>
-      <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-      <div>
-        <strong>Compra especializada</strong>
-        <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
-      </div>
-    </li>
-    <li>
-      <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="6" cy="14" r="1" fill="currentColor"/>
-        <circle cx="10" cy="10" r="1" fill="currentColor"/>
-        <circle cx="14" cy="13" r="1" fill="currentColor"/>
-        <circle cx="18" cy="8" r="1" fill="currentColor"/>
-      </svg>
-      <div>
-        <strong>Seguimiento</strong>
-        <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
-      </div>
-    </li>
-    <li>
-      <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-      <div>
-        <strong>Capacitación personalizada</strong>
-        <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
-      </div>
-    </li>
-  </ul>
-</section>
-
+        <section className="RN__benefitsList--mobile">
+          <ul>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <div>
+                <strong>Compra de vacantes</strong>
+                <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <div>
+                <strong>Compra especializada</strong>
+                <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="6" cy="14" r="1" fill="currentColor"/>
+                <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                <circle cx="14" cy="13" r="1" fill="currentColor"/>
+                <circle cx="18" cy="8" r="1" fill="currentColor"/>
+              </svg>
+              <div>
+                <strong>Seguimiento</strong>
+                <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
+              </div>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <div>
+                <strong>Capacitación personalizada</strong>
+                <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
 
         {/* Carrusel Logos */}
         <div className="logos-section mt-5">

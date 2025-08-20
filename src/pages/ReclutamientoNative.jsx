@@ -171,23 +171,16 @@ export default function ReclutamientoNative() {
           {/* Columna derecha */}
           <div className="RN__right">
             <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
+            <section className="RN__card">
+             <section className="RN__promoHeader"> 
+              <h3>Prueba OCC Empresas 14 días gratis</h3>
+              <p>Sin compromiso, sin límites y sin necesidad de tarjeta de crédito.</p>
+             </section>
+            <div className="RN__separator">
+              <span>o</span>
+            </div>
             <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
             <section className="RN__card">
-              <section className="RN__promoHeader" aria-labelledby="rn-promo-title">
-  <h2 id="rn-promo-title" className="RN__promoTitle">
-    Prueba OCC Empresas 14 días gratis
-  </h2>
-  <p className="RN__promoSub">
-    Sin compromisos, sin límites y sin necesidad de tarjeta.
-  </p>
-
-  {/* Separador “o …” opcional */}
-  <div className="RN__separator" role="separator" aria-label="o continúa con el formulario">
-    <span className="RN__separatorLine" />
-    <span className="RN__separatorText">o completa el formulario</span>
-    <span className="RN__separatorLine" />
-  </div>
-</section>
               <div id="hubspot-form"></div>
             </section>
           </div>

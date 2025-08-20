@@ -59,6 +59,38 @@ export default function ReclutamientoNative() {
         target: "#hubspot-form",
         onFormReady: ($form) => fillHiddenFields($form),
         onBeforeSubmit: ($form) => fillHiddenFields($form),
+
+        // 👇 NUEVO: espejo del submit hacia tu backend
+        onFormSubmit: ($form) => {
+          try {
+            const root = $form?.get ? $form.get(0) : $form;
+
+            // 1) Recolecta todos los valores del form del iframe
+            const payload = {};
+            root.querySelectorAll('input, textarea, select').forEach(el => {
+              if (el.name) payload[el.name] = el.value;
+            });
+
+            // 2) Añade metadatos útiles (VID + UTM + página)
+            payload.visitorId    = localStorage.getItem('visitorId') || '';
+            payload.vid_cookie   = getCookie('vid') || '';
+            payload.utm_source   = getCookie('utm_source') || '';
+            payload.utm_medium   = getCookie('utm_medium') || '';
+            payload.utm_campaign = getCookie('utm_campaign') || '';
+            payload.page         = window.location.href;
+            payload.referrer     = document.referrer || '';
+            payload.form_id      = 'hubspot_embed';
+
+            // 3) Envía al backend (usa relativo si sirves backend en el mismo dominio)
+            fetch('/api/lead', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            }).catch(() => {});
+          } catch (e) {
+            console.warn('mirror /api/lead failed:', e);
+          }
+        }
       });
     };
     document.body.appendChild(script);

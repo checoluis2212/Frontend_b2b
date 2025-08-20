@@ -168,33 +168,29 @@ export default function ReclutamientoNative() {
             </ul>
           </section>
 
-          {/* Columna derecha */}
-          <div className="RN__right">
-            <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
-            <section className="RN__promoHeader">
-              <h3>Prueba OCC Empresas gratis</h3>
-              <p>Sin compromiso y sin necesidad de tarjeta de crédito.</p>
-            <button
-              type="button"
-              className="RN__promoBtn"
-              onClick={() => trackAndGo_PruebaGratis('https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp',
-              { placement: 'promo_header' }
-             )
-           }
-              aria-label="Empieza gratis"
-                >
-              Empieza gratis
-              </button>
-            </section> 
-            <div className="RN__divider">
-              <span>o</span>
-            </div>
-            <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
-            <section className="RN__card">
-              <div id="hubspot-form"></div>
-            </section>
-          </div>
-        </div>
+          {/* Columna derecha */}                                    
+<div className="RN__right">
+  <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
+  <section className="RN__promoHeader">
+    <h3>Prueba OCC Empresas gratis</h3>
+    <p>Sin compromiso y sin necesidad de tarjeta de crédito.</p>
+
+    <button
+      type="button"
+      className="RN__promoBtn"
+      onClick={() =>
+        trackAndGo_PruebaGratis(
+          'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp',
+          { placement: 'promo_header' }
+        )
+      }
+      aria-label="Empieza gratis"
+    >
+      Empieza gratis
+    </button>
+  </section>
+</div>
+
 
         {/* Bullets versión mobile */}
         <section className="RN__benefitsList--mobile">

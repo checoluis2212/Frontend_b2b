@@ -19,14 +19,45 @@ export default function ReclutamientoNative() {
     script.type = "text/javascript";
     script.charset = "utf-8";
     script.onload = () => {
-      if (window.hbspt) {
-        window.hbspt.forms.create({
-          portalId: "49514148",
-          formId: "5f745bfa-8589-40c2-9940-f9081123e0b4",
-          region: "na1",
-          target: "#hubspot-form"
-        });
-      }
+      if (!window.hbspt) return;
+
+      // === Helpers para rellenar campos ocultos ===
+      const getCookie = (k) =>
+        decodeURIComponent(
+          ((document.cookie.split("; ").find(r => r.startsWith(k + "=")) || "").split("=")[1]) || ""
+        );
+
+      const fillHiddenFields = ($form) => {
+        const setVal = (name, val) => {
+          const input = $form.querySelector(`input[name="${name}"]`);
+          if (input && val && !input.value) {
+            input.value = val;
+            // notifica al iframe de HS
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+            input.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+        };
+
+        // Usa exactamente los INTERNAL NAMES del form
+        const vid =
+          getCookie("vid") ||               // si la guardaste como cookie
+          localStorage.getItem("visitorId") // o desde tu localStorage
+          || "";
+
+        setVal("visitorid", vid);
+        setVal("utm_source", getCookie("utm_source"));
+        setVal("utm_medium", getCookie("utm_medium"));
+        setVal("utm_campaign", getCookie("utm_campaign"));
+      };
+
+      window.hbspt.forms.create({
+        portalId: "49514148",
+        formId: "5f745bfa-8589-40c2-9940-f9081123e0b4",
+        region: "na1",
+        target: "#hubspot-form",
+        onFormReady: ($form) => fillHiddenFields($form),
+        onBeforeSubmit: ($form) => fillHiddenFields($form),
+      });
     };
     document.body.appendChild(script);
   }, []);
@@ -35,10 +66,10 @@ export default function ReclutamientoNative() {
     <div className="RN__wrap">
       {/* Header con logo */}
       <header className="RN__bar">
-  <div className="RN__barContainer">
-    <img src="/occ1.png" alt="OCC" className="RN__logo" />
-  </div>
-</header>
+        <div className="RN__barContainer">
+          <img src="/occ1.png" alt="OCC" className="RN__logo" />
+        </div>
+      </header>
 
       <main className="RN__container">
         <div className="RN__grid">

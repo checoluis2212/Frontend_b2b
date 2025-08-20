@@ -264,21 +264,26 @@ footer small {
   }
 }
 
-.RN__divider {
+.divider {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 16px 0;
+  text-align: center;
+  color: #fff; /* color del texto "o", cámbialo si quieres */
+  margin: 20px 0;
 }
 
-.RN__line {
+.divider::before,
+.divider::after {
+  content: '';
   flex: 1;
-  border: none;
-  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc; /* color de la línea */
 }
 
-.RN__dividerText {
-  font-size: 14px;
-  color: #666;
-  font-weight: 500;
+.divider:not(:empty)::before {
+  margin-right: .75em;
 }
+
+.divider:not(:empty)::after {
+  margin-left: .75em;
+}
+

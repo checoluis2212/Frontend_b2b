@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import './ReclutamientoNative.css';
 import '../index.css';
-import { trackAndGo_PruebaGratis } from '../utils/ga4.js';
+import { trackAndGo_PruebaGratis, trackGA4Click } from '../utils/ga4.js';
 
 import amazon from '../assets/amazon.png';
 import bbva from '../assets/bbva.png';
@@ -82,6 +82,14 @@ export default function ReclutamientoNative() {
             payload.referrer     = document.referrer || '';
             payload.form_id      = 'hubspot_embed';
 
+            // 🔔 Evento GA4: intento de envío del formulario (frontend)
+            trackGA4Click('lead_form_submit', {
+              placement: 'hubspot_embed',
+              params: { form_id: 'hubspot_embed' },
+              newTab: false,
+              timeoutMs: 200,
+            });
+
             // 3) Envía al backend (URL ABSOLUTA a Render)
             fetch('https://backend-b2b-a3up.onrender.com/api/lead', {
               method: 'POST',
@@ -94,8 +102,32 @@ export default function ReclutamientoNative() {
               body: JSON.stringify(payload)
             })
               .then(r => r.ok ? r.json() : Promise.reject(r.status))
-              .then(d => console.log('[mirror /api/lead OK]', d))
-              .catch(e => console.warn('[mirror /api/lead ERR]', e));
+              .then(d => {
+                console.log('[mirror /api/lead OK]', d);
+                // 🔔 Evento GA4: espejo al backend exitoso
+                trackGA4Click('lead_mirror_sent', {
+                  placement: 'hubspot_embed',
+                  params: {
+                    form_id: 'hubspot_embed',
+                    mirror_status: 'ok'
+                  },
+                  newTab: false,
+                  timeoutMs: 200,
+                });
+              })
+              .catch(e => {
+                console.warn('[mirror /api/lead ERR]', e);
+                // 🔔 Evento GA4: espejo falló
+                trackGA4Click('lead_mirror_error', {
+                  placement: 'hubspot_embed',
+                  params: {
+                    form_id: 'hubspot_embed',
+                    mirror_status: 'error'
+                  },
+                  newTab: false,
+                  timeoutMs: 200,
+                });
+              });
           } catch (e) {
             console.warn('mirror /api/lead failed:', e);
           }

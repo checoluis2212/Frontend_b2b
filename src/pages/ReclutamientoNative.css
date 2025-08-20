@@ -81,7 +81,6 @@ body {
   font-size: 50px;
   color: #fff;
   margin-bottom: 32px;
-  width: 90%;
 }
 
 .RN__benefitsList {
@@ -98,6 +97,12 @@ body {
   display: flex;
   gap: 16px;
   align-items: flex-start;
+  width:90%;
+}
+
+.RN__benefitsList p {
+  font-size: 14px;
+    margin-top: 5px;
 }
 
 .RN__icon {

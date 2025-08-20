@@ -293,3 +293,32 @@ footer small {
   line-height: 1;
 }
 
+/* Promo header (ya lo tienes, lo dejo por si hace falta centrar) */
+.RN__promoHeader {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* Botón de “prueba 14 días” */
+.RN__promoBtn {
+  margin-top: 12px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 9999px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #ff4d6d;             /* color acorde al “Enviar” rosa */
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0,0,0,.15);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.RN__promoBtn:hover {
+  background: #ff3a5d;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+}
+
+.RN__promoBtn:active {
+  transform: translateY(0);
+}

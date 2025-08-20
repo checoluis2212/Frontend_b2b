@@ -60,8 +60,8 @@ export default function ReclutamientoNative() {
         onFormReady: ($form) => fillHiddenFields($form),
         onBeforeSubmit: ($form) => fillHiddenFields($form),
 
-        // 👇 NUEVO: espejo del submit hacia tu backend
-        onFormSubmit: ($form) => {
+        // 👇 Espejo del submit hacia tu backend (evento correcto + URL absoluta)
+        onFormSubmitted: ($form) => {
           try {
             const root = $form?.get ? $form.get(0) : $form;
 
@@ -81,8 +81,8 @@ export default function ReclutamientoNative() {
             payload.referrer     = document.referrer || '';
             payload.form_id      = 'hubspot_embed';
 
-            // 3) Envía al backend (usa relativo si sirves backend en el mismo dominio)
-            fetch('/api/lead', {
+            // 3) Envía al backend (URL absoluta para que llegue a Render)
+            fetch('https://backend-b2b-a3up.onrender.com/api/lead', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload)

@@ -367,9 +367,9 @@ footer small {
 .m-title{margin:0 0 8px;font-size:18px}
 .m-text{margin:0 0 16px;color:#475569}
 .m-actions{display:flex;gap:10px;justify-content:flex-end}
-.btn-primary{background:#f13465 !importan;color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+.btn-primary{background:#f13465 !important;color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
 .btn-ghost{background:transparent;border:1px solid #cbd5e1;border-radius:10px;padding:10px 14px;cursor:pointer}
-.btn-primary:hover{background:#ff3a5d !importan} .btn-ghost:hover{background:#f8fafc}
+.btn-primary:hover{background:#ff3a5d !important} .btn-ghost:hover{background:#f8fafc}
 
 
 /* overlay centrado en viewport */

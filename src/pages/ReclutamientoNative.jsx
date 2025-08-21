@@ -254,20 +254,8 @@ export default function ReclutamientoNative() {
     <div className="RN__wrap">
       <header className="RN__bar">
   <div className="RN__barContainer">
-    {/* IZQUIERDA → Botón */}
+    {/* IZQUIERDA → Logo */}
     <div className="RN__barLeft">
-      <button
-        type="button"
-        className="RN__jobLink"
-        onClick={() => setOpenModal(true)}
-        aria-haspopup="dialog"
-      >
-        Estoy buscando trabajo
-      </button>
-    </div>
-
-    {/* DERECHA → Logo */}
-    <div className="RN__barRight">
       <img
         src="/occ1.png"
         alt="OCC"
@@ -277,8 +265,22 @@ export default function ReclutamientoNative() {
         fetchpriority="low"
       />
     </div>
+
+    {/* DERECHA → Botón */}
+    <div className="RN__barRight">
+      <button
+        type="button"
+        className="RN__jobLink"
+        onClick={() => setOpenModal(true)}
+        aria-haspopup="dialog"
+      >
+        Estoy buscando trabajo
+      </button>
+    </div>
   </div>
 </header>
+</div>
+
 
 
       <main className="RN__container">

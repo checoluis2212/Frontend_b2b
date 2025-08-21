@@ -347,33 +347,27 @@ footer small {
   line-height: 1.5; /* opcional, mejora la legibilidad */
 }
 
-* ⬅️ Asegura que ningún ancestro corte el sticky */
+/* 1) Asegura que el sticky funcione */
 .RN__wrap,
 .RN__container,
-.RN__grid {
-  overflow: visible !important;
-}
+.RN__grid { overflow: visible !important; }
 
-/* Grid alineado arriba para que el sticky pueda “pegarse” */
-.RN__grid {
-  align-items: start;
-}
+/* 2) El grid no debe centrar verticalmente */
+.RN__grid { align-items: start; }
 
-/* 🎯 Hace sticky la columna izquierda */
-.RN__left {
-  position: sticky;
-  top: 72px;                 /* ajusta si tu header es más/menos alto */
-  height: calc(100vh - 72px);
-  overflow: auto;            /* scroll interno si el contenido crece */
-  align-self: start;         /* por si el grid intenta estirarla */
-  z-index: 1;                /* evita que el form la tape en algunos navegadores */
-}
+/* 3) Columna izquierda fija con sticky (desktop) */
+@media (min-width: 992px) {
+  :root { --header-h: 72px; } /* alto real de tu barra azul; ajústalo si cambia */
 
-/* En mobile, desactiva el sticky */
-@media (max-width: 992px) {
   .RN__left {
-    position: static;
-    height: auto;
-    overflow: visible;
+    position: sticky;
+    top: var(--header-h);   /* se “pega” justo debajo del header */
+    align-self: start;
+    /* sin height ni overflow ⇒ NO sale scrollbar interno en la izquierda */
   }
+}
+
+/* 4) En mobile, comportamiento normal */
+@media (max-width: 991.98px) {
+  .RN__left { position: static; }
 }

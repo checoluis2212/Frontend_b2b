@@ -383,14 +383,19 @@ footer small {
 }
 
 .m-panel{
+  position: fixed;
+  inset: 0;          /* top:0; right:0; bottom:0; left:0 */
+  margin: auto;      /* centra en ambos ejes */
+  width: min(480px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
   background: #fff;
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 24px 80px rgba(0,0,0,.25);
-  width: min(480px, 92vw);
-  max-height: 90vh; overflow-y: auto;
-  z-index: 10000;           /* encima del overlay */
+  z-index: 10000;    /* por encima del overlay */
 }
+
 
 
 

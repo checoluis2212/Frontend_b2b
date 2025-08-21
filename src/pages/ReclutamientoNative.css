@@ -347,3 +347,9 @@ footer small {
   line-height: 1.5; /* opcional, mejora la legibilidad */
 }
 
+@media (max-width: 768px) {
+  .RN__promoHeader h3 {
+    font-size: 30px !important;
+  }
+}
+

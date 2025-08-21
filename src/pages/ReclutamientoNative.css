@@ -353,3 +353,23 @@ footer small {
   }
 }
 
+/* Topbar */
+.RN__bar { position: sticky; top: 0; z-index: 50; background: #0f4ec7; }
+.RN__barContainer { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; }
+.RN__barLeft { display: flex; align-items: center; gap: 10px; }
+.RN__jobLink { background: transparent; border: 1px solid rgba(255,255,255,.7); color: #fff; border-radius: 999px; padding: 6px 12px; font-size: 14px; cursor: pointer; }
+.RN__jobLink:hover { background: rgba(255,255,255,.12); }
+.RN__logo { height: 28px; }
+
+/* Modal */
+.m-overlay{position:fixed;inset:0;background:rgba(2,6,23,.55);backdrop-filter:blur(2px);z-index:1000}
+.m-panel{position:fixed;z-index:1001;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(480px,92vw);background:#fff;border-radius:16px;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,.25)}
+.m-title{margin:0 0 8px;font-size:18px}
+.m-text{margin:0 0 16px;color:#475569}
+.m-actions{display:flex;gap:10px;justify-content:flex-end}
+.btn-primary{background:#0f4ec7;color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
+.btn-ghost{background:transparent;border:1px solid #cbd5e1;border-radius:10px;padding:10px 14px;cursor:pointer}
+.btn-primary:hover{filter:brightness(1.05)} .btn-ghost:hover{background:#f8fafc}
+
+

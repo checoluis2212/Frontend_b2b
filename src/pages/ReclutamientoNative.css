@@ -347,27 +347,24 @@ footer small {
   line-height: 1.5; /* opcional, mejora la legibilidad */
 }
 
-/* 1) Asegura que el sticky funcione */
-.RN__wrap,
-.RN__container,
-.RN__grid { overflow: visible !important; }
-
-/* 2) El grid no debe centrar verticalmente */
-.RN__grid { align-items: start; }
-
-/* 3) Columna izquierda fija con sticky (desktop) */
 @media (min-width: 992px) {
-  :root { --header-h: 72px; } /* alto real de tu barra azul; ajústalo si cambia */
+  :root {
+    --header-h: 72px;
+    --container-w: 1200px;      /* ancho máximo de tu contenedor si lo usas */
+    --left-col: 48%;            /* ancho aprox de la izquierda en tu grid */
+  }
 
   .RN__left {
-    position: sticky;
-    top: var(--header-h);   /* se “pega” justo debajo del header */
-    align-self: start;
-    /* sin height ni overflow ⇒ NO sale scrollbar interno en la izquierda */
+    position: fixed;
+    top: var(--header-h);
+    left: max(0px, calc((100vw - var(--container-w)) / 2)); /* centra respecto al contenedor */
+    width: calc(var(--container-w) * (var(--left-col) / 100));
+    height: calc(100vh - var(--header-h));
+    overflow: auto; /* si el contenido rebasa, que scrollee dentro */
+    z-index: 1;
   }
-}
 
-/* 4) En mobile, comportamiento normal */
-@media (max-width: 991.98px) {
-  .RN__left { position: static; }
+  .RN__right {
+    margin-left: calc(var(--container-w) * (var(--left-col) / 100));
+  }
 }

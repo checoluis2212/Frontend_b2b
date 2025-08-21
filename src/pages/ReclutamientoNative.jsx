@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+// ReclutamientoNative.jsx
+import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import './ReclutamientoNative.css';
 import '../index.css';
 import { trackAndGo_PruebaGratis, trackGA4Click } from '../utils/ga4.js';
@@ -25,7 +27,61 @@ const getUTMs = () => {
   };
 };
 
+/* =========================================================
+   MODAL de confirmación "¿Quieres ir a buscar trabajo?"
+   (Autosize, cierre con overlay/ESC, focus y bloqueo de scroll)
+========================================================= */
+function ConfirmLeaveModal({ open, onClose, onConfirm }) {
+  const panelRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === "Escape") onClose?.(); };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    setTimeout(() => panelRef.current?.querySelector("button")?.focus(), 60);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div
+            className="m-overlay"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={onClose}
+          />
+          <motion.div
+            role="dialog" aria-modal="true" aria-labelledby="modal-title"
+            ref={panelRef}
+            className="m-panel"
+            initial={{ y: 24, opacity: 0, scale: 0.98 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: 24, opacity: 0, scale: 0.98 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 id="modal-title" className="m-title">¿Quieres ir a buscar trabajo?</h2>
+            <p className="m-text">
+              Te llevaremos a la página de búsqueda de empleo. Esta acción te sacará de la página de empresas.
+            </p>
+            <div className="m-actions">
+              <button className="btn-primary" onClick={onConfirm}>Sí, llévame</button>
+              <button className="btn-ghost" onClick={onClose}>No, quedarme aquí</button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export default function ReclutamientoNative() {
+  const [openModal, setOpenModal] = useState(false);
+
   useEffect(() => {
     // ===== LAZY LOAD HUBSPOT (se carga solo cuando #hubspot-form es visible) =====
     let loaded = false;
@@ -186,16 +242,35 @@ export default function ReclutamientoNative() {
     }
   }, []);
 
+  const handleConfirm = () => {
+    // Redirección a búsqueda de empleo preservando UTM si existen
+    const base = 'https://www.occ.com.mx/empleos';
+    const utm = new URLSearchParams(window.location.search).toString();
+    const url = utm ? `${base}?${utm}` : base;
+    window.location.href = url;
+  };
+
   return (
     <div className="RN__wrap">
-      {/* Header con logo */}
+      {/* Header con logo + NUEVO botón izquierda */}
       <header className="RN__bar">
         <div className="RN__barContainer">
+          <div className="RN__barLeft">
+            <button
+              type="button"
+              className="RN__jobLink"
+              onClick={() => setOpenModal(true)}
+              aria-haspopup="dialog"
+            >
+              Estoy buscando trabajo
+            </button>
+          </div>
+
           <img
             src="/occ1.png"
             alt="OCC"
             className="RN__logo"
-            loading="lazy"            /* LAZY */
+            loading="lazy"
             decoding="async"
             fetchpriority="low"
           />
@@ -372,7 +447,7 @@ export default function ReclutamientoNative() {
                   src={logoSrc}
                   alt="Logo"
                   className="logo-item uniform-logo"
-                  loading="lazy"         /* LAZY */
+                  loading="lazy"
                   decoding="async"
                   fetchpriority="low"
                   sizes="(max-width: 768px) 120px, 160px"
@@ -387,6 +462,13 @@ export default function ReclutamientoNative() {
           <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
         </footer>
       </main>
+
+      {/* Modal */}
+      <ConfirmLeaveModal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        onConfirm={handleConfirm}
+      />
     </div>
   );
 }

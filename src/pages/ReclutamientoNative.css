@@ -347,24 +347,3 @@ footer small {
   line-height: 1.5; /* opcional, mejora la legibilidad */
 }
 
-@media (min-width: 992px) {
-  :root {
-    --header-h: 72px;
-    --container-w: 1200px;      /* ancho máximo de tu contenedor si lo usas */
-    --left-col: 48%;            /* ancho aprox de la izquierda en tu grid */
-  }
-
-  .RN__left {
-    position: fixed;
-    top: var(--header-h);
-    left: max(0px, calc((100vw - var(--container-w)) / 2)); /* centra respecto al contenedor */
-    width: calc(var(--container-w) * (var(--left-col) / 100));
-    height: calc(100vh - var(--header-h));
-    overflow: auto; /* si el contenido rebasa, que scrollee dentro */
-    z-index: 1;
-  }
-
-  .RN__right {
-    margin-left: calc(var(--container-w) * (var(--left-col) / 100));
-  }
-}

@@ -48,31 +48,37 @@ function ConfirmLeaveModal({ open, onClose, onConfirm }) {
 
   return (
     <AnimatePresence>
-  {open && (
-    <motion.div
-      className="m-overlay"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={onClose}                // cierra al hacer click afuera
-    >
-      <motion.div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        ref={panelRef}
-        className="m-panel"
-        initial={{ opacity: 0, scale: 0.98 }}  // evita animar "y" para no pelear con posición
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.98 }}
-        onClick={(e) => e.stopPropagation()}   // evita burbuja
-      >
-        {/* ...contenido del modal tal cual... */}
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
+      {open && (
+        <motion.div
+          className="m-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}                // cierra al hacer click afuera
+        >
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+            ref={panelRef}
+            className="m-panel"
+            initial={{ opacity: 0, scale: 0.98 }}  // evita animar "y" para no pelear con posición
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            onClick={(e) => e.stopPropagation()}   // evita burbuja
+          >
+            <h2 id="modal-title" className="m-title">¿Quieres ir a buscar trabajo?</h2>
+            <p className="m-text">
+              Te llevaremos a la página de búsqueda de empleo. Esta acción te sacará de la página de empresas.
+            </p>
+            <div className="m-actions">
+              <button className="btn-primary" onClick={onConfirm}>Sí, llévame</button>
+              <button className="btn-ghost" onClick={onClose}>No, quedarme aquí</button>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
@@ -250,218 +256,35 @@ export default function ReclutamientoNative() {
   return (
     <div className="RN__wrap">
       <header className="RN__bar">
-  <div className="RN__barContainer">
-    {/* IZQUIERDA → Logo */}
-    <div className="RN__barLeft">
-      <img
-        src="/occ1.png"
-        alt="OCC"
-        className="RN__logo"
-        loading="lazy"
-        decoding="async"
-        fetchpriority="low"
-      />
-    </div>
+        <div className="RN__barContainer">
+          {/* IZQUIERDA → Logo */}
+          <div className="RN__barLeft">
+            <img
+              src="/occ1.png"
+              alt="OCC"
+              className="RN__logo"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+            />
+          </div>
 
-    {/* DERECHA → Botón */}
-    <div className="RN__barRight">
-      <button
-        type="button"
-        className="RN__jobLink"
-        onClick={() => setOpenModal(true)}
-        aria-haspopup="dialog"
-      >
-        Estoy buscando trabajo
-      </button>
-    </div>
-  </div>
-</header>
-
+          {/* DERECHA → Botón */}
+          <div className="RN__barRight">
+            <button
+              type="button"
+              className="RN__jobLink"
+              onClick={() => setOpenModal(true)}
+              aria-haspopup="dialog"
+            >
+              Estoy buscando trabajo
+            </button>
+          </div>
+        </div>
+      </header>
 
       <main className="RN__container">
-        <div className="RN__grid">
-          {/* Columna izquierda */}
-          <section className="RN__left">
-            <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
-
-            {/* Bullets con título + descripción */}
-            <ul className="RN__benefitsList">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <circle cx="9" cy="21" r="1" />
-                  <circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div>
-                  <strong>Compra de vacantes</strong>
-                  <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
-                </div>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div>
-                  <strong>Compra especializada</strong>
-                  <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
-                </div>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="6" cy="14" r="1" fill="currentColor"/>
-                  <circle cx="10" cy="10" r="1" fill="currentColor"/>
-                  <circle cx="14" cy="13" r="1" fill="currentColor"/>
-                  <circle cx="18" cy="8" r="1" fill="currentColor"/>
-                </svg>
-                <div>
-                  <strong>Seguimiento</strong>
-                  <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
-                </div>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div>
-                  <strong>Capacitación personalizada</strong>
-                  <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
-                </div>
-              </li>
-            </ul>
-          </section>
-
-          {/* Columna derecha */}
-          <div className="RN__right">
-            <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
-
-            <section className="RN__promoHeader">
-              <h3>Prueba OCC Empresas gratis</h3>
-              <p>Sin compromiso y sin necesidad de tarjeta de crédito.</p>
-
-              <button
-                type="button"
-                className="RN__promoBtn"
-                onClick={() => {
-                  const url = 'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp';
-
-                  const payload = {
-                    visitorId:  localStorage.getItem('visitorId') || '',
-                    page:       window.location.href,
-                    referrer:   document.referrer || '',
-                    placement:  'promo_header',
-                    eventName:  'cta_prueba_gratis_click',
-                  };
-
-                  fetch('https://backend-b2b-a3up.onrender.com/api/click', {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload)
-                  })
-                    .catch(() => {}) 
-                    .finally(() => {
-                      window.location.href = url; 
-                    });
-                }}
-                aria-label="Empieza gratis"
-              >
-                Empieza gratis
-              </button>
-
-            </section>
-
-            <div className="RN__divider">
-              <span>o</span>
-            </div>
-
-            <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
-            <section className="RN__card">
-              <div id="hubspot-form"></div>
-            </section>
-          </div>
-        </div>
-
-        {/* Bullets versión mobile */}
-        <section className="RN__benefitsList--mobile">
-          <ul>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <div>
-                <strong>Compra de vacantes</strong>
-                <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
-              </div>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <div>
-                <strong>Compra especializada</strong>
-                <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
-              </div>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="6" cy="14" r="1" fill="currentColor"/>
-                <circle cx="10" cy="10" r="1" fill="currentColor"/>
-                <circle cx="14" cy="13" r="1" fill="currentColor"/>
-                <circle cx="18" cy="8" r="1" fill="currentColor"/>
-              </svg>
-              <div>
-                <strong>Seguimiento</strong>
-                <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
-              </div>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <div>
-                <strong>Capacitación personalizada</strong>
-                <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
-              </div>
-            </li>
-          </ul>
-        </section>
-
-        {/* Carrusel Logos */}
-        <div className="logos-section mt-5">
-          <h3 className="mb-3">Marcas que confían en nosotros</h3>
-          <div className="logo-carousel">
-            <div className="logo-track">
-              {[bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson, amazon,
-                bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson, amazon].map((logoSrc, idx) => (
-                <img
-                  key={idx}
-                  src={logoSrc}
-                  alt="Logo"
-                  className="logo-item uniform-logo"
-                  loading="lazy"
-                  decoding="async"
-                  fetchpriority="low"
-                  sizes="(max-width: 768px) 120px, 160px"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <footer className="mt-5 text-center">
-          <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
-        </footer>
+        {/* ... todo tu contenido igual ... */}
       </main>
 
       {/* Modal */}

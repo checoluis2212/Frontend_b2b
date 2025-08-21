@@ -279,8 +279,6 @@ export default function ReclutamientoNative() {
     </div>
   </div>
 </header>
-</div>
-
 
 
       <main className="RN__container">

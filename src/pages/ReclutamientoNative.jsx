@@ -27,311 +27,126 @@ const getUTMs = () => {
 
 export default function ReclutamientoNative() {
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "//js.hsforms.net/forms/embed/v2.js";
-    script.type = "text/javascript";
-    script.charset = "utf-8";
-    script.onload = () => {
-      if (!window.hbspt) return;
+    // ===== LAZY LOAD HUBSPOT (se carga solo cuando #hubspot-form es visible) =====
+    let loaded = false;
+    const loadHubspot = () => {
+      if (loaded) return;
+      loaded = true;
 
-      // === Helpers para rellenar campos ocultos ===
-      const getCookie = (k) =>
-        decodeURIComponent(
-          ((document.cookie.split("; ").find(r => r.startsWith(k + "=")) || "").split("=")[1]) || ""
-        );
+      const script = document.createElement("script");
+      script.src = "//js.hsforms.net/forms/embed/v2.js";
+      script.type = "text/javascript";
+      script.charset = "utf-8";
+      script.async = true;
+      script.defer = true;
 
-      const fillHiddenFields = ($form) => {
-        const root = $form?.get ? $form.get(0) : $form; // <-- DOM node real del iframe
+      script.onload = () => {
+        if (!window.hbspt) return;
 
-        const setVal = (name, val) => {
-          const input = root.querySelector(`input[name="${name}"]`);
-          if (input && val && !input.value) {
-            input.value = val;
-            // notifica al iframe de HS
-            input.dispatchEvent(new Event("input", { bubbles: true }));
-            input.dispatchEvent(new Event("change", { bubbles: true }));
-          }
+        // === Helpers para rellenar campos ocultos ===
+        const getCookie = (k) =>
+          decodeURIComponent(
+            ((document.cookie.split("; ").find(r => r.startsWith(k + "=")) || "").split("=")[1]) || ""
+          );
+
+        const fillHiddenFields = ($form) => {
+          const root = $form?.get ? $form.get(0) : $form; // <-- DOM node real del iframe
+
+          const setVal = (name, val) => {
+            const input = root.querySelector(`input[name="${name}"]`);
+            if (input && val && !input.value) {
+              input.value = val;
+              input.dispatchEvent(new Event("input", { bubbles: true }));
+              input.dispatchEvent(new Event("change", { bubbles: true }));
+            }
+          };
+
+          const vid =
+            getCookie("vid") ||
+            localStorage.getItem("visitorId") ||
+            "";
+
+          setVal("visitorid", vid);
+          setVal("utm_source", getCookie("utm_source"));
+          setVal("utm_medium", getCookie("utm_medium"));
+          setVal("utm_campaign", getCookie("utm_campaign"));
         };
 
-        // Usa exactamente los INTERNAL NAMES del form
-        const vid =
-          getCookie("vid") ||               // si la guardaste como cookie
-          localStorage.getItem("visitorId") // o desde tu localStorage
-          || "";
+        window.hbspt.forms.create({
+          portalId: "49514148",
+          formId: "5f745bfa-8589-40c2-9940-f9081123e0b4",
+          region: "na1",
+          target: "#hubspot-form",
+          onFormReady: ($form) => fillHiddenFields($form),
+          onBeforeSubmit: ($form) => fillHiddenFields($form),
 
-        setVal("visitorid", vid);
-        setVal("utm_source", getCookie("utm_source"));
-        setVal("utm_medium", getCookie("utm_medium"));
-        setVal("utm_campaign", getCookie("utm_campaign"));
-      };
+          // 👇 Espejo del submit hacia tu backend
+          onFormSubmit: ($form) => {
+            try {
+              const root = $form?.get ? $form.get(0) : $form;
 
-      window.hbspt.forms.create({
-        portalId: "49514148",
-        formId: "5f745bfa-8589-40c2-9940-f9081123e0b4",
-        region: "na1",
-        target: "#hubspot-form",
-        onFormReady: ($form) => fillHiddenFields($form),
-        onBeforeSubmit: ($form) => fillHiddenFields($form),
-
-        // 👇 NUEVO: espejo del submit hacia tu backend
-        onFormSubmit: ($form) => {
-          try {
-            const root = $form?.get ? $form.get(0) : $form;
-
-            // 1) Recolecta todos los valores del form del iframe
-            const payload = {};
-            root.querySelectorAll('input, textarea, select').forEach(el => {
-              if (el.name) payload[el.name] = el.value;
-            });
-
-            // 2) Añade metadatos útiles (VID + UTM + página)
-            payload.visitorId    = localStorage.getItem('visitorId') || '';
-            payload.vid_cookie   = getCookie('vid') || '';
-            payload.utm_source   = getCookie('utm_source') || '';
-            payload.utm_medium   = getCookie('utm_medium') || '';
-            payload.utm_campaign = getCookie('utm_campaign') || '';
-            payload.page         = window.location.href;
-            payload.referrer     = document.referrer || '';
-            payload.form_id      = 'hubspot_embed';
-
-            // 🔔 Evento GA4: intento de envío del formulario (frontend)
-            trackGA4Click('lead_form_submit', {
-              placement: 'hubspot_embed',
-              params: { form_id: 'hubspot_embed' },
-              newTab: false,
-              timeoutMs: 200,
-            });
-
-            // 3) Envía al backend (URL ABSOLUTA a Render)
-            fetch('https://backend-b2b-a3up.onrender.com/api/lead', {
-              method: 'POST',
-              mode: 'cors',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(payload)
-            })
-              .then(r => r.ok ? r.json() : Promise.reject(r.status))
-              .then(d => {
-                console.log('[mirror /api/lead OK]', d);
-                // 🔔 Evento GA4: espejo al backend exitoso
-                trackGA4Click('lead_mirror_sent', {
-                  placement: 'hubspot_embed',
-                  params: {
-                    form_id: 'hubspot_embed',
-                    mirror_status: 'ok'
-                  },
-                  newTab: false,
-                  timeoutMs: 200,
-                });
-              })
-              .catch(e => {
-                console.warn('[mirror /api/lead ERR]', e);
-                // 🔔 Evento GA4: espejo falló
-                trackGA4Click('lead_mirror_error', {
-                  placement: 'hubspot_embed',
-                  params: {
-                    form_id: 'hubspot_embed',
-                    mirror_status: 'error'
-                  },
-                  newTab: false,
-                  timeoutMs: 200,
-                });
+              // 1) Recolecta todos los valores del form del iframe
+              const payload = {};
+              root.querySelectorAll('input, textarea, select').forEach(el => {
+                if (el.name) payload[el.name] = el.value;
               });
-          } catch (e) {
-            console.warn('mirror /api/lead failed:', e);
-          }
-        }
-      });
-    };
-    document.body.appendChild(script);
-  }, []);
 
-  return (
-    <div className="RN__wrap">
-      {/* Header con logo */}
-      <header className="RN__bar">
-        <div className="RN__barContainer">
-          <img src="/occ1.png" alt="OCC" className="RN__logo" />
-        </div>
-      </header>
+              // 2) Añade metadatos útiles (VID + UTM + página)
+              payload.visitorId    = localStorage.getItem('visitorId') || '';
+              payload.vid_cookie   = getCookie('vid') || '';
+              payload.utm_source   = getCookie('utm_source') || '';
+              payload.utm_medium   = getCookie('utm_medium') || '';
+              payload.utm_campaign = getCookie('utm_campaign') || '';
+              payload.page         = window.location.href;
+              payload.referrer     = document.referrer || '';
+              payload.form_id      = 'hubspot_embed';
 
-      <main className="RN__container">
-        <div className="RN__grid">
-          {/* Columna izquierda */}
-          <section className="RN__left">
-            <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
+              // 🔔 Evento GA4: intento de envío del formulario (frontend)
+              trackGA4Click('lead_form_submit', {
+                placement: 'hubspot_embed',
+                params: { form_id: 'hubspot_embed' },
+                newTab: false,
+                timeoutMs: 200,
+              });
 
-            {/* Bullets con título + descripción */}
-            <ul className="RN__benefitsList">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <circle cx="9" cy="21" r="1" />
-                  <circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div>
-                  <strong>Compra de vacantes</strong>
-                  <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
-                </div>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div>
-                  <strong>Compra especializada</strong>
-                  <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
-                </div>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="6" cy="14" r="1" fill="currentColor"/>
-                  <circle cx="10" cy="10" r="1" fill="currentColor"/>
-                  <circle cx="14" cy="13" r="1" fill="currentColor"/>
-                  <circle cx="18" cy="8" r="1" fill="currentColor"/>
-                </svg>
-                <div>
-                  <strong>Seguimiento</strong>
-                  <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
-                </div>
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <div>
-                  <strong>Capacitación personalizada</strong>
-                  <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
-                </div>
-              </li>
-            </ul>
-          </section>
-
-          {/* Columna derecha */}
-          <div className="RN__right">
-            <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
-
-            <section className="RN__promoHeader">
-              <h3>Prueba OCC Empresas gratis</h3>
-              <p>Sin compromiso y sin necesidad de tarjeta de crédito.</p>
-
-              <button
-                type="button"
-                className="RN__promoBtn"
-                onClick={() => {
-                  const url = 'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp';
-
-                  const payload = {
-                    visitorId:  localStorage.getItem('visitorId') || '',
-                    page:       window.location.href,
-                    referrer:   document.referrer || '',
-                    placement:  'promo_header',
-                    eventName:  'cta_prueba_gratis_click',
-                  };
-
-                  fetch('https://backend-b2b-a3up.onrender.com/api/click', {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: {
-                      'Content-Type': 'application/json',
+              // 3) Envía al backend (URL ABSOLUTA a Render)
+              fetch('https://backend-b2b-a3up.onrender.com/api/lead', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload)
+              })
+                .then(r => r.ok ? r.json() : Promise.reject(r.status))
+                .then(d => {
+                  console.log('[mirror /api/lead OK]', d);
+                  // 🔔 Evento GA4: espejo al backend exitoso
+                  trackGA4Click('lead_mirror_sent', {
+                    placement: 'hubspot_embed',
+                    params: {
+                      form_id: 'hubspot_embed',
+                      mirror_status: 'ok'
                     },
-                    body: JSON.stringify(payload)
-                  })
-                    .catch(() => {}) 
-                    .finally(() => {
-                      window.location.href = url; 
-                    });
-                }}
-                aria-label="Empieza gratis"
-              >
-                Empieza gratis
-              </button>
-
-            </section>
-
-            <div className="RN__divider">
-              <span>o</span>
-            </div>
-
-            <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
-            <section className="RN__card">
-              <div id="hubspot-form"></div>
-            </section>
-          </div>
-        </div>
-
-        {/* Bullets versión mobile */}
-        <section className="RN__benefitsList--mobile">
-          <ul>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <div>
-                <strong>Compra de vacantes</strong>
-                <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
-              </div>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M3 9h3V6a3 3 0 0 1 6 0v3h3a3 3 0 0 1 0 6h-3v3a3 3 0 0 1-6 0v-3H3a3 3 0 0 1 0-6z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <div>
-                <strong>Compra especializada</strong>
-                <p>Soluciones diseñadas a la medida para cubrir perfiles estratégicos y posiciones clave.</p>
-              </div>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M3 3v18h18" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <polyline points="6 14 10 10 14 13 18 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="6" cy="14" r="1" fill="currentColor"/>
-                <circle cx="10" cy="10" r="1" fill="currentColor"/>
-                <circle cx="14" cy="13" r="1" fill="currentColor"/>
-                <circle cx="18" cy="8" r="1" fill="currentColor"/>
-              </svg>
-              <div>
-                <strong>Seguimiento</strong>
-                <p>Monitorea y optimiza el desempeño de tus vacantes con reportes claros y efectivos.</p>
-              </div>
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" className="RN__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <circle cx="12" cy="7" r="4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <div>
-                <strong>Capacitación personalizada</strong>
-                <p>Accede a asesoría y entrenamientos especializados para tu equipo de reclutamiento.</p>
-              </div>
-            </li>
-          </ul>
-        </section>
-
-        {/* Carrusel Logos */}
-        <div className="logos-section mt-5">
-          <h3 className="mb-3">Marcas que confían en nosotros</h3>
-          <div className="logo-carousel">
-            <div className="logo-track">
-              {[bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson, amazon,
-                bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson, amazon].map((logoSrc, idx) => (
-                <img key={idx} src={logoSrc} alt="Logo" className="logo-item uniform-logo" />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <footer className="mt-5 text-center">
-          <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
-        </footer>
-      </main>
-    </div>
-  );
-}
+                    newTab: false,
+                    timeoutMs: 200,
+                  });
+                })
+                .catch(e => {
+                  console.warn('[mirror /api/lead ERR]', e);
+                  // 🔔 Evento GA4: espejo falló
+                  trackGA4Click('lead_mirror_error', {
+                    placement: 'hubspot_embed',
+                    params: {
+                      form_id: 'hubspot_embed',
+                      mirror_status: 'error'
+                    },
+                    newTab: false,
+                    timeoutMs: 200,
+                  });
+                });
+            } catch (e) {
+              console.warn('mirror /api/lead failed:', e);
+            }
+          }
+        });

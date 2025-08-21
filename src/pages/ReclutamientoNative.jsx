@@ -15,7 +15,6 @@ import palacio from '../assets/palacio.png';
 import thomson from '../assets/thomson.png';
 import lala from '../assets/lala.png';
 
-// === NUEVO: helper para leer UTMs de la URL ===
 const getUTMs = () => {
   const q = new URLSearchParams(window.location.search);
   return {
@@ -27,10 +26,6 @@ const getUTMs = () => {
   };
 };
 
-/* =========================================================
-   MODAL de confirmación "¿Quieres ir a buscar trabajo?"
-   (Autosize, cierre con overlay/ESC, focus y bloqueo de scroll)
-========================================================= */
 function ConfirmLeaveModal({ open, onClose, onConfirm }) {
   const panelRef = useRef(null);
 
@@ -54,7 +49,7 @@ function ConfirmLeaveModal({ open, onClose, onConfirm }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={onClose}                // cierra al hacer click afuera
+          onClick={onClose}
         >
           <motion.div
             role="dialog"
@@ -62,10 +57,10 @@ function ConfirmLeaveModal({ open, onClose, onConfirm }) {
             aria-labelledby="modal-title"
             ref={panelRef}
             className="m-panel"
-            initial={{ opacity: 0, scale: 0.98 }}  // evita animar "y" para no pelear con posición
+            initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
-            onClick={(e) => e.stopPropagation()}   // evita burbuja
+            onClick={(e) => e.stopPropagation()}
           >
             <h2 id="modal-title" className="m-title">¿Quieres ir a buscar trabajo?</h2>
             <p className="m-text">
@@ -86,7 +81,6 @@ export default function ReclutamientoNative() {
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    // ===== LAZY LOAD HUBSPOT (se carga solo cuando #hubspot-form es visible) =====
     let loaded = false;
     const loadHubspot = () => {
       if (loaded) return;
@@ -102,15 +96,13 @@ export default function ReclutamientoNative() {
       script.onload = () => {
         if (!window.hbspt) return;
 
-        // === Helpers para rellenar campos ocultos ===
         const getCookie = (k) =>
           decodeURIComponent(
             ((document.cookie.split("; ").find(r => r.startsWith(k + "=")) || "").split("=")[1]) || ""
           );
 
         const fillHiddenFields = ($form) => {
-          const root = $form?.get ? $form.get(0) : $form; // <-- DOM node real del iframe
-
+          const root = $form?.get ? $form.get(0) : $form;
           const setVal = (name, val) => {
             const input = root.querySelector(`input[name="${name}"]`);
             if (input && val && !input.value) {
@@ -138,19 +130,14 @@ export default function ReclutamientoNative() {
           target: "#hubspot-form",
           onFormReady: ($form) => fillHiddenFields($form),
           onBeforeSubmit: ($form) => fillHiddenFields($form),
-
-          // 👇 Espejo del submit hacia tu backend
           onFormSubmit: ($form) => {
             try {
               const root = $form?.get ? $form.get(0) : $form;
-
-              // 1) Recolecta todos los valores del form del iframe
               const payload = {};
               root.querySelectorAll('input, textarea, select').forEach(el => {
                 if (el.name) payload[el.name] = el.value;
               });
 
-              // 2) Añade metadatos útiles (VID + UTM + página)
               payload.visitorId    = localStorage.getItem('visitorId') || '';
               payload.vid_cookie   = getCookie('vid') || '';
               payload.utm_source   = getCookie('utm_source') || '';
@@ -160,7 +147,6 @@ export default function ReclutamientoNative() {
               payload.referrer     = document.referrer || '';
               payload.form_id      = 'hubspot_embed';
 
-              // 🔔 Evento GA4: intento de envío del formulario (frontend)
               trackGA4Click('lead_form_submit', {
                 placement: 'hubspot_embed',
                 params: { form_id: 'hubspot_embed' },
@@ -168,7 +154,6 @@ export default function ReclutamientoNative() {
                 timeoutMs: 200,
               });
 
-              // 3) Envía al backend (URL ABSOLUTA a Render)
               fetch('https://backend-b2b-a3up.onrender.com/api/lead', {
                 method: 'POST',
                 mode: 'cors',
@@ -180,7 +165,6 @@ export default function ReclutamientoNative() {
                 .then(r => r.ok ? r.json() : Promise.reject(r.status))
                 .then(d => {
                   console.log('[mirror /api/lead OK]', d);
-                  // 🔔 Evento GA4: espejo al backend exitoso
                   trackGA4Click('lead_mirror_sent', {
                     placement: 'hubspot_embed',
                     params: {
@@ -193,7 +177,6 @@ export default function ReclutamientoNative() {
                 })
                 .catch(e => {
                   console.warn('[mirror /api/lead ERR]', e);
-                  // 🔔 Evento GA4: espejo falló
                   trackGA4Click('lead_mirror_error', {
                     placement: 'hubspot_embed',
                     params: {
@@ -225,11 +208,10 @@ export default function ReclutamientoNative() {
             }
           });
         },
-        { root: null, rootMargin: '200px', threshold: 0 } // pre-carga ~200px antes
+        { root: null, rootMargin: '200px', threshold: 0 }
       );
       io.observe(target);
 
-      // Fallback por si el usuario nunca hace scroll (carga diferida de cortesía)
       const fallback = setTimeout(() => {
         loadHubspot();
         io.disconnect();
@@ -240,13 +222,11 @@ export default function ReclutamientoNative() {
         clearTimeout(fallback);
       };
     } else {
-      // Sin IO (navegadores viejos): carga directa
       loadHubspot();
     }
   }, []);
 
   const handleConfirm = () => {
-    // Redirección a búsqueda de empleo preservando UTM si existen
     const base = 'https://www.occ.com.mx/empleos';
     const utm = new URLSearchParams(window.location.search).toString();
     const url = utm ? `${base}?${utm}` : base;
@@ -257,7 +237,6 @@ export default function ReclutamientoNative() {
     <div className="RN__wrap">
       <header className="RN__bar">
         <div className="RN__barContainer">
-          {/* IZQUIERDA → Logo */}
           <div className="RN__barLeft">
             <img
               src="/occ1.png"
@@ -268,8 +247,6 @@ export default function ReclutamientoNative() {
               fetchpriority="low"
             />
           </div>
-
-          {/* DERECHA → Botón */}
           <div className="RN__barRight">
             <button
               type="button"
@@ -284,10 +261,87 @@ export default function ReclutamientoNative() {
       </header>
 
       <main className="RN__container">
-        {/* ... todo tu contenido igual ... */}
+        <div className="RN__grid">
+          <section className="RN__left">
+            <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
+            <ul className="RN__benefitsList">
+              <li> ... aquí van tus bullets ... </li>
+            </ul>
+          </section>
+
+          <div className="RN__right">
+            <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
+            <section className="RN__promoHeader">
+              <h3>Prueba OCC Empresas gratis</h3>
+              <p>Sin compromiso y sin necesidad de tarjeta de crédito.</p>
+              <button
+                type="button"
+                className="RN__promoBtn"
+                onClick={() => {
+                  const url = 'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp';
+                  const payload = {
+                    visitorId:  localStorage.getItem('visitorId') || '',
+                    page:       window.location.href,
+                    referrer:   document.referrer || '',
+                    placement:  'promo_header',
+                    eventName:  'cta_prueba_gratis_click',
+                  };
+                  fetch('https://backend-b2b-a3up.onrender.com/api/click', {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                  })
+                    .catch(() => {}) 
+                    .finally(() => { window.location.href = url; });
+                }}
+                aria-label="Empieza gratis"
+              >
+                Empieza gratis
+              </button>
+            </section>
+            <div className="RN__divider">
+              <span>o</span>
+            </div>
+            <h2 className="RN__titleOutside">¡Cotiza tu paquete de vacantes!</h2>
+            <section className="RN__card">
+              <div id="hubspot-form"></div>
+            </section>
+          </div>
+        </div>
+
+        <section className="RN__benefitsList--mobile">
+          <ul>
+            <li> ... versión mobile ... </li>
+          </ul>
+        </section>
+
+        <div className="logos-section mt-5">
+          <h3 className="mb-3">Marcas que confían en nosotros</h3>
+          <div className="logo-carousel">
+            <div className="logo-track">
+              {[bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson, amazon,
+                bbva, dhl, netflix, palacio, Walmart, lala, salinas, thomson, amazon].map((logoSrc, idx) => (
+                <img
+                  key={idx}
+                  src={logoSrc}
+                  alt="Logo"
+                  className="logo-item uniform-logo"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
+                  sizes="(max-width: 768px) 120px, 160px"
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <footer className="mt-5 text-center">
+          <small>© {new Date().getFullYear()} OCC. Todos los derechos reservados.</small>
+        </footer>
       </main>
 
-      {/* Modal */}
       <ConfirmLeaveModal
         open={openModal}
         onClose={() => setOpenModal(false)}

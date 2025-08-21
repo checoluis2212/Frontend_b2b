@@ -67,6 +67,12 @@ function ConfirmLeaveModal({ open, onClose, onConfirm }) {
             exit={{ opacity: 0, scale: 0.98 }}
             onClick={(e) => e.stopPropagation()}
           >
+            <img
+              src="/rocket.gif"
+              alt="Animación trabajo"
+              style={{ width: "120px", margin: "0 auto 16px auto", display: "block" }}
+             />
+              
             <h2 id="modal-title" className="m-title">¿Quieres ir a buscar trabajo?</h2>
             <p className="m-text">
               Te llevaremos a la página de búsqueda de empleo. Esta acción te sacará de la página de empresas.

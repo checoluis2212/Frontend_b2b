@@ -1,4 +1,4 @@
-{
+
 @font-face {
   font-family: 'OCCText';
   src: url('/OCCText-Regular.ttf') format('truetype');
@@ -19,7 +19,7 @@
 
 body {
   margin: 0;
-  font-family: 'OCCText', sans-serif;
+  font-family: 'OCCText', sans-serif; /* 👈 cambiado a tu fuente */
   background-color: var(--ink);
   color: white;
 }
@@ -34,16 +34,32 @@ body {
   background-repeat: no-repeat;
 }
 
-/* Topbar */
-.RN__bar { position: sticky; top: 0; z-index: 50; background: #0f4ec7; border-bottom: 1px solid #eee; }
-.RN__barContainer { max-width: 1140px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; height: 64px; width: 100%; gap: 12px; }
-.RN__barLeft { display: flex; align-items: center; gap: 10px; }          /* Botón IZQUIERDA */
-.RN__barRight { display: flex; align-items: center; }                    /* Logo DERECHA */
-.RN__jobLink { background: transparent; border: 1px solid rgba(255,255,255,.7); color: #fff; border-radius: 999px; padding: 6px 12px; font-size: 14px; cursor: pointer; }
-.RN__jobLink:hover { background: rgba(255,255,255,.12); }
-.RN__logo { height: 28px; width: auto; }
+.RN__bar {
+  background: var(--blue);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #eee;
+}
 
-/* Layout principal */
+.RN__barContainer {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
+.RN__logo {
+  height: 32px;
+  width: auto;
+  max-width: 120px;
+  margin-left: 0;
+}
+
 .RN__container {
   flex: 1;
   padding: 40px 20px;
@@ -84,12 +100,12 @@ body {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  width: 90%;
+  width:90%;
 }
 
 .RN__benefitsList p {
   font-size: 14px;
-  margin-top: 5px;
+    margin-top: 5px;
 }
 
 .RN__icon {
@@ -99,9 +115,17 @@ body {
   stroke: #acbbff;
 }
 
-.RN__right { display: flex; flex-direction: column; gap: 16px; }
+.RN__right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-.RN__titleOutside { font-size: 24px; color: white; text-align: center; }
+.RN__titleOutside {
+  font-size: 24px;
+  color: white;
+  text-align: center;
+}
 
 .RN__card {
   background: white;
@@ -112,79 +136,231 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
-  .RN__grid { display: flex; flex-direction: column-reverse; gap: 40px; }
-  .RN__left { display: none; }
-  .RN__card { width: 100%; }
-
-  .RN__benefitsList--mobile { display: block; padding: 0 20px; margin-top: 32px; }
-  .RN__benefitsList--mobile ul {
-    list-style: none; padding: 0; margin: 0;
-    display: flex; flex-direction: column; gap: 28px; margin-top: 70px;
+  .RN__grid {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 40px;
   }
-  .RN__benefitsList--mobile li { display: flex; gap: 16px; align-items: flex-start; }
+
+  .RN__left {
+    display: none;
+  }
+
+  .RN__card {
+    width: 100%;
+  }
+
+  .RN__benefitsList--mobile {
+    display: block;
+    padding: 0 20px;
+    margin-top: 32px;
+  }
+
+  .RN__benefitsList--mobile ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 70px;
+  }
+
+  .RN__benefitsList--mobile li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .RN__icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    stroke: #acbbff;
+  }
 
   .RN__mobileTitle {
-    display: block; font-size: 50px; color: #fff;
-    text-align: center; margin-bottom: 50px; padding: 0 20px; line-height: 1.2;
+    display: block;
+    font-size: 50px;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 0 20px;
+    line-height: 1.2;
   }
 }
 
 /* Carrusel de logos */
-.logos-section { width: 70%; margin: 0 auto; padding: 0 20px; text-align: center; }
-.logo-carousel { position: relative; width: 100%; }
-.logo-track { display: flex; width: max-content; animation: scroll 30s linear infinite; gap: 48px; align-items: center; }
-.logo-item { height: 40px; object-fit: contain; filter: grayscale(1) brightness(1.4); opacity: 0.8; flex-shrink: 0; }
-.uniform-logo { width: auto; max-height: 40px; max-width: 120px; }
+.logos-section {
+  width: 70%;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
 
-@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.logo-carousel {
+  position: relative;
+  width: 100%;
+}
 
-footer small { color: white; opacity: 0.6; }
+.logo-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 30s linear infinite;
+  gap: 48px;
+  align-items: center;
+}
 
-/* Ocultar elementos mobile extra en desktop */
+.logo-item {
+  height: 40px;
+  object-fit: contain;
+  filter: grayscale(1) brightness(1.4);
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.uniform-logo {
+  width: auto;
+  max-height: 40px;
+  max-width: 120px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+footer small {
+  color: white;
+  opacity: 0.6;
+}
+
 @media (min-width: 768px) {
-  .RN__mobileTitle { display: none; }
-  .RN__benefitsList--mobile { display: none; }
+  .RN__mobileTitle {
+    display: none;
+  }
+
+  .RN__benefitsList--mobile {
+    display: none;
+  }
 }
 
-/* Logos: ajustes mobile unificados */
 @media (max-width: 768px) {
-  .logos-section { width: 100%; margin: 0 auto; padding: 0 20px; text-align: center; }
-  .logos-section h3 { font-size: 1.5rem; width: 100%; max-width: 100%; padding: 0 20px; margin: 2rem auto 1rem auto; text-align: center; color: white; }
-  .logo-track { gap: 32px; padding: 0 12px; }
-  .logo-item { max-width: 90px; height: auto; }
+  .logos-section h3 {
+    font-size: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;
+    margin: 2rem auto 1rem auto;
+    text-align: center;
+    color: white;
+  }
 }
 
-/* Divider (solo la clase usada) */
+@media (max-width: 768px) {
+  .logos-section {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .logo-track {
+    gap: 32px;
+    padding: 0 12px;
+  }
+
+  .logo-item {
+    max-width: 90px;
+    height: auto;
+  }
+}
+
+/* --- Divider robusto (como Holded) --- */
+.divider,
 .RN__divider{
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto 1fr;  /* línea - "o" - línea */
   align-items: center;
   gap: 12px;
   margin: 16px 0;
   width: 100%;
 }
+
+.divider::before,
+.divider::after,
 .RN__divider::before,
 .RN__divider::after{
   content: "";
   display: block;
-  height: 1px;
-  background: rgba(255,255,255,.45);
+  height: 1px;                          /* grosor de la línea */
+  background: rgba(255,255,255,.45);     /* color de la línea */
 }
-.RN__divider span{ color: #fff; font-weight: 600; line-height: 1; }
 
-/* Promo header y botón */
-.RN__promoHeader { text-align: center; margin: 20px 0 12px 0; }
-.RN__promoHeader p { font-size: 13px; line-height: 1.5; }
-@media (max-width: 768px) { .RN__promoHeader h3 { font-size: 25px !important; } }
+/* La “o” centrada */
+.divider span,
+.RN__divider span{
+  color: #fff;
+  font-weight: 600;
+  line-height: 1;
+}
 
+/* Promo header (ya lo tienes, lo dejo por si hace falta centrar) */
+.RN__promoHeader {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* Botón de “prueba 14 días” */
 .RN__promoBtn {
-  margin-top: 12px; padding: 12px 20px; border: 0; border-radius: 9999px;
-  font-weight: 700; cursor: pointer; background: #F13465; color: #fff;
+  margin-top: 12px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 9999px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #F13465;             /* color acorde al “Enviar” rosa */
+  color: #fff;
   box-shadow: 0 6px 20px rgba(0,0,0,.15);
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
 }
-.RN__promoBtn:hover { background: #ff3a5d; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.18); }
-.RN__promoBtn:active { transform: translateY(0); }
+
+.RN__promoBtn:hover {
+  background: #ff3a5d;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+}
+
+.RN__promoBtn:active {
+  transform: translateY(0);
+}
+
+.RN__promoHeader {
+      margin-top: 20px;
+}
+
+.RN__promoHeader p {
+  font-size: 13px;  /* cámbialo al tamaño que quieras */
+  line-height: 1.5; /* opcional, mejora la legibilidad */
+}
+
+@media (max-width: 768px) {
+  .RN__promoHeader h3 {
+    font-size: 25px !important;
+  }
+}
+
+/* Topbar */
+.RN__bar { position: sticky; top: 0; z-index: 50; background: #0f4ec7; }
+.RN__barContainer { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; }
+.RN__barLeft { display: flex; align-items: center; gap: 10px; }
+.RN__jobLink { background: transparent; border: 1px solid rgba(255,255,255,.7); color: #fff; border-radius: 999px; padding: 6px 12px; font-size: 14px; cursor: pointer; }
+.RN__jobLink:hover { background: rgba(255,255,255,.12); }
+.RN__logo { height: 28px; }
 
 /* Modal */
 .m-overlay{position:fixed;inset:0;background:rgba(2,6,23,.55);backdrop-filter:blur(2px);z-index:1000}
@@ -195,6 +371,4 @@ footer small { color: white; opacity: 0.6; }
 .m-actions{display:flex;gap:10px;justify-content:flex-end}
 .btn-primary{background:#0f4ec7;color:#fff;border:0;border-radius:10px;padding:10px 14px;cursor:pointer}
 .btn-ghost{background:transparent;border:1px solid #cbd5e1;border-radius:10px;padding:10px 14px;cursor:pointer}
-.btn-primary:hover{filter:brightness(1.05)}
-.btn-ghost:hover{background:#f8fafc}
-}
+.btn-primary:hover{filter:brightness(1.05)} .btn-ghost:hover{background:#f8fafc}

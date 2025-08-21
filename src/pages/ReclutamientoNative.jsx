@@ -48,34 +48,31 @@ function ConfirmLeaveModal({ open, onClose, onConfirm }) {
 
   return (
     <AnimatePresence>
-      {open && (
-        <>
-          <motion.div
-            className="m-overlay"
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            onClick={onClose}
-          />
-          <motion.div
-            role="dialog" aria-modal="true" aria-labelledby="modal-title"
-            ref={panelRef}
-            className="m-panel"
-            initial={{ y: 24, opacity: 0, scale: 0.98 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: 24, opacity: 0, scale: 0.98 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 id="modal-title" className="m-title">¿Quieres ir a buscar trabajo?</h2>
-            <p className="m-text">
-              Te llevaremos a la página de búsqueda de empleo. Esta acción te sacará de la página de empresas.
-            </p>
-            <div className="m-actions">
-              <button className="btn-primary" onClick={onConfirm}>Sí, llévame</button>
-              <button className="btn-ghost" onClick={onClose}>No, quedarme aquí</button>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+  {open && (
+    <motion.div
+      className="m-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}                // cierra al hacer click afuera
+    >
+      <motion.div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        ref={panelRef}
+        className="m-panel"
+        initial={{ opacity: 0, scale: 0.98 }}  // evita animar "y" para no pelear con posición
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.98 }}
+        onClick={(e) => e.stopPropagation()}   // evita burbuja
+      >
+        {/* ...contenido del modal tal cual... */}
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
   );
 }
 

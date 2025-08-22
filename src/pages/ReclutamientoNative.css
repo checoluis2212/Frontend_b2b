@@ -394,7 +394,7 @@ footer small {
 }
 
 /* ya lo tenías, pero por si acaso */
-.m-title{ margin:0 0 8px; font-size:18px; color:#0b1b46; }
+.m-title{ margin:0 0 8px; font-size:18px; color:#0b1b46; font-weight: bold}
 .m-text{ margin:0 0 16px; color:#475569; }
 
 

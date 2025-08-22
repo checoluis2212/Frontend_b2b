@@ -309,7 +309,7 @@ footer small {
   line-height: 1;
 }
 
-/* Promo header (ya lo tienes, lo dejo por si hace falta centrar) */
+/* Promo header */
 .RN__promoHeader {
   text-align: center;
   margin-bottom: 12px;
@@ -352,7 +352,10 @@ footer small {
   .RN__promoHeader h3 {
     font-size: 25px !important;
   }
-}
+  .RN__promoBtn {
+    width: 70%;
+ }
+} 
 
 /* Topbar */
 .RN__bar { position: fixed; top: 0; z-index: 50; background: #0f4ec7; }

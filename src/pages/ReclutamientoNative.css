@@ -354,6 +354,14 @@ footer small {
   }
 }
 
+/* Topbar */
+.RN__bar { position: fixed; top: 0; z-index: 50; background: #0f4ec7; }
+.RN__barContainer { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; }
+.RN__barLeft { display: flex; align-items: center; gap: 10px; }
+.RN__jobLink { background: transparent; border: 1px solid rgba(255,255,255,.7); color: #fff; border-radius: 999px; padding: 6px 12px; font-size: 14px; cursor: pointer; }
+.RN__jobLink:hover { background: rgba(255,255,255,.12); }
+.RN__logo { height: 28px; }
+
 /* Modal */
 .m-overlay{position:fixed;inset:0;background:rgba(2,6,23,.55);backdrop-filter:blur(2px);z-index:1000}
 .m-title{margin:0 0 8px;font-size:18px}

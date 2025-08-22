@@ -70,7 +70,7 @@ function ConfirmLeaveModal({ open, onClose, onConfirm }) {
             <img
               src="/rocket.gif"
               alt="Animación trabajo"
-              style={{ width: "70px", margin: "0 auto 16px auto", display: "block", marginBottom: 40px}}
+              className="rocket-gif"
              />
               
             <h2 id="modal-title" className="m-title">¿Quieres ir a buscar trabajo?</h2>

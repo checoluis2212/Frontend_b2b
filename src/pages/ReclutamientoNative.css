@@ -331,7 +331,7 @@ footer small {
 }
 
 .RN__promoBtn:hover {
-  background: #ff3a5d;
+  background: #811a34;
   transform: translateY(-1px);
   box-shadow: 0 10px 24px rgba(0,0,0,.18);
 }
@@ -356,6 +356,9 @@ footer small {
   .RN__promoBtn {
     width: 90%;
  }
+  .RN__promoBtn:hover {
+  background: #811a34;
+  }
 } 
 
 /* Topbar */

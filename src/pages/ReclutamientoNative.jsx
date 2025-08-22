@@ -305,7 +305,7 @@ export default function ReclutamientoNative() {
                   <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 <div>
-                  <strong>Compra de vacantes</strong>
+                  <strong>Compra vacantes</strong>
                   <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
                 </div>
               </li>
@@ -417,7 +417,7 @@ export default function ReclutamientoNative() {
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <div>
-                <strong>Compra de vacantes</strong>
+                <strong>Compra vacantes</strong>
                 <p>Adquiere paquetes flexibles y publica en la bolsa de empleo líder en México.</p>
               </div>
             </li>

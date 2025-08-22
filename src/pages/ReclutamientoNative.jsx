@@ -354,36 +354,45 @@ export default function ReclutamientoNative() {
               <p>Sin compromiso y sin necesidad de tarjeta de crédito.</p>
 
               <button
-                type="button"
-                className="RN__promoBtn"
-                onClick={() => {
-                  const url = 'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp';
+  type="button"
+  className="RN__promoBtn"
+  onClick={() => {
+    const url = 'https://scrappy.occ.com.mx/api/create?utm_source=bing&utm_medium=cpc&utm_campaign=short-lp';
 
-                  const payload = {
-                    visitorId:  localStorage.getItem('visitorId') || '',
-                    page:       window.location.href,
-                    referrer:   document.referrer || '',
-                    placement:  'promo_header',
-                    eventName:  'cta_prueba_gratis_click',
-                  };
+    const payload = {
+      visitorId:  localStorage.getItem('visitorId') || '',
+      page:       window.location.href,
+      referrer:   document.referrer || '',
+      placement:  'promo_header',
+      eventName:  'cta_prueba_gratis_click',
+      ts: Date.now()
+    };
 
-                  fetch('https://backend-b2b-a3up.onrender.com/api/click', {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(payload)
-                  })
-                    .catch(() => {}) 
-                    .finally(() => {
-                      window.location.href = url; 
-                    });
-                }}
-                aria-label="Empieza gratis"
-              >
-                Empieza gratis
-              </button>
+    const endpoint = 'https://backend-b2b-a3up.onrender.com/api/click';
+    const body = JSON.stringify(payload);
+
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(endpoint, new Blob([body], { type: 'application/json' }));
+      } else {
+        fetch(endpoint, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body,
+          keepalive: true,
+        }).catch(() => {});
+      }
+    } catch (_) {}
+
+    // Navega INMEDIATAMENTE
+    window.location.href = url;
+  }}
+  aria-label="Empieza gratis"
+>
+  Empieza gratis
+</button>
+
 
             </section>
 

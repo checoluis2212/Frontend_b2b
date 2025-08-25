@@ -350,7 +350,7 @@ export default function ReclutamientoNative() {
             <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
 
             <section className="RN__promoHeader">
-              <h3>Prueba OCC Empresas gratis</h3>
+              <h3>Publica tu primer vacante gratis</h3>
               <p>Sin compromiso y sin necesidad de tarjeta de crédito.</p>
 
               <button

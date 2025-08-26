@@ -414,6 +414,16 @@ footer small {
 }
 
 
+.RN__rayonMobile {
+  display: none;         
+  width: 90%;
+}
+
+@media (max-width: 768px) {
+  .RN__rayonMobile {
+    display: block;       /* se muestra solo en mobile */
+  }
+}
 
 
 

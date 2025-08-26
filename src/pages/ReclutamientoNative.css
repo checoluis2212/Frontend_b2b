@@ -415,13 +415,12 @@ footer small {
 
 .RN__rayonMobile {
   display: none;         
-  width: 90%;
-  margin-bottom: 50px;
 }
 
 @media (max-width: 768px) {
   .RN__rayonMobile {
-    display: block;       /* se muestra solo en mobile */
+    display: block;   
+    margin-bottom: 50px;
   }
 }
 

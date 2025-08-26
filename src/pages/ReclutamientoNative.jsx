@@ -290,11 +290,20 @@ export default function ReclutamientoNative() {
 </header>
 
 
-      <main className="RN__container">
-        <div className="RN__grid">
-          {/* Columna izquierda */}
-          <section className="RN__left">
-            <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
+<main className="RN__container">
+  <div className="RN__grid">
+    {/* Columna izquierda */}
+    <section className="RN__left">
+      <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
+      <img 
+        src="/rayon.png" 
+        alt="Ilustración publicar vacantes" 
+        className="RN__rayon" 
+      />
+    </section>
+  </div>
+</main>
+            
 
             {/* Bullets con título + descripción */}
             <ul className="RN__benefitsList">

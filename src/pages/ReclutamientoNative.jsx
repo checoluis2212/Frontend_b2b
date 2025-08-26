@@ -296,7 +296,7 @@ export default function ReclutamientoNative() {
     <section className="RN__left">
       <h1>Publicar tus vacantes nunca fue tan fácil…</h1>
       <img 
-        src="/rayon.png" 
+        src="/RAYON1.png" 
         alt="Ilustración publicar vacantes" 
         className="RN__rayon" 
       />

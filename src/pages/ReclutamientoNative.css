@@ -19,7 +19,7 @@
 
 body {
   margin: 0;
-  font-family: 'OCCText', sans-serif; /* 👈 cambiado a tu fuente */
+  font-family: 'OCCText', sans-serif; 
   background-color: var(--ink);
   color: white;
 }

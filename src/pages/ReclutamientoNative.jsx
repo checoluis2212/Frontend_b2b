@@ -353,6 +353,7 @@ export default function ReclutamientoNative() {
           {/* Columna derecha */}
           <div className="RN__right">
             <h1 className="RN__mobileTitle">Publicar tus vacantes nunca fue tan fácil…</h1>
+            <img src="/RAYON1.png" alt="Decoración vacantes mobile" className="RN__rayonMobile"/>
 
             <section className="RN__promoHeader">
               <h3>Publica tu primer vacante gratis</h3>

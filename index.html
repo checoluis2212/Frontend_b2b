@@ -1,48 +1,81 @@
 <!doctype html>
 <html lang="es">
   <head>
-<script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@4/dist/fp.min.js"></script>
+    <!-- 0) Inicializa dataLayer -->
+    <script>window.dataLayer = window.dataLayer || [];</script>
+
+    <!-- FingerprintJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@4/dist/fp.min.js"></script>
     
-<!-- HubSpot Tracking Code -->
-<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/YOUR_PORTAL_ID.js">
-</script>
+    <!-- HubSpot Tracking Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/YOUR_PORTAL_ID.js"></script>
 
-<script>
-(async () => {
-  const setCookie = (k,v,days=365) => {
-    document.cookie = `${k}=${encodeURIComponent(v)}; path=/; domain=.occ.com.mx; max-age=${60*60*24*days}; Secure; SameSite=Lax`;
-  };
-  const getCookie = (k) =>
-    (document.cookie.split('; ').find(r=>r.startsWith(k+'='))||'').split('=')[1];
+    <script>
+    (async () => {
+      /* ===== Helpers de cookies ===== */
+      const setCookie = (k,v,days=365) => {
+        document.cookie = `${k}=${encodeURIComponent(v)}; path=/; domain=.occ.com.mx; max-age=${60*60*24*days}; Secure; SameSite=Lax`;
+      };
+      const getCookie = (k) =>
+        (document.cookie.split('; ').find(r=>r.startsWith(k+'='))||'').split('=')[1];
 
-  // 1) Generar o leer VID (fingerprint)
-  let vid = getCookie('vid');
-  if (!vid) {
-    const fp = await FingerprintJS.load();
-    vid = (await fp.get()).visitorId;
-    setCookie('vid', vid, 365);
-  }
+      /* ===== 1) Generar o leer VID (FingerprintJS) ===== */
+      let vid = getCookie('vid');
+      if (!vid) {
+        const fp = await FingerprintJS.load();
+        vid = (await fp.get()).visitorId;
+        setCookie('vid', vid, 365);
+      }
 
-  // 2) Guardar UTMs en cookies si existen en la URL
-  const qs = new URLSearchParams(location.search);
-  const ref = document.referrer ? new URL(document.referrer) : null;
-  const utm_source   = qs.get('utm_source')   || getCookie('utm_source')   || (ref ? ref.hostname : 'direct');
-  const utm_medium   = qs.get('utm_medium')   || getCookie('utm_medium')   || (ref ? 'referral'    : 'direct');
-  const utm_campaign = qs.get('utm_campaign') || getCookie('utm_campaign') || '(not set)';
+      // Guardar en localStorage también
+      try { localStorage.setItem('visitorId', vid); } catch(e){}
 
-  setCookie('utm_source', utm_source, 90);
-  setCookie('utm_medium', utm_medium, 90);
-  setCookie('utm_campaign', utm_campaign, 90);
-})();
-</script>
+      /* ===== 2) Guardar UTMs en cookies si existen ===== */
+      const qs  = new URLSearchParams(location.search);
+      const ref = document.referrer ? new URL(document.referrer) : null;
 
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W926CG23');</script>
-<!-- End Google Tag Manager -->
+      const utm_source   = qs.get('utm_source')   || getCookie('utm_source')   || (ref ? ref.hostname : 'direct');
+      const utm_medium   = qs.get('utm_medium')   || getCookie('utm_medium')   || (ref ? 'referral'    : 'direct');
+      const utm_campaign = qs.get('utm_campaign') || getCookie('utm_campaign') || '(not set)';
+      const utm_content  = qs.get('utm_content')  || getCookie('utm_content')  || '';
+      const utm_term     = qs.get('utm_term')     || getCookie('utm_term')     || '';
+
+      setCookie('utm_source',   utm_source,   90);
+      setCookie('utm_medium',   utm_medium,   90);
+      setCookie('utm_campaign', utm_campaign, 90);
+      if (utm_content) setCookie('utm_content', utm_content, 90);
+      if (utm_term)    setCookie('utm_term',    utm_term,    90);
+
+      /* ===== 3) Empujar al dataLayer ===== */
+      window.dataLayer.push({ 
+        event: 'user_id_ready', 
+        user_id: vid 
+      });
+
+      window.dataLayer.push({ 
+        event: 'utm_ready', 
+        utm_source, 
+        utm_medium, 
+        utm_campaign, 
+        utm_content, 
+        utm_term 
+      });
+    })();
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W926CG23');
+    </script>
+    <!-- End Google Tag Manager -->
     
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -63,10 +96,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="module" src="/src/main.jsx"></script>
 
     <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W926CG23"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-    
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W926CG23"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
   </body>
 </html>

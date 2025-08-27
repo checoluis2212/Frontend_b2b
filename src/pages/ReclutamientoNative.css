@@ -420,7 +420,7 @@ footer small {
 @media (max-width: 768px) {
   .RN__rayonMobile {
     display: block;   
-    margin-bottom: 50px;
+    margin-bottom: 10px;
   }
 }
 
